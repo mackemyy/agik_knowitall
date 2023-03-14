@@ -1,6 +1,6 @@
 var config = {
     type: Phaser.AUTO,
-    backgroundColor: 0x000,
+    backgroundColor: 0x0C2238,
     scene: [LoadingScene, LoadAllScenes],
     pixelArt: true,
     physics: {
