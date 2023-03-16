@@ -5,6 +5,7 @@ class LoadAllScenes extends Phaser.Scene {
     }
 
     create() {
-        this.scene.start('loadingScene');
+        this.scene.start('introGame');
+        this.scene.start('playLogofy');
     }
 }
