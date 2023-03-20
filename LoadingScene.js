@@ -27,8 +27,8 @@ class LoadingScene extends Phaser.Scene {
             targets: this.logo1,
             scaleY: 0.5,
             scaleX: 0.5,
-            // duration: 2000,
-            duration: 100,
+            duration: 2000,
+            // duration: 100,
             onComplete: function() {
                 this.fadeLogo1();
             },
@@ -44,8 +44,8 @@ class LoadingScene extends Phaser.Scene {
         this.logo1Tween = this.add.tween({
             targets: this.logo1,
             alpha: 0,
-            // duration: 250,
-            duration: 100,
+            duration: 250,
+            // duration: 100,
             ease: 'Power2',
             onComplete: function() {
                 this.showLogo2();
@@ -58,8 +58,8 @@ class LoadingScene extends Phaser.Scene {
         this.logo2Tween = this.add.tween({
             targets: this.logo2,
             alpha: 0,
-            // duration: 250,
-            duration: 100,
+            duration: 250,
+            // duration: 100,
             ease: 'Power2',
             onComplete: function() {
                 this.showDisclaimerScreen()
@@ -72,8 +72,8 @@ class LoadingScene extends Phaser.Scene {
         this.disclaimerTween = this.add.tween({
             targets: this.disclaimer,
             alpha: 0,
-            // duration: 250,
-            duration: 100,
+            duration: 250,
+            // duration: 100,
             ease: 'Power2',
             onComplete: function() {
                 this.showMenuScreen()
@@ -88,8 +88,8 @@ class LoadingScene extends Phaser.Scene {
         this.logo2Tween = this.add.tween({
             targets: this.logo2,
             alpha: 1,
-            // duration: 2000,
-            duration: 100,
+            duration: 2000,
+            // duration: 100,
             ease: 'Power2',
             onComplete: function() {
                 this.fadeLogo2();
@@ -102,8 +102,8 @@ class LoadingScene extends Phaser.Scene {
         this.disclaimerTween = this.add.tween({
             targets: this.disclaimer,
             alpha: 1,
-            // duration: 5000,
-            duration: 100,
+            duration: 5000,
+            // duration: 100,
             ease: 'Power2',
             onComplete: function() {
                 this.fadeDisclaimer();
@@ -116,8 +116,8 @@ class LoadingScene extends Phaser.Scene {
         this.menuBgTween = this.add.tween({
             targets: this.menu_bg,
             alpha: 1,
-            // duration: 1000,
-            duration: 100,
+            duration: 1500,
+            // duration: 100,
             ease: 'Power2',
             onComplete: function() {
                 this.newGameBtn = this.add.image(config.scale.width/2, config.scale.height/2, "newGameBtn")
@@ -136,6 +136,6 @@ class LoadingScene extends Phaser.Scene {
     }
 
     goToNextScene() {
-        this.scene.start("loadAllScenes");
+        this.scene.start("introGame");
     }
 }
