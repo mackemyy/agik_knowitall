@@ -15,6 +15,7 @@ class IntroGame extends Phaser.Scene {
         this.load.image("officeWithHR", "assets/bg/office_with_hr.png");
         this.load.image("bubbleChatORLeft", "assets/objects/bubbleChatORLeft.png");
         this.load.image("sureBtn", "assets/buttons/sureButton.png");
+        
 
     }
 
