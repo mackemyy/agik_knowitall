@@ -137,5 +137,6 @@ class LoadingScene extends Phaser.Scene {
 
     goToNextScene() {
         this.scene.start("introGame");
+        // this.scene.start("startGame");
     }
 }
