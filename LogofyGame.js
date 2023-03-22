@@ -86,7 +86,7 @@ class PlayLogofy extends Phaser.Scene {
         this.gameObjTxtTween = this.add.tween({
             targets: this.groupGameObjTxt,
             alpha: 1,
-            duration: 20000,
+            duration: 15000,
             // duration: 100,
             ease: Phaser.Math.Easing.Sine.Out,
             onComplete: function() {
@@ -110,7 +110,6 @@ class PlayLogofy extends Phaser.Scene {
             .on('pointerout', () => this.playbtn.setPosition(config.scale.width/2 + 500, config.scale.height/2 + 350));
         this.hrNarrateTxt = this.add.text(config.scale.width/2 - 240, config.scale.height/2 + 120, "To begin, read the client's request at the left side of the screen, which will be your guide in making the logo. You'll be given 90 seconds to finish all the clients' request. Do your best and good luck!", {
             fontFamily: '"Montserrat"', fill: '#00453B', fontSize: '29px', align: "justify", wordWrap: { width: 820, useAdvancedWrap: true }})
-
      }
 
 

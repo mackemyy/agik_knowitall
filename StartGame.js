@@ -61,13 +61,18 @@ class StartGame extends Phaser.Scene {
             .setScale(0.9)
             .on('pointerover', () => this.checkButton.setScale(1))
             .on('pointerout', () => this.checkButton.setScale(0.9));
+
+        this.timerTxt = this.add.text(config.scale.width/2 - 370, config.scale.height/2 - 475, '', { fontFamily: '"Typesauce"', fill: '#FFFFFF', fontSize: '70px', align: "center", } );
+        this.timer = this.time.delayedCall(91000, this.onEvent, [], this);
         
      }
-        
-
-
-
-
     
-    update() { }
+    update() {
+        this.timerTxt.setText('' + this.timer.getRemainingSeconds().toString().substr(0, 2).padStart(2, '0'), { fontFamily: '"Typesauce"', fill: '#FFFFFF', fontSize: '70px', align: "center", } );
+    }
+
+    onEvent() {
+        console.log('mana');
+        this.gameOverTxt = this.add.text(config.scale.width/2 - 200, config.scale.height/2,"TIME'S UP!", { fontFamily: '"Typesauce"', fill: '#FFFFFF', fontSize: '72px', align: "center", });
+    }
 }

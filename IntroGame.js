@@ -17,11 +17,9 @@ class IntroGame extends Phaser.Scene {
         this.load.image("sureBtn", "assets/buttons/sureButton.png");
     }
 
-    create() { 
-        const width = this.cameras.main.width/2;
-        const height = this.cameras.main.height/2;
-        this.opening = this.add.image(width, height, "opening");
-        this.nextBtn = this.add.image(width + 800, height + 420, "nextBtn")
+    create() {
+        this.opening = this.add.image(this.cameras.main.width/2, this.cameras.main.height/2, "opening");
+        this.nextBtn = this.add.image(this.cameras.main.width/2 + 800, this.cameras.main.height/2 + 420, "nextBtn")
         .setInteractive({useHandCursor: true})
         .setScale(0.8)
         .on('pointerdown', () => this.loadNextScreen())
@@ -50,8 +48,8 @@ class IntroGame extends Phaser.Scene {
     showText2() {
         this.hrText1.alpha = 0;
         this.nextBtn1.alpha = 0;
-        this.hrText2 = this.add.text(this.cameras.main.width/2 - 280, this.cameras.main.height/2 - 360, 'I am Marjorie. I am the HR of this company, and I will be the one to introduce you to this place. Lets go!', {
-            fontFamily: '"Montserrat"', fill: '#924600', fontSize: '30px', align: "center", wordWrap: { width: 480, useAdvancedWrap: true }
+        this.hrText2 = this.add.text(this.cameras.main.width/2 - 275, this.cameras.main.height/2 - 360, "I am Keisha Harriet. I'm the HR of this company, and I'll be the one to introduce you to this place. Let's go!", {
+            fontFamily: '"Montserrat"', fill: '#924600', fontSize: '30px', align: "center", wordWrap: { width: 450, useAdvancedWrap: true }
         });
         this.nextBtn2 = this.add.image(this.cameras.main.width/2 + 800, this.cameras.main.height/2 + 420, "nextBtn")
             .setInteractive({useHandCursor: true})
@@ -105,7 +103,7 @@ class IntroGame extends Phaser.Scene {
     showHRinAGIK() {
         this.officeWithHR = this.add.image(this.cameras.main.width/2, this.cameras.main.height/2, "officeWithHR");
         this.bubbleChatORLeft = this.add.image(this.cameras.main.width/2 + 200, this.cameras.main.height/2 - 100, "bubbleChatORLeft");
-        this.hrText4 = this.add.text(this.cameras.main.width/2 - 170, this.cameras.main.height/2 - 200, 'This is the AGIK Office, which is composed of graphic & web designers, illustrators, and game developers.', {
+        this.hrText4 = this.add.text(this.cameras.main.width/2 - 150, this.cameras.main.height/2 - 200, 'This is the AGIK Office, which is composed of graphic & web designers, illustrators, and game developers.', {
             fontFamily: '"Montserrat"', fill: '#924600', fontSize: '38px', align: "center", wordWrap: { width: 800, useAdvancedWrap: true }
         });
         this.nextBtn4 = this.add.image(this.cameras.main.width/2 + 800, this.cameras.main.height/2 + 420, "nextBtn")
@@ -119,7 +117,7 @@ class IntroGame extends Phaser.Scene {
     showText5() {
         this.hrText4.alpha = 0;
         this.nextBtn4.alpha = 0;
-        this.hrText5 = this.add.text(this.cameras.main.width/2 - 110, this.cameras.main.height/2 - 200, 'Our employees usually cater to our clients requests and provide them illustrations,', {
+        this.hrText5 = this.add.text(this.cameras.main.width/2 - 110, this.cameras.main.height/2 - 190, "Our employees usually cater to our client's requests and provide them illustrations,", {
             fontFamily: '"Montserrat"', fill: '#924600', fontSize: '38px', align: "center", wordWrap: { width: 800, useAdvancedWrap: true }
         });
         this.nextBtn5 = this.add.image(this.cameras.main.width/2 + 800, this.cameras.main.height/2 + 420, "nextBtn")
@@ -147,10 +145,10 @@ class IntroGame extends Phaser.Scene {
     showText7() {
         this.hrText6.alpha = 0;
         this.nextBtn6.alpha = 0;
-        this.hrText7 = this.add.text(this.cameras.main.width/2 - 170, this.cameras.main.height/2 - 240, 'To have a clear idea of the working environment at AGIK, how about let’s play a game? Are you ready?', {
+        this.hrText7 = this.add.text(this.cameras.main.width/2 - 140, this.cameras.main.height/2 - 240, "To have a clear idea of the working environment at AGIK, how about let's play a game? Are you ready?", {
             fontFamily: '"Montserrat"', fill: '#924600', fontSize: '38px', align: "center", wordWrap: { width: 800, useAdvancedWrap: true }
         });
-        this.sureBtn = this.add.image(this.cameras.main.width/2 + 220, this.cameras.main.height/2 - 10, "sureBtn")
+        this.sureBtn = this.add.image(this.cameras.main.width/2 + 230, this.cameras.main.height/2 - 10, "sureBtn")
             .setScale(0.8)
             .setInteractive({useHandCursor: true})
             .on('pointerdown', () => this.scene.start('levelMap'))
