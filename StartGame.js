@@ -14,6 +14,10 @@ class StartGame extends Phaser.Scene {
         this.load.image("vectorbtn", "assets/buttons/vectorbtn.png");
         this.load.image("deletebtn", "assets/buttons/delete.png");
         this.load.image("checkbtn", "assets/buttons/check.png");
+        this.load.image("quitWindow", "assets/objects/quitscreen.png");
+        this.load.image("yesButton", "assets/buttons/quitbtn.png");
+        this.load.image("noButton", "assets/buttons/backbtn.png");
+        
 
 
 
@@ -24,10 +28,9 @@ class StartGame extends Phaser.Scene {
 
 
 
+
+
         this.emptyOffice1Bg = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2, "emptyOffice1")
-
-
-
         this.logoBox = this.add.image(config.scale.width / 2, config.scale.height / 2, "logoCntnr");
         this.clientRequest = this.add.image(230, 750, "clientRqst");
         this.clientAvatar = this.add.image(230, 350, "clientDP");
@@ -35,9 +38,10 @@ class StartGame extends Phaser.Scene {
 
         this.menuButton = this.add.image(150, 110, "menuBtn")
             .setInteractive({ useHandCursor: true })
-            .setScale(1)
-            .on('pointerover', () => this.menuButton.setScale(0.9))
-            .on('pointerout', () => this.menuButton.setScale(1));
+            this.menuButton.on('pointerdown', () => {
+                this.scene.pause();
+                this.scene.launch("QuitGame")
+            })
 
         this.shapeButton = this.add.image(this.cameras.main.width / 1 - 170, 230, "shapebtn")
             .setInteractive({ useHandCursor: true })
