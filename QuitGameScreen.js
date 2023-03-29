@@ -20,15 +20,17 @@ class QuitGameScene extends Phaser.Scene {
         const window = this.add.image(0, 0, 'quitWindow');
         container.add(window);
 
-        const yesButton = this.add.image(-220, 120, 'yesButton');
+        const yesButton = this.add.image(220, 120, 'yesButton');
         yesButton.setInteractive();
         yesButton.on('pointerup', () => {
             this.scene.start('levelMap');
 
         });
         container.add(yesButton);
+
+        -240, 120
     
-        const noButton = this.add.image(220, 120, 'noButton');
+        const noButton = this.add.image(-240, 120, 'noButton');
         noButton.setInteractive();
         noButton.on('pointerdown', () => {
           this.scene.stop();
