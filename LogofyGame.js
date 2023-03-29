@@ -15,7 +15,7 @@ class PlayLogofy extends Phaser.Scene {
     }
 
     create() {
-        this.emptyOffice1Bg = this.add.image(this.cameras.main.width/2, this.cameras.main.height/2, "emptyOffice1");
+        this.emptyOffice1Bg = this.add.image(config.scale.width/2, config.scale.height/2, "emptyOffice1");
         this.gameTitleCtr = this.add.image(config.scale.width/2, config.scale.height/2, "gameTitleCtr");
         this.groupGameObjTxt = this.add.container(10,10).setVisible(false);
 
