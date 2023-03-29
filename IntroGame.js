@@ -5,18 +5,6 @@ class IntroGame extends Phaser.Scene {
         super("introGame");
     }
 
-    preload() { 
-        this.load.image("opening", "assets/bg/opening.png");
-        this.load.image("nextBtn", "assets/buttons/nextButton.png");
-        this.load.image("hrScreen", "assets/bg/hr_screen.png");
-        this.load.image("bubbleChatOR", "assets/objects/bubbleChatOrange.png");
-        this.load.image("emptyOffice", "assets/bg/empty_office_bg.png");
-        this.load.image("agikObj", "assets/objects/AGIK.png");
-        this.load.image("officeWithHR", "assets/bg/office_with_hr.png");
-        this.load.image("bubbleChatORLeft", "assets/objects/bubbleChatORLeft.png");
-        this.load.image("sureBtn", "assets/buttons/sureButton.png");
-    }
-
     create() {
         this.opening = this.add.image(this.cameras.main.width/2, this.cameras.main.height/2, "opening");
         this.nextBtn = this.add.image(this.cameras.main.width/2 + 800, this.cameras.main.height/2 + 420, "nextBtn")

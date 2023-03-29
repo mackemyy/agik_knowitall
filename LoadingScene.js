@@ -3,14 +3,6 @@ class LoadingScene extends Phaser.Scene {
         super('loadingScene')
     }
 
-    preload() {
-        this.load.image("logo1", "assets/logo/logo6.png");
-        this.load.image("logo2", "assets/logo/logo5.png");
-        this.load.image("menu_bg", "assets/bg/menu_bg.png");
-        this.load.image("disclaimer", "assets/bg/disclaimer.png");
-        this.load.image("newGameBtn", "assets/buttons/newGameButton.png");
-        this.load.image("loadGameBtn", "assets/buttons/loadGameButton.png");
-    }
     create() {
         this.cameras.main.setBounds(0, 0, config.scale.width/2, config.scale.height/2);
         this.logo1 = this.add.image(config.scale.width/2, config.scale.height/2, "logo1").setScale(0.1).setOrigin(0.5).setAngle(90);

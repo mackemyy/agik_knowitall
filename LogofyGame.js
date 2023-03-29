@@ -3,17 +3,6 @@ class PlayLogofy extends Phaser.Scene {
         super("playLogofy");
     }
 
-    preload() { 
-        this.load.image("emptyOffice1", "assets/bg/empty_office_bg2.png");
-        this.load.image("gameTitleCtr", "assets/objects/gameTitleContainer.png")
-        this.load.image("gameObjCtr", "assets/objects/gameObjContainer.png");
-        this.load.image("playbtn", "assets/buttons/playbtn.png");
-        this.load.image("hrDP", "assets/objects/hrDP.png");
-        this.load.image("hrNarrateCtr", "assets/objects/hrNarrateContainer.png");
-        this.load.image("nextBtn", "assets/buttons/nextButton.png");
-
-    }
-
     create() {
         this.emptyOffice1Bg = this.add.image(config.scale.width/2, config.scale.height/2, "emptyOffice1");
         this.gameTitleCtr = this.add.image(config.scale.width/2, config.scale.height/2, "gameTitleCtr");

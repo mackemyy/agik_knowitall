@@ -3,13 +3,6 @@ class LevelMap extends Phaser.Scene{
         super('levelMap')
     }
 
-    preload() {
-        this.load.image("levelMapBg", "assets/bg/level_map_bg.png");
-        this.load.image("level1", "assets/objects/level1.png");
-        this.load.image("level2", "assets/objects/level2.png");
-        this.load.image("miniGame", "assets/objects/miniGame.png");
-     }
-
     create() { 
         this.levelMapBg = this.add.image(this.cameras.main.width/2, this.cameras.main.height/2, "levelMapBg");
         this.level1 = this.add.image(this.cameras.main.width/2 - 590, this.cameras.main.height/2 + 90, "level1")

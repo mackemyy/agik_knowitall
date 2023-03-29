@@ -3,22 +3,6 @@ class StartGame extends Phaser.Scene {
         super("startGame");
     }
 
-    preload() {
-        this.load.image("emptyOffice1", "assets/bg/empty_office_bg2.png");
-        this.load.image("logoCntnr", "assets/objects/logoContainer.png");
-        this.load.image("clientRqst", "assets/objects/clientrqts.png");
-        this.load.image("clientDP", "assets/objects/clientDP.png");
-        this.load.image("menuBtn", "assets/buttons/menubtn.png");
-        this.load.image("shapebtn", "assets/buttons/shapesbtn.png");
-        this.load.image("textbtn", "assets/buttons/textbtn.png");
-        this.load.image("vectorbtn", "assets/buttons/vectorbtn.png");
-        this.load.image("deletebtn", "assets/buttons/delete.png");
-        this.load.image("checkbtn", "assets/buttons/check.png");
-        this.load.image("quitWindow", "assets/objects/quitscreen.png");
-        this.load.image("yesButton", "assets/buttons/quitbtn.png");
-        this.load.image("noButton", "assets/buttons/backbtn.png");
-    }
-
     create() {
 
         this.timer = this.time.delayedCall(120000, this.timerCallback, [], this);

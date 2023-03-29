@@ -3,15 +3,6 @@ class QuitGameScene extends Phaser.Scene {
         super("QuitGame");
     }
 
-
-
-    preload() {
-        this.load.image("quitWindow", "assets/bg/quitscreen.png");
-        this.load.image("yesButton", "assets/buttons/quitbtn.png");
-        this.load.image("noButton", "assets/buttons/backbtn.png");
-    }
-
-
     create() {
         // Create a container for the pop-up window
         const container = this.add.container(0, 0);
