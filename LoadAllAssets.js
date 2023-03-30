@@ -13,6 +13,7 @@ class LoadAllAssets extends Phaser.Scene {
          this.load.image("levelMapBg", "assets/bg/level_map_bg.png");
          this.load.image("menu_bg", "assets/bg/menu_bg.png");
          this.load.image("disclaimer", "assets/bg/disclaimer.png");
+         this.load.image("quitWindow", "assets/bg/quitscreen.png");
  
          //assets for all buttons
          this.load.image("sureBtn", "assets/buttons/sureButton.png");
