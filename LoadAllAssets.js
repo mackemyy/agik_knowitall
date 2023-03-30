@@ -50,9 +50,44 @@ class LoadAllAssets extends Phaser.Scene {
          this.load.image("hrNarrateCtr", "assets/objects/hrNarrateContainer.png");
          this.load.image("clientRqst", "assets/objects/clientrqts.png");
          this.load.image("clientDP", "assets/objects/clientDP.png");
-    }
 
-    create() {
-        this.scene.start("loadingScene");
-     }
+        var progress = 0;
+        var targetProcess = 1; 
+        var progressDelay = 40; 
+        var progressBar = this.add.graphics();
+        var progressBox = this.add.graphics();
+        
+        progressBox.fillStyle(0xffffff, 1);
+        progressBox.fillRoundedRect(config.scale.width/2 - 250, config.scale.height/2 + 50, 533, 50, 25);
+
+       var loadingText = this.add.text(config.scale.width/2, config.scale.height/2 - 20, 'Loading', {
+            fontFamily: 'Montserrat',
+            fontSize: '48px',
+            color: '#ffffff',
+            fontWeight: 'bold'
+        });
+       loadingText.setOrigin(0.5);
+
+        this.time.addEvent({
+            delay: progressDelay,
+            callback: function () {
+                progress += 0.07;
+                progressBar.clear();
+                progressBar.fillStyle(0xFFC929, 1);
+                progressBar.fillRoundedRect(config.scale.width/2 - 250, config.scale.height/2 + 50, 500 * progress, 50, 25);
+                progressBar.setDepth(1);
+
+                if (progress >= targetProcess) {
+                    progress = targetProcess;
+                    this.load.off('progress');
+                    progressBox.destroy();
+                    progressBar.destroy();
+                    loadingText.destroy();
+                    this.scene.start("loadingScene");
+                }
+            },
+            callbackScope: this,
+            loop: true
+        });
+    }      
 }
