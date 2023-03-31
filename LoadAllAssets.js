@@ -1,6 +1,8 @@
 class LoadAllAssets extends Phaser.Scene {
     constructor() {
-        super("loadAllAssets")
+        super("loadAllAssets");
+        this.centerX = config.scale.width / 2;
+        this.centerY = config.scale.height / 2;
     }
 
     preload() {
@@ -58,9 +60,9 @@ class LoadAllAssets extends Phaser.Scene {
         var progressBox = this.add.graphics();
         
         progressBox.fillStyle(0xffffff, 1);
-        progressBox.fillRoundedRect(config.scale.width/2 - 250, config.scale.height/2 + 50, 533, 50, 25);
+        progressBox.fillRoundedRect(this.centerX - 250, this.centerY + 50, 533, 50, 25);
 
-       var loadingText = this.add.text(config.scale.width/2, config.scale.height/2 - 20, 'Loading', {
+       var loadingText = this.add.text(this.centerX, this.centerY - 20, 'Loading', {
             fontFamily: 'Montserrat',
             fontSize: '48px',
             color: '#ffffff',
@@ -74,7 +76,7 @@ class LoadAllAssets extends Phaser.Scene {
                 progress += 0.07;
                 progressBar.clear();
                 progressBar.fillStyle(0xFFC929, 1);
-                progressBar.fillRoundedRect(config.scale.width/2 - 250, config.scale.height/2 + 50, 500 * progress, 50, 25);
+                progressBar.fillRoundedRect(this.centerX - 250, this.centerY + 50, 500 * progress, 50, 25);
                 progressBar.setDepth(1);
 
                 if (progress >= targetProcess) {

@@ -1,14 +1,16 @@
 class LoadingScene extends Phaser.Scene {
     constructor() {
-        super('loadingScene')
+        super('loadingScene');
+        this.centerX = config.scale.width / 2;
+        this.centerY = config.scale.height / 2;
     }
 
     create() {
-        this.cameras.main.setBounds(0, 0, config.scale.width/2, config.scale.height/2);
-        this.logo1 = this.add.image(config.scale.width/2, config.scale.height/2, "logo1").setScale(0.1).setOrigin(0.5).setAngle(90);
-        this.logo2 = this.add.image(config.scale.width/2, config.scale.height/2, "logo2").setScale(0.5).setOrigin(0.5).setAlpha(0);
-        this.menu_bg = this.add.image(config.scale.width/2, config.scale.height/2, "menu_bg").setAlpha(0);
-        this.disclaimer = this.add.image(config.scale.width/2, config.scale.height/2, "disclaimer").setAlpha(0);
+        this.cameras.main.setBounds(0, 0, this.centerX, this.centerY);
+        this.logo1 = this.add.image(this.centerX, this.centerY, "logo1").setScale(0.1).setOrigin(0.5).setAngle(90);
+        this.logo2 = this.add.image(this.centerX, this.centerY, "logo2").setScale(0.5).setOrigin(0.5).setAlpha(0);
+        this.menu_bg = this.add.image(this.centerX, this.centerY, "menu_bg").setAlpha(0);
+        this.disclaimer = this.add.image(this.centerX, this.centerY, "disclaimer").setAlpha(0);
 
         this.logo1Tween = this.add.tween({
                 targets: this.logo1,
