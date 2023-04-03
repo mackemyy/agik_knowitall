@@ -33,6 +33,8 @@ class LoadAllAssets extends Phaser.Scene {
          this.load.image("checkbtn", "assets/buttons/check.png");
          this.load.image("yesButton", "assets/buttons/quitbtn.png");
          this.load.image("noButton", "assets/buttons/backbtn.png");
+         this.load.image("soundOn", "assets/buttons/sound_on.png");
+         this.load.image("soundOff", "assets/buttons/sound_off.png");
  
          //assets for all logo
          this.load.image("logo1", "assets/logo/logo6.png");
@@ -52,6 +54,13 @@ class LoadAllAssets extends Phaser.Scene {
          this.load.image("hrNarrateCtr", "assets/objects/hrNarrateContainer.png");
          this.load.image("clientRqst", "assets/objects/clientrqts.png");
          this.load.image("clientDP", "assets/objects/clientDP.png");
+
+        //assets for music
+        this.load.audio("music1", "assets/music/music1.mp3");
+        this.load.audio("music2", "assets/music/music2.mp3");
+        this.load.audio("music3", "assets/music/music3.mp3");
+        this.load.audio("music4", "assets/music/music4.mp3");
+
 
         var progress = 0;
         var targetProcess = 1; 
