@@ -92,6 +92,33 @@ class LoadingScene extends Phaser.Scene {
     }
 
     showMenuScreen() {
+        this.startMusic1 = this.sound.add("music1", musicConfig);
+        this.soundOff = this.add.image(this.centerX + 800, this.centerY - 450, "soundOff")
+            .setInteractive({useHandCursor: true})
+            .setScale(0.3)
+            .on('pointerdown', function() {
+                if(this.sound.locked) {
+                    this.sound.once('unlocked', function() {
+                        this.soundOff.setVisible(false);
+                        this.soundOn.setVisible(true);
+                        this.startMusic1.play();
+                    }, this);
+                } else {
+                    this.startMusic1.play();
+                }
+                this.startMusic1.resume();
+                this.soundOff.setVisible(false);
+                this.soundOn.setVisible(true);
+            }, this);
+        this.soundOn = this.add.image(this.centerX + 800, this.centerY - 450, "soundOn")
+            .setInteractive({useHandCursor: true})
+            .setScale(0.3).setVisible(false)
+            .on('pointerdown', function() {
+                this.startMusic1.pause();
+                this.soundOff.setVisible(true);
+                this.soundOn.setVisible(false);
+            }, this);
+
         this.menuBgTween = this.add.tween({
             targets: this.menu_bg,
             alpha: 1,
@@ -111,9 +138,12 @@ class LoadingScene extends Phaser.Scene {
             },
             callbackScope: this,
         });
+    
     }
 
     goToNextScene() {
+        this.startMusic1.stop();
+        console.log('stop music1');
         this.scene.start("introGame");
         // this.scene.start("startGame");
     }

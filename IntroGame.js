@@ -8,8 +8,35 @@ class IntroGame extends Phaser.Scene {
     }
 
     create() {
+        this.startMusic4 = this.sound.add("music4", musicConfig);
         this.opening = this.add.image(this.centerX, this.centerY, "opening");
         this.nextBtn = new CustomButton(this, this.centerX + 800, this.centerY + 420, "nextBtn", () => { this.loadNextScreen() });
+        this.soundOff = this.add.image(this.centerX + 800, this.centerY - 450, "soundOff")
+            .setInteractive({useHandCursor: true})
+            .setScale(0.3).setDepth(1)
+            .on('pointerdown', function() {
+                if(this.sound.locked) {
+                    this.sound.once('unlocked', function() {
+                        this.soundOff.setVisible(false);
+                        this.soundOn.setVisible(true);
+                        this.startMusic4.play();
+                    }, this);
+                } else {
+                    this.startMusic4.play();
+                }
+                this.startMusic4.resume();
+                this.soundOff.setVisible(false);
+                this.soundOn.setVisible(true);
+            }, this);
+        this.soundOn = this.add.image(this.centerX + 800, this.centerY - 450, "soundOn")
+            .setInteractive({useHandCursor: true})
+            .setScale(0.3).setVisible(false).setDepth(1)
+            .on('pointerdown', function() {
+                this.startMusic4.pause();
+                this.soundOff.setVisible(true);
+                this.soundOn.setVisible(false);
+            }, this);
+        
     }
 
     loadNextScreen() {
@@ -86,7 +113,10 @@ class IntroGame extends Phaser.Scene {
         this.hrText6.destroy();
         this.nextBtn.destroy();
         this.hrText7 = new CustomHrText(this, this.centerX - 140, this.centerY - 240, "To have a clear idea of the working environment at AGIK, how about let's play a game? Are you ready?", '38px', 800);
-        this.nextBtn = new CustomButton(this, this.centerX + 230, this.centerY - 10, "sureBtn", () => { this.scene.start('levelMap') });
+        this.nextBtn = new CustomButton(this, this.centerX + 230, this.centerY - 10, "sureBtn", () => { 
+            this.startMusic4.stop(); 
+            console.log('stop music4');
+            this.scene.start('levelMap') });
     }
 }
 
