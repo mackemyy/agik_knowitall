@@ -18,7 +18,7 @@ var config = {
         PlayLogofy, 
         LevelMap, 
         StartGame, 
-        // Sound,
+        // SoundButton,
         QuitGameScene,
      ],
     pixelArt: true,
