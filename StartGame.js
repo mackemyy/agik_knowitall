@@ -20,12 +20,21 @@ class StartGame extends Phaser.Scene {
         this.clientRequest = this.add.image(230, 750, "clientRqst");
         this.clientAvatar = this.add.image(230, 350, "clientDP");
 
+        this.menuButton = new ImageButton(this, 150, 110, "menuBtn", 
+            () => this.launchQuitGame(),
+            () => this.tweenButtonScale(1.1, this.menuButton),
+            () => this.tweenButtonScale(1, this.menuButton),
+        );
 
-        this.menuButton = this.add.image(150, 110, "menuBtn")
-            .setInteractive({ useHandCursor: true })
-            .on('pointerover', () => this.tweenButtonScale(1.1, this.menuButton))
-            .on('pointerout', () => this.tweenButtonScale(1, this.menuButton))
-            .on('pointerdown', () => this.launchQuitGame());
+        this.tweenButtonScale = (scale, targets) => {
+            this.tweens.add({
+                targets: targets,
+                duration: 5,
+                scaleX: scale,
+                scaleY: scale,
+                ease: 'Linear'
+            });
+        };
 
         this.launchQuitGame = () => {
             this.scene.pause();

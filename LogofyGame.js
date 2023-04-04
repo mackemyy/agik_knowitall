@@ -52,13 +52,7 @@ class PlayLogofy extends Phaser.Scene {
         this.groupGameObjTxt = this.add.group();
 
         for(let i = 0; i < this.gameObjTexts.length; i++) {
-            this.gameObjTxt = this.add.text(this.centerX - 390, this.centerY  - 150 + (i * 75), this.gameObjTexts[i], {
-                fontFamily: '"Montserrat"',
-                fill: '#713600',
-                fontSize: '25px',
-                align: "left",
-                wordWrap: { width: 830, useAdvancedWrap: true }
-              });
+            this.gameObjTxt = new CustomHrText(this, this.centerX - 390, this.centerY  - 150 + (i * 75), this.gameObjTexts[i], '25px', 830, '#713600', "left");
               this.groupGameObjTxt.add(this.gameObjTxt);
         }
 
@@ -71,12 +65,7 @@ class PlayLogofy extends Phaser.Scene {
             callbackScope: this,
         });
 
-        this.nextBtn = this.add.image(this.centerX + 800, this.centerY + 420, "nextBtn")
-            .setInteractive({useHandCursor: true})
-            .setScale(0.8)
-            .on('pointerdown', () => this.showHRNarrate())
-            .on('pointerover', () => this.nextBtn.setScale(1))
-            .on('pointerout', () => this.nextBtn.setScale(0.8))
+        this.nextBtn = new ImageButton(this, this.centerX + 800, this.centerY + 420, "nextBtn", () => this.showHRNarrate(), () => this.nextBtn.setScale(1), () => this.nextBtn.setScale(0.8), 0.8);
      }
 
      showHRNarrate() {
@@ -87,14 +76,10 @@ class PlayLogofy extends Phaser.Scene {
         this.nextBtn.setVisible(false);
         this.hrNarrateCtr = this.add.image(this.centerX, this.centerY + 250, "hrNarrateCtr");
         this.hrDP = this.add.image(this.centerX - 465, this.centerY + 240, "hrDP");
-        this.playbtn = this.add.image(this.centerX + 500, this.centerY + 350, "playbtn")
-            .setInteractive({useHandCursor: true})
-            .on('pointerdown', ()=> { 
-                this.scene.get("introGame").sound.pauseAll();
-                this.scene.start("startGame")} )
-            .on('pointerover', () => this.playbtn.setPosition(this.centerX + 490, this.centerY + 340))
-            .on('pointerout', () => this.playbtn.setPosition(this.centerX + 500, this.centerY + 350));
-        this.hrNarrateTxt = this.add.text(this.centerX - 240, this.centerY + 120, "To begin, read the client's request at the left side of the screen, which will be your guide in making the logo. You'll be given 90 seconds to finish all the clients' request. Do your best and good luck!", {
-            fontFamily: '"Montserrat"', fill: '#00453B', fontSize: '29px', align: "justify", wordWrap: { width: 820, useAdvancedWrap: true }})
+        this.playbtn = new ImageButton(this, this.centerX + 500, this.centerY + 350, "playbtn", () => {
+            this.scene.get("introGame").sound.pauseAll();
+            this.scene.start("startGame");}, 
+            () => this.playbtn.setPosition(this.centerX + 490, this.centerY + 340), () => this.playbtn.setPosition(this.centerX + 500, this.centerY + 350),);
+        this.hrNarrateTxt = new CustomHrText(this, this.centerX - 240, this.centerY + 120, "To begin, read the client's request at the left side of the screen, which will be your guide in making the logo. You'll be given 90 seconds to finish all the clients' request in each stage. Do your best and good luck!", "29px", 820, '#00453B', "justify");
      }  
 }

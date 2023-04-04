@@ -101,16 +101,15 @@ class LoadingScene extends Phaser.Scene {
             duration: 1500,
             ease: 'Power2',
             onComplete: function() {
-                const createButton = (x, y, image, callback) => {
-                    const button = this.add.image(x, y, image)
-                        .setInteractive({useHandCursor: true})
-                        .on('pointerdown', callback)
-                        .on('pointerover', () => button.setPosition(x - 10, y - 10))
-                        .on('pointerout', () => button.setPosition(x, y));
-                    return button;
-                };
-                this.newGameBtn = createButton(config.scale.width/2, config.scale.height/2, "newGameBtn", () => this.goToNextScene());
-                this.loadGameBtn = createButton(config.scale.width/2, config.scale.height/2 + 200, "loadGameBtn", () => console.log("load game scene here"));
+                this.newGameBtn = new ImageButton(this, config.scale.width/2, config.scale.height/2, "newGameBtn", 
+                    () => this.goToNextScene(), 
+                    () => this.newGameBtn.setPosition(config.scale.width/2 - 10, config.scale.height/2 - 10), 
+                    ()=> this.newGameBtn.setPosition(config.scale.width/2, config.scale.height/2), 0.8);
+
+                this.loadGameBtn = new ImageButton(this, config.scale.width/2, config.scale.height/2 + 200, "loadGameBtn", 
+                    () => console.log("load game scene here"), 
+                    () => this.loadGameBtn.setPosition(config.scale.width/2 - 10, config.scale.height/2 + 190), 
+                    ()=> this.loadGameBtn.setPosition(config.scale.width/2, config.scale.height/2 + 200), 0.8);
             },
             callbackScope: this,
         });
