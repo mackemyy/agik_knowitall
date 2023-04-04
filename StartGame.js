@@ -68,12 +68,14 @@ class StartGame extends Phaser.Scene {
         this.deleteButton = this.add.image(this.cameras.main.width / 2 - 400, config.scale.height / 1 - 100, "deletebtn")
             .setInteractive({ useHandCursor: true })
             .setScale(0.9)
+            .setDepth(1)
             .on('pointerover', () => this.deleteButton.setScale(1))
             .on('pointerout', () => this.deleteButton.setScale(0.9));
 
         this.checkButton = this.add.image(this.cameras.main.width / 2 + 410, config.scale.height / 1 - 100, "checkbtn")
             .setInteractive({ useHandCursor: true })
             .setScale(0.9)
+            .setDepth(1)
             .on('pointerover', () => this.checkButton.setScale(1))
             .on('pointerout', () => this.checkButton.setScale(0.9));
 
