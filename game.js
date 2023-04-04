@@ -1,3 +1,13 @@
+var musicConfig = {
+    mute: false,
+    volume: 0.2,
+    rate: 1,
+    detune: 0,
+    seek: 0,
+    loop: true,
+    delay: 0,
+}
+
 var config = {
     type: Phaser.AUTO,
     backgroundColor: 0x0C2238,

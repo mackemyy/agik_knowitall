@@ -1,14 +1,16 @@
 class LoadingScene extends Phaser.Scene {
     constructor() {
-        super('loadingScene')
+        super('loadingScene');
+        this.centerX = config.scale.width / 2;
+        this.centerY = config.scale.height / 2;
     }
 
     create() {
-        this.cameras.main.setBounds(0, 0, config.scale.width/2, config.scale.height/2);
-        this.logo1 = this.add.image(config.scale.width/2, config.scale.height/2, "logo1").setScale(0.1).setOrigin(0.5).setAngle(90);
-        this.logo2 = this.add.image(config.scale.width/2, config.scale.height/2, "logo2").setScale(0.5).setOrigin(0.5).setAlpha(0);
-        this.menu_bg = this.add.image(config.scale.width/2, config.scale.height/2, "menu_bg").setAlpha(0);
-        this.disclaimer = this.add.image(config.scale.width/2, config.scale.height/2, "disclaimer").setAlpha(0);
+        this.cameras.main.setBounds(0, 0, this.centerX, this.centerY);
+        this.logo1 = this.add.image(this.centerX, this.centerY, "logo1").setScale(0.1).setOrigin(0.5).setAngle(90);
+        this.logo2 = this.add.image(this.centerX, this.centerY, "logo2").setScale(0.5).setOrigin(0.5).setAlpha(0);
+        this.menu_bg = this.add.image(this.centerX, this.centerY, "menu_bg").setAlpha(0);
+        this.disclaimer = this.add.image(this.centerX, this.centerY, "disclaimer").setAlpha(0);
 
         this.logo1Tween = this.add.tween({
                 targets: this.logo1,
@@ -90,6 +92,33 @@ class LoadingScene extends Phaser.Scene {
     }
 
     showMenuScreen() {
+        this.startMusic1 = this.sound.add("music1", musicConfig);
+        this.soundOff = this.add.image(this.centerX + 800, this.centerY - 450, "soundOff")
+            .setInteractive({useHandCursor: true})
+            .setScale(0.3)
+            .on('pointerdown', function() {
+                if(this.sound.locked) {
+                    this.sound.once('unlocked', function() {
+                        this.soundOff.setVisible(false);
+                        this.soundOn.setVisible(true);
+                        this.startMusic1.play();
+                    }, this);
+                } else {
+                    this.startMusic1.play();
+                }
+                this.startMusic1.resume();
+                this.soundOff.setVisible(false);
+                this.soundOn.setVisible(true);
+            }, this);
+        this.soundOn = this.add.image(this.centerX + 800, this.centerY - 450, "soundOn")
+            .setInteractive({useHandCursor: true})
+            .setScale(0.3).setVisible(false)
+            .on('pointerdown', function() {
+                this.startMusic1.pause();
+                this.soundOff.setVisible(true);
+                this.soundOn.setVisible(false);
+            }, this);
+
         this.menuBgTween = this.add.tween({
             targets: this.menu_bg,
             alpha: 1,
@@ -109,9 +138,12 @@ class LoadingScene extends Phaser.Scene {
             },
             callbackScope: this,
         });
+    
     }
 
     goToNextScene() {
+        this.startMusic1.stop();
+        console.log('stop music1');
         this.scene.start("introGame");
         // this.scene.start("startGame");
     }

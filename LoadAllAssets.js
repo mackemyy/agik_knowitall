@@ -1,6 +1,8 @@
 class LoadAllAssets extends Phaser.Scene {
     constructor() {
-        super("loadAllAssets")
+        super("loadAllAssets");
+        this.centerX = config.scale.width / 2;
+        this.centerY = config.scale.height / 2;
     }
 
     preload() {
@@ -31,11 +33,12 @@ class LoadAllAssets extends Phaser.Scene {
          this.load.image("checkbtn", "assets/buttons/check.png");
          this.load.image("yesButton", "assets/buttons/quitbtn.png");
          this.load.image("noButton", "assets/buttons/backbtn.png");
+         this.load.image("soundOn", "assets/buttons/sound_on.png");
+         this.load.image("soundOff", "assets/buttons/sound_off.png");
+         this.load.image('downBtn', 'assets/Buttons/DownBtn.png');
          this.load.image("closeButton", "assets/buttons/closeButton.png");
          this.load.image('buttonBorder', 'assets/Buttons/buttonborder.png');
-         this.load.image('downBtn', 'assets/Buttons/DownBtn.png');
          this.load.image('upBtn', 'assets/Buttons/UpBtn.png');
-
          //assets for all logo
          this.load.image("logo1", "assets/logo/logo6.png");
          this.load.image("logo2", "assets/logo/logo5.png");
@@ -80,7 +83,11 @@ class LoadAllAssets extends Phaser.Scene {
          this.load.image("clientDP", "assets/objects/clientDP.png");
          this.load.image("sideBar", "assets/objects/sideBar.png");
 
-
+        //assets for music
+        this.load.audio("music1", "assets/music/music1.mp3");
+        this.load.audio("music2", "assets/music/music2.mp3");
+        this.load.audio("music3", "assets/music/music3.mp3");
+        this.load.audio("music4", "assets/music/music4.mp3");
         var progress = 0;
         var targetProcess = 1; 
         var progressDelay = 40; 
@@ -88,9 +95,9 @@ class LoadAllAssets extends Phaser.Scene {
         var progressBox = this.add.graphics();
         
         progressBox.fillStyle(0xffffff, 1);
-        progressBox.fillRoundedRect(config.scale.width/2 - 250, config.scale.height/2 + 50, 533, 50, 25);
+        progressBox.fillRoundedRect(this.centerX - 250, this.centerY + 50, 533, 50, 25);
 
-       var loadingText = this.add.text(config.scale.width/2, config.scale.height/2 - 20, 'Loading', {
+       var loadingText = this.add.text(this.centerX, this.centerY - 20, 'Loading', {
             fontFamily: 'Montserrat',
             fontSize: '48px',
             color: '#ffffff',
@@ -104,7 +111,7 @@ class LoadAllAssets extends Phaser.Scene {
                 progress += 0.07;
                 progressBar.clear();
                 progressBar.fillStyle(0xFFC929, 1);
-                progressBar.fillRoundedRect(config.scale.width/2 - 250, config.scale.height/2 + 50, 500 * progress, 50, 25);
+                progressBar.fillRoundedRect(this.centerX - 250, this.centerY + 50, 500 * progress, 50, 25);
                 progressBar.setDepth(1);
 
                 if (progress >= targetProcess) {
