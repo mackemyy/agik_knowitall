@@ -50,7 +50,7 @@ class ShapesPopUpScene extends Phaser.Scene{
             type: 'shape',
             name:'Yellow Rectangle',
             key:'rectangle2',
-            position:[250,830],
+            position:[210,820],
             newPos:[950,600],
             size:0.1,
             newSize:0.25,
@@ -82,7 +82,7 @@ class ShapesPopUpScene extends Phaser.Scene{
             type: 'shape',
             name:'Red',
             key:'circle1',
-            position:[200,830],
+            position:[200,800],
             newPos:[950,600],
             size:0.1,
             newSize:0.25,
@@ -116,15 +116,15 @@ class ShapesPopUpScene extends Phaser.Scene{
       }
     };
 
-    const buttonBorder = this.add.image(380,500, 'buttonBorder');
+    const buttonBorder = this.add.image(390,450, 'buttonBorder');
     buttonBorder.setScale(30 / buttonBorder.width, 150 / buttonBorder.height)
     mainContainer.add(buttonBorder);
 
-    const upBtn= this.add.image(280,450, 'upBtn')
-    upBtn.setScale(100 / upBtn.width, 80 / upBtn.height);
+    const upBtn= this.add.image(290,400, 'upBtn')
+    upBtn.setScale(0.7)
     upBtn.setInteractive();
-    upBtn.on('pointerover', () => upBtn.setScale(0.9));
-    upBtn.on('pointerout', () => upBtn.setScale(1));
+    upBtn.on('pointerover', () => upBtn.setScale(0.8));
+    upBtn.on('pointerout', () => upBtn.setScale(0.7));
     upBtn.on('pointerdown', () => {
     if (currentContainerIndex > 0) {
       currentContainerIndex--;
@@ -134,11 +134,11 @@ class ShapesPopUpScene extends Phaser.Scene{
     
     mainContainer.add(upBtn);
 
-    const downBtn = this.add.image(280,550, 'downBtn');
-    downBtn.setScale(100 / downBtn.width, 80 / downBtn.height);
+    const downBtn = this.add.image(290,520, 'downBtn');
+    downBtn.setScale(0.7)
     downBtn.setInteractive();
-    downBtn.on('pointerover', () => downBtn.setScale(0.9));
-    downBtn.on('pointerout', () => downBtn.setScale(1));
+    downBtn.on('pointerover', () => downBtn.setScale(0.8));
+    downBtn.on('pointerout', () => downBtn.setScale(0.7));
     downBtn.on('pointerdown', () => {
     if (currentContainerIndex < containers.length - 1) {
       currentContainerIndex++;
@@ -210,7 +210,7 @@ class ShapesPopUpScene extends Phaser.Scene{
       let sprite1 = this.physics.add.sprite(shape.position[0], shape.position[1], shape.key).setScale(shape.size)
   
           sprite1.setInteractive({useHandCursor: true})
-            .on('pointerover', () => sprite1.setPosition(shape.position[0] + 20, shape.position[1] + 20))
+            .on('pointerover', () => sprite1.setPosition(shape.position[0] + 5, shape.position[1] + 5))
             .on('pointerout', () => sprite1.setPosition(shape.position[0], shape.position[1]))
             .on('pointerdown', () => {
   
