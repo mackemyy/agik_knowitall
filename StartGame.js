@@ -55,6 +55,10 @@ class StartGame extends Phaser.Scene {
                         this.scene.launch('shapesPopUpScene');
                         console.log('click shapes button');
                     }
+                    if(key == 'textbtn'){
+                        this.scene.launch('textPopUpScene');
+                        console.log('click text button');
+                    }
                 })
                 .on('pointerover', () => button.setScale(0.9))
                 .on('pointerout', () => button.setScale(1));

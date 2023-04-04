@@ -32,22 +32,28 @@ class ShapesPopUpScene extends Phaser.Scene{
             type: 'shape',
             name:'Red Rectangle',
             key:'rectangle1',
-            position:[250,200],
+            position:[200,200],
             newPos:[950,600],
+            size:0.1,
+            newSize:0.25,
           },
           {
             type: 'shape',
             name:'Orange Rectangle',
             key:'rectangle3',
-            position:[250,550],
+            position:[200,530],
             newPos:[950,600],
+            size:0.1,
+            newSize:0.25,
           },
           {
             type: 'shape',
             name:'Yellow Rectangle',
             key:'rectangle2',
-            position:[250,800],
+            position:[250,830],
             newPos:[950,600],
+            size:0.1,
+            newSize:0.25,
           },
         
         ];
@@ -55,25 +61,31 @@ class ShapesPopUpScene extends Phaser.Scene{
         this.options_shapes2 = [
           {
             type: 'shape',
-            name:'Red Rectangle',
-            key:'rectangle4',
-            position:[250,200],
+            name:'Yellow Square',
+            key:'square1',
+            position:[200,200],
             newPos:[950,600],
+            size:0.1,
+            newSize:0.25,
           },
           {
             type: 'shape',
-            name:'Yellow Rectangle',
-            key:'rectangle5',
-            position:[250,450],
+            name:'Orange Triangle',
+            key:'triangle1',
+            position:[200,530],
             newPos:[950,600],
+            size:0.1,
+            newSize:0.25,
           },
           
           {
             type: 'shape',
-            name:'Orange Rectangle',
-            key:'rectangle6',
-            position:[250,650],
+            name:'Red',
+            key:'circle1',
+            position:[200,830],
             newPos:[950,600],
+            size:0.1,
+            newSize:0.25,
           },
         ];
 
@@ -167,7 +179,7 @@ class ShapesPopUpScene extends Phaser.Scene{
       let squareObj = this.logoContainer();
       this.selectedShape = shape;
       
-      let newSprite = this.physics.add.sprite(shape.newPos[0], shape.newPos[1], shape.key).setScale(0.25);
+      let newSprite = this.physics.add.sprite(shape.newPos[0], shape.newPos[1], shape.key).setScale(shape.newSize);
       newSprite.setName(shape.key);  
       
       this.options_shapes1.push(newSprite);  
@@ -195,7 +207,7 @@ class ShapesPopUpScene extends Phaser.Scene{
   
     createClickableShape(shape) {
       
-      let sprite1 = this.physics.add.sprite(shape.position[0], shape.position[1], shape.key).setScale(0.1)
+      let sprite1 = this.physics.add.sprite(shape.position[0], shape.position[1], shape.key).setScale(shape.size)
   
           sprite1.setInteractive({useHandCursor: true})
             .on('pointerover', () => sprite1.setPosition(shape.position[0] + 20, shape.position[1] + 20))

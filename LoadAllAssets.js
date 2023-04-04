@@ -45,25 +45,15 @@ class LoadAllAssets extends Phaser.Scene {
          this.load.image("rectangle1", "assets/logofy_shapes/Rectangle1.png");
          this.load.image("rectangle2", "assets/logofy_shapes/Rectangle2.png");
          this.load.image("rectangle3", "assets/logofy_shapes/Rectangle3.png");
-         this.load.image("rectangle4", "assets/logofy_shapes/Rectangle4.png");
-         this.load.image("rectangle5", "assets/logofy_shapes/Rectangle5.png");
-         this.load.image("rectangle6", "assets/logofy_shapes/Rectangle6.png");
-         this.load.image("rectangle7", "assets/logofy_shapes/Rectangle1.png");
          this.load.image("square1", "assets/logofy_shapes/Square1.png");
-         this.load.image("square2", "assets/logofy_shapes/Square2.png");
-         this.load.image("square3", "assets/logofy_shapes/Square3.png");
-         this.load.image("square4", "assets/logofy_shapes/Square4.png");
-         this.load.image("square5", "assets/logofy_shapes/Square5.png");
-         this.load.image("square6", "assets/logofy_shapes/Square6.png");
          this.load.image("triangle1", "assets/logofy_shapes/Triangle1.png");
-         this.load.image("triangle2", "assets/logofy_shapes/Triangle2.png");
-         this.load.image("triangle3", "assets/logofy_shapes/Triangle3.png");
          this.load.image("circle1", "assets/logofy_shapes/Circle1.png");
-         this.load.image("circle2", "assets/logofy_shapes/Circle2.png");
-         this.load.image("circle3", "assets/logofy_shapes/Circle3.png");
-         this.load.image("circle4", "assets/logofy_shapes/Circle4.png");
-         this.load.image("circle5", "assets/logofy_shapes/Circle5.png");
-         this.load.image("circle6", "assets/logofy_shapes/Circle6.png");
+
+         //assets for all text
+         this.load.image("cctvWarning", "assets/logofy_text/cctvWarning.png");
+         this.load.image("noNoonBreak", "assets/logofy_text/NoNoonBreak.png");
+         this.load.image("noSmoking", "assets/logofy_text/NoSmoking.png");
+         this.load.image("noTrespassing", "assets/logofy_text/NoTrespassing.png");
 
          //assets for all objects
          this.load.image("bubbleChatOR", "assets/objects/bubbleChatOrange.png");
@@ -79,6 +69,7 @@ class LoadAllAssets extends Phaser.Scene {
          this.load.image("clientRqst", "assets/objects/clientrqts.png");
          this.load.image("clientDP", "assets/objects/clientDP.png");
          this.load.image("sideBar", "assets/objects/sideBar.png");
+         this.load.image("textsideBar", "assets/objects/TextsideBar.png");
 
 
         var progress = 0;

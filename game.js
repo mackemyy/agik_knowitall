@@ -1,7 +1,7 @@
 var config = {
     type: Phaser.AUTO,
     backgroundColor: 0x0C2238,
-    scene: [ LoadAllAssets, LoadingScene, IntroGame, PlayLogofy, LevelMap, StartGame, ShapesPopUpScene, QuitGameScene, ],
+    scene: [ LoadAllAssets, LoadingScene, IntroGame, PlayLogofy, LevelMap, StartGame, ShapesPopUpScene, TextPopUpScene, QuitGameScene, ],
     pixelArt: true,
     physics: {
         default: "arcade",
