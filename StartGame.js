@@ -137,11 +137,6 @@ class StartGame extends Phaser.Scene {
 
     timerCallback() {
         // Handle the timer completion event
-         // Stop the music
-        this.music3.startMusic.stop();
-
-        // Pause the scene
-        this.scene.pause();
     }
 
     formatTime(time) {
