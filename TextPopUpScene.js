@@ -124,7 +124,7 @@ class TextPopUpScene extends Phaser.Scene{
       let sprite1 = this.physics.add.sprite(text.position[0], text.position[1], text.key).setScale(0.14)
 
       sprite1.setInteractive({useHandCursor: true})
-        .on('pointerover', () => sprite1.setPosition(text.position[0] + 20, text.position[1] + 20))
+        .on('pointerover', () => sprite1.setPosition(text.position[0] + 5, text.position[1] + 5))
         .on('pointerout', () => sprite1.setPosition(text.position[0], text.position[1]))
         .on('pointerdown', () => {
           if (this.selectedText) {
