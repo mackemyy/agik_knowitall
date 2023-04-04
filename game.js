@@ -1,6 +1,6 @@
 var musicConfig = {
     mute: false,
-    volume: 0.2,
+    volume: 0.5,
     rate: 1,
     detune: 0,
     seek: 0,
@@ -11,7 +11,16 @@ var musicConfig = {
 var config = {
     type: Phaser.AUTO,
     backgroundColor: 0x0C2238,
-    scene: [ LoadAllAssets, LoadingScene, IntroGame, PlayLogofy, LevelMap, StartGame, QuitGameScene  ],
+    scene: [ 
+        LoadAllAssets, 
+        LoadingScene, 
+        IntroGame, 
+        PlayLogofy, 
+        LevelMap, 
+        StartGame, 
+        // Sound,
+        QuitGameScene,
+     ],
     pixelArt: true,
     physics: {
         default: "arcade",
