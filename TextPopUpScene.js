@@ -40,14 +40,14 @@ class TextPopUpScene extends Phaser.Scene{
             type: 'text',
             name:'No Smoking',
             key:'noSmoking',
-            position:[210,580],
+            position:[220,595],
             newPos:[950,600],
           },
           {
             type: 'text',
             name:'No Trespassing',
             key:'noTrespassing',
-            position:[210,820],
+            position:[220,830],
             newPos:[950,600],
           },
         
