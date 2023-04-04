@@ -96,6 +96,8 @@ class LoadingScene extends Phaser.Scene {
         this.soundOff = this.add.image(this.centerX + 800, this.centerY - 450, "soundOff")
             .setInteractive({useHandCursor: true})
             .setScale(0.3)
+            .on('pointerover', () => this.tweenButtonScale(0.33, this.soundOff))
+            .on('pointerout', () => this.tweenButtonScale(0.3, this.soundOff))
             .on('pointerdown', function() {
                 if(this.sound.locked) {
                     this.sound.once('unlocked', function() {
@@ -113,11 +115,23 @@ class LoadingScene extends Phaser.Scene {
         this.soundOn = this.add.image(this.centerX + 800, this.centerY - 450, "soundOn")
             .setInteractive({useHandCursor: true})
             .setScale(0.3).setVisible(false)
+            .on('pointerover', () => this.tweenButtonScale(0.33, this.soundOn))
+            .on('pointerout', () => this.tweenButtonScale(0.3, this.soundOn))
             .on('pointerdown', function() {
                 this.startMusic1.pause();
                 this.soundOff.setVisible(true);
                 this.soundOn.setVisible(false);
             }, this);
+
+        this.tweenButtonScale = (scale, targets) => {
+            this.tweens.add({
+                targets: targets,
+                duration: 5,
+                scaleX: scale,
+                scaleY: scale,
+                ease: 'Linear'
+            });
+        };
 
         this.menuBgTween = this.add.tween({
             targets: this.menu_bg,
@@ -143,7 +157,6 @@ class LoadingScene extends Phaser.Scene {
 
     goToNextScene() {
         this.startMusic1.stop();
-        console.log('stop music1');
         this.scene.start("introGame");
         // this.scene.start("startGame");
     }

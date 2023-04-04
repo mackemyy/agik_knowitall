@@ -89,7 +89,9 @@ class PlayLogofy extends Phaser.Scene {
         this.hrDP = this.add.image(this.centerX - 465, this.centerY + 240, "hrDP");
         this.playbtn = this.add.image(this.centerX + 500, this.centerY + 350, "playbtn")
             .setInteractive({useHandCursor: true})
-            .on('pointerdown', ()=> this.scene.start("startGame") )
+            .on('pointerdown', ()=> { 
+                this.scene.get("introGame").sound.pauseAll();
+                this.scene.start("startGame")} )
             .on('pointerover', () => this.playbtn.setPosition(this.centerX + 490, this.centerY + 340))
             .on('pointerout', () => this.playbtn.setPosition(this.centerX + 500, this.centerY + 350));
         this.hrNarrateTxt = this.add.text(this.centerX - 240, this.centerY + 120, "To begin, read the client's request at the left side of the screen, which will be your guide in making the logo. You'll be given 90 seconds to finish all the clients' request. Do your best and good luck!", {
