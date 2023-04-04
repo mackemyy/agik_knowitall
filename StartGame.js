@@ -5,41 +5,10 @@ class StartGame extends Phaser.Scene {
 
     create() {
         
-        // this.music3 = new Sound(this, 300, 110, "music3", musicConfig);
-        // this.add.existing(this.music3);
+        this.startMusic3 = new SoundButton(this, 300, 110, "music3", musicConfig);
+        this.add.existing(this.startMusic3);
+        this.startMusic3.setDepth(1);
        
-        this.startMusic3 = this.sound.add("music3", musicConfig);
-        this.soundOff = this.add.image(300, 110, "soundOff")
-            .setInteractive({useHandCursor: true})
-            .setScale(0.35).setDepth(1)
-            .on('pointerover', () => this.tweenButtonScale(0.38, this.soundOff))
-            .on('pointerout', () => this.tweenButtonScale(0.35, this.soundOff))
-            .on('pointerdown', function() {
-                if(this.sound.locked) {
-                    this.sound.once('unlocked', function() {
-                        this.soundOff.setVisible(false);
-                        this.soundOn.setVisible(true);
-                        this.startMusic3.play();
-                    }, this);
-                } else {
-                    this.startMusic3.play();
-                }
-                this.startMusic3.resume();
-                this.soundOff.setVisible(false);
-                this.soundOn.setVisible(true);
-            }, this);
-        this.soundOn = this.add.image(300, 110, "soundOn")
-            .setInteractive({useHandCursor: true})
-            .setScale(0.35).setVisible(false).setDepth(1)
-            .on('pointerover', () => this.tweenButtonScale(0.38, this.soundOn))
-            .on('pointerout', () => this.tweenButtonScale(0.35, this.soundOn))
-            .on('pointerdown', function() {
-                this.startMusic3.pause();
-                this.soundOff.setVisible(true);
-                this.soundOn.setVisible(false);
-            }, this);
-
-
         this.timer = this.time.delayedCall(120000, this.timerCallback, [], this);
         console.log('Timer duration:', this.timer.delay);
 
@@ -58,19 +27,7 @@ class StartGame extends Phaser.Scene {
             .on('pointerout', () => this.tweenButtonScale(1, this.menuButton))
             .on('pointerdown', () => this.launchQuitGame());
 
-
-        this.tweenButtonScale = (scale, targets) => {
-            this.tweens.add({
-                targets: targets,
-                duration: 5,
-                scaleX: scale,
-                scaleY: scale,
-                ease: 'Linear'
-            });
-        };
-
         this.launchQuitGame = () => {
-            // this.startMusic3.stop();
             this.scene.pause();
             this.scene.launch("QuitGame");
         };

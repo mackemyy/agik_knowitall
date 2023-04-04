@@ -8,49 +8,11 @@ class IntroGame extends Phaser.Scene {
     }
 
     create() {
-        this.startMusic4 = this.sound.add("music4", musicConfig);
         this.opening = this.add.image(this.centerX, this.centerY, "opening");
         this.nextBtn = new CustomButton(this, this.centerX + 800, this.centerY + 420, "nextBtn", () => { this.loadNextScreen() });
-        this.soundOff = this.add.image(this.centerX + 800, this.centerY - 450, "soundOff")
-            .setInteractive({useHandCursor: true})
-            .setScale(0.3).setDepth(1)
-            .on('pointerover', () => this.tweenButtonScale(0.33, this.soundOff))
-            .on('pointerout', () => this.tweenButtonScale(0.3, this.soundOff))
-            .on('pointerdown', function() {
-                if(this.sound.locked) {
-                    this.sound.once('unlocked', function() {
-                        this.soundOff.setVisible(false);
-                        this.soundOn.setVisible(true);
-                        this.startMusic4.play();
-                    }, this);
-                } else {
-                    this.startMusic4.play();
-                }
-                this.startMusic4.resume();
-                this.soundOff.setVisible(false);
-                this.soundOn.setVisible(true);
-            }, this);
-        this.soundOn = this.add.image(this.centerX + 800, this.centerY - 450, "soundOn")
-            .setInteractive({useHandCursor: true})
-            .setScale(0.3).setVisible(false).setDepth(1)
-            .on('pointerover', () => this.tweenButtonScale(0.33, this.soundOn))
-            .on('pointerout', () => this.tweenButtonScale(0.3, this.soundOn))
-            .on('pointerdown', function() {
-                this.startMusic4.pause();
-                this.soundOff.setVisible(true);
-                this.soundOn.setVisible(false);
-            }, this);
-        
-        this.tweenButtonScale = (scale, targets) => {
-            this.tweens.add({
-                targets: targets,
-                duration: 5,
-                scaleX: scale,
-                scaleY: scale,
-                ease: 'Linear'
-            });
-        };
-        
+        this.startMusic4 = new SoundButton(this, this.centerX + 800, this.centerY - 450, "music4", musicConfig);
+        this.add.existing(this.startMusic4);
+        this.startMusic4.setDepth(1);
     }
 
     loadNextScreen() {
