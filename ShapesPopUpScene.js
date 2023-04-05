@@ -165,33 +165,15 @@ class ShapesPopUpScene extends Phaser.Scene{
           });
     }
 
-    logoContainer() {  
-      const mainScene = this.scene.get('startGame');
-      mainScene.logoBoxBackground();
-      let square = new Phaser.Geom.Rectangle(400, 100, 800, 1000);
-      return{
-        square: square
-      };
-  
-    }
   
     selectShape(shape) {
-      let squareObj = this.logoContainer();
       this.selectedShape = shape;
       
       let newSprite = this.physics.add.sprite(shape.newPos[0], shape.newPos[1], shape.key).setScale(shape.newSize);
       newSprite.setName(shape.key);  
       
       this.options_shapes1.push(newSprite);  
-  
-      if (Phaser.Geom.Rectangle.Contains(squareObj.square, newSprite.x, newSprite.y)) {
-        console.log(`${shape.name} is inside the area!`);
-        let myString = `${shape.name}`;
-        newSprite.setDepth(1);  
-        myArray.push(myString);
-      } else {
-        console.log(`${shape.name} is NOT inside the area!`);
-      }
+
       return newSprite;
   
     }
