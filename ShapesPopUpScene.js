@@ -140,29 +140,29 @@ class ShapesPopUpScene extends Phaser.Scene{
     downBtn.on('pointerover', () => downBtn.setScale(0.8));
     downBtn.on('pointerout', () => downBtn.setScale(0.7));
     downBtn.on('pointerdown', () => {
-    if (currentContainerIndex < containers.length - 1) {
-      currentContainerIndex++;
-    }
+      if (currentContainerIndex < containers.length - 1) {
+        currentContainerIndex++;
+      }
     showContainer(currentContainerIndex);
     });
-    mainContainer.add(downBtn);
+      mainContainer.add(downBtn);
 
-        this.tweens.add({
-            targets: [
-              mainContainer,
-              closeBtn,
-              upBtn,  
-              downBtn, 
-              ],
-            x: '+=100',
-            duration: 300,
-            ease: 'Power2',
-          });
-          // Add a close button in the top-right corner of the popup
-          closeBtn.setInteractive();
-          closeBtn.on('pointerdown', () => {
-            this.scene.stop();
-          });
+      this.tweens.add({
+          targets: [
+            mainContainer,
+            closeBtn,
+            upBtn,  
+            downBtn, 
+            ],
+          x: '+=100',
+          duration: 300,
+          ease: 'Power2',
+        });
+        // Add a close button in the top-right corner of the popup
+        closeBtn.setInteractive();
+        closeBtn.on('pointerdown', () => {
+          this.scene.stop();
+        });
     }
 
   

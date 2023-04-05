@@ -9,7 +9,10 @@ class IntroGame extends Phaser.Scene {
 
     create() {
         this.opening = this.add.image(this.centerX, this.centerY, "opening");
-        this.nextBtn = new ImageButton(this, this.centerX + 800, this.centerY + 420, "nextBtn", () => this.loadNextScreen(), () => this.nextBtn.setScale(1), () => this.nextBtn.setScale(0.8), 0.8);
+        this.nextBtn = new ImageButton(this, this.centerX + 800, this.centerY + 420, "nextBtn", 
+        () => this.loadNextScreen(), 
+        () => this.nextBtn.setScale(1), 
+        () => this.nextBtn.setScale(0.8), 0.8);
         this.startMusic4 = new SoundButton(this, this.centerX + 800, this.centerY - 450, "music4", musicConfig);
         this.add.existing(this.startMusic4);
         this.startMusic4.setDepth(1);

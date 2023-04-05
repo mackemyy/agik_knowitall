@@ -5,7 +5,7 @@ class QuitGameScene extends Phaser.Scene {
 
     create() {
         // Create a container for the pop-up window
-        const container = this.add.container(0, 0);
+        const container = this.add.container(this.game.config.width / 2, this.game.config.height / 2);
     
         // Add any UI elements to the container
         const window = this.add.image(0, 0, 'quitWindow');
@@ -14,8 +14,9 @@ class QuitGameScene extends Phaser.Scene {
         const yesButton = this.add.image(220, 120, 'yesButton');
         yesButton.setInteractive();
         yesButton.on('pointerup', () => {
-            this.scene.start('levelMap');
-
+          this.game.scene.getScene('startGame').scene.stop();
+          // this.scenes.getScene('startGame').destroy();
+          this.scene.start('levelMap');
         });
         container.add(yesButton);
 
@@ -37,7 +38,7 @@ class QuitGameScene extends Phaser.Scene {
         // Helper function to add hover animations to a button
       
         // Position the container in the center of the screen
-        container.setPosition(this.game.config.width / 2, this.game.config.height / 2);
+        // container.setPosition(this.game.config.width / 2, this.game.config.height / 2);
       }
 
       // I have no idea why this code is finally working but thanks god.

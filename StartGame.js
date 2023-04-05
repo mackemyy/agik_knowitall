@@ -3,8 +3,38 @@ class StartGame extends Phaser.Scene {
         super("startGame");
     }
 
-    create() {
-        
+    create()
+    {
+        this.options_shapes1 = [
+            {
+              type: 'shape',
+              name:'Red Rectangle',
+              key:'rectangle1',
+              x: 200, y: 200,
+              newPos:[950,600],
+              size:0.1,
+              newSize:0.25,
+            },
+            {
+              type: 'shape',
+              name:'Orange Rectangle',
+              key:'rectangle3',
+              x: 200, y: 530,
+              newPos:[950,600],
+              size:0.1,
+              newSize:0.25,
+            },
+            {
+              type: 'shape',
+              name:'Yellow Rectangle',
+              key:'rectangle2',
+              x: 210, y: 820,
+              newPos:[950,600],
+              size:0.1,
+              newSize:0.25,
+            },
+          
+        ];
         this.startMusic3 = new SoundButton(this, 300, 110, "music3", musicConfig);
         this.add.existing(this.startMusic3);
         this.startMusic3.setDepth(1);
@@ -54,6 +84,7 @@ class StartGame extends Phaser.Scene {
                 .setScale(1)
                 .on('pointerdown', () => {
                     if(key == 'shapebtn'){
+
                         this.scene.launch('shapesPopUpScene');
                         console.log('click shapes button');
                     }
@@ -92,6 +123,9 @@ class StartGame extends Phaser.Scene {
         });
         this.clientTxtContainer.add(this.clientRqstTxt);
 
+        let shapePopup = new OptionsContainer(this, 1370,50, this.options_shapes1);
+        // let shapePopup = new OptionsContainer(this, );
+        // let shapePopup = new OptionsContainer(this, );
     }
 
     update() {
@@ -133,4 +167,44 @@ class StartGame extends Phaser.Scene {
     }
 
     
+}
+
+class OptionsContainer extends Phaser.GameObjects.Container {
+    constructor(scene, x, y, items) {
+        super(scene, x, y);
+        scene.add.existing(this);
+        // 1370,50
+        
+        this.bg = scene.add.image(0, 0, 'sideBar').setOrigin(0);
+        this.bg.setScale(530 / this.bg.width, 1000 / this.bg.height);
+
+
+        
+        this.setSize(this.bg.displayWidth, this.bg.displayHeight).setInteractive();
+        scene.input.enableDebug(this);
+        this.add(this.bg);
+
+
+
+        // this.items.forEach((item) => {  
+        //     scene.add(scne.createClickableShape(shape));
+        //     // this.createClickableShape(shape);
+            
+        //     let sprite = scene.add.sprite(item.x, item.y, item.key).setScale(item.size);
+
+        //     sprite.setInteractive({useHandCursor: true})
+        //         .on('pointerover', () => sprite.setPosition(item.x + 5, item.y + 5))
+        //         .on('pointerout', () => sprite.setPosition(item.x, item.y))
+        //         .on('pointerdown', () => {
+
+        //             if (this.selectedShape) {
+        //                 this.deselectShape(this.selectedShape);
+        //             }
+        //             this.selectShape(shape);
+        //         });
+
+        //     this.options_shapes1.push(sprite1);
+        //     return sprite1;
+        // });
+    }
 }
