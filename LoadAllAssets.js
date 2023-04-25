@@ -58,6 +58,12 @@ class LoadAllAssets extends Phaser.Scene {
          this.load.image("noSmoking", "assets/logofy_text/NoSmoking.png");
          this.load.image("noTrespassing", "assets/logofy_text/NoTrespassing.png");
 
+         //assets for all vector
+         this.load.image("cctv", "assets/logofy_vectors/cctv.png");
+         this.load.image("clock", "assets/logofy_vectors/clock.png");
+         this.load.image("smoking", "assets/logofy_vectors/smoking.png");
+         this.load.image("trespassing", "assets/logofy_vectors/trespassing.png");
+         
          //assets for all objects
          this.load.image("bubbleChatOR", "assets/objects/bubbleChatOrange.png");
          this.load.image("agikObj", "assets/objects/AGIK.png");
