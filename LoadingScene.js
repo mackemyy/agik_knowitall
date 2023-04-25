@@ -103,13 +103,13 @@ class LoadingScene extends Phaser.Scene {
             onComplete: function() {
                 this.newGameBtn = new ImageButton(this, config.scale.width/2, config.scale.height/2, "newGameBtn", 
                     () => this.goToNextScene(), 
-                    () => this.newGameBtn.setPosition(config.scale.width/2 - 10, config.scale.height/2 - 10), 
+                    () => this.newGameBtn.setPosition(config.scale.width/2 - 10, config.scale.height/2), 
                     ()=> this.newGameBtn.setPosition(config.scale.width/2, config.scale.height/2), 0.8);
 
-                this.loadGameBtn = new ImageButton(this, config.scale.width/2, config.scale.height/2 + 200, "loadGameBtn", 
+                this.loadGameBtn = new ImageButton(this, config.scale.width/2, config.scale.height/2 + 150, "loadGameBtn", 
                     () => console.log("load game scene here"), 
-                    () => this.loadGameBtn.setPosition(config.scale.width/2 - 10, config.scale.height/2 + 190), 
-                    ()=> this.loadGameBtn.setPosition(config.scale.width/2, config.scale.height/2 + 200), 0.8);
+                    () => this.loadGameBtn.setPosition(config.scale.width/2 - 10, config.scale.height/2 + 150), 
+                    ()=> this.loadGameBtn.setPosition(config.scale.width/2, config.scale.height/2 + 150), 0.8);
             },
             callbackScope: this,
         });
