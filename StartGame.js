@@ -5,6 +5,82 @@ class StartGame extends Phaser.Scene {
 
     create() {
         
+
+        this.options_shapes1 = [
+            {
+              type: 'shape',
+              name:'Red Rectangle',
+              key:'rectangle1',
+              x: 200, y: 200,
+              newPos:[-520, 500],
+              size:0.1,
+              newSize:0.23,
+            },
+            {
+              type: 'shape',
+              name:'Orange Rectangle',
+              key:'rectangle3',
+              x: 200, y: 530,
+              newPos:[-520, 500],
+              size:0.1,
+              newSize:0.23,
+            },
+            {
+              type: 'shape',
+              name:'Yellow Rectangle',
+              key:'rectangle2',
+              x: 210, y: 820,
+              newPos:[-520, 500],
+              size:0.1,
+              newSize:0.23,
+            },
+          
+        ];
+
+        this.options_text = [
+            {
+              type: 'text',
+              name:'CCTV Warning',
+              key:'cctvWarning',
+              x: 210, y:150,
+              newPos:[-520, 500],
+              size:0.1,
+              newSize:0.23,
+  
+            },
+            {
+              type: 'text',
+              name:'No Noon Break',
+              key:'noNoonBreak',
+              x: 210, y: 360,
+              newPos:[-520, 500],
+              size:0.1,
+              newSize:0.2,
+  
+            },
+            {
+              type: 'text',
+              name:'No Smoking',
+              key:'noSmoking',
+              x: 220, y: 595,
+              newPos:[-520, 500],
+              size:0.1,
+              newSize:0.2,
+            },
+            {
+              type: 'text',
+              name:'No Trespassing',
+              key:'noTrespassing',
+              x: 220, y: 830,
+              newPos:[-520, 500],
+              size:0.1,
+              newSize:0.2,
+            },
+          
+          ];
+
+        
+
         this.startMusic3 = new SoundButton(this, 300, 110, "music3", musicConfig);
         this.add.existing(this.startMusic3);
         this.startMusic3.setDepth(1);
@@ -54,13 +130,18 @@ class StartGame extends Phaser.Scene {
                 .setScale(1)
                 .on('pointerdown', () => {
                     if(key == 'shapebtn'){
-                        this.scene.launch('shapesPopUpScene');
+                        // this.scene.launch('shapesPopUpScene');
+                        this.shapePopup = new OptionsContainer(this, 1480,50, this.options_shapes1);
                         console.log('click shapes button');
                     }
                     if(key == 'textbtn'){
-                        this.scene.launch('textPopUpScene');
+                        this.TextPopup = new TextOptionsContainer(this, 1480,50, this.options_text);
                         console.log('click text button');
                     }
+                    // if(key == 'vectorbtn'){
+                    //     this.VectorPopup = new OptionsContainer(this, 1480,50, this.options_shapes1);
+                    //     console.log('click vector button');
+                    // }
                 })
                 .on('pointerover', () => button.setScale(0.9))
                 .on('pointerout', () => button.setScale(1));
@@ -92,6 +173,8 @@ class StartGame extends Phaser.Scene {
         });
         this.clientTxtContainer.add(this.clientRqstTxt);
 
+        
+
     }
 
     update() {
@@ -104,13 +187,25 @@ class StartGame extends Phaser.Scene {
         if (remainingTime <= 0) {
             this.timeText.setText('0:00');
             this.timer.remove();
-            this.add.text(this.cameras.main.centerX, this.cameras.main.centerY, 'Time\'s up!', { fontFamily: '"Typesauce"', fill: '#FFFFFF', fontSize: '72px', align: "center", }).setOrigin(0.5);
-        } else {
+            this.add
+                .text(
+                    this.cameras.main.centerX, 
+                    this.cameras.main.centerY, 
+                    'Time\'s up!', 
+                    { fontFamily: '"Typesauce"', fill: '#FFFFFF', fontSize: '72px', align: "center",}
+                )
+            .setOrigin(0.5);
+
+        }
+
+        if (remainingTime > 0) {
             var minutes = Math.floor(remainingTime / 60);
             var seconds = Math.floor(remainingTime % 60);
             var timeString = minutes.toString().padStart(1, '0') + ':' + seconds.toString().padStart(2, '0');
             this.timeText.setText(timeString);
+
         }
+
         // Bring the time text to the top to ensure it's visible
         this.children.bringToTop(this.timeText);
 
@@ -133,4 +228,145 @@ class StartGame extends Phaser.Scene {
     }
 
     
+}
+
+class OptionsContainer extends Phaser.GameObjects.Container {
+    constructor(scene, x, y, items) {
+        super(scene, x, y);
+        scene.add.existing(this);
+        this.scene = scene;
+        this.items = items;
+        this.options_images = []; 
+
+        // 1370,50
+        this.closeBtn = this.scene.add.image(1405, 300, 'closeButton')
+        // this.closeBtn.setScale(200 / this.closeBtn.width, 150 / this.closeBtn.height);
+        this.closeBtn.setInteractive({useHandCursor: true});
+          this.closeBtn.on('pointerdown', () => {
+            this.closeBtn.setVisible(false);
+            this.bg.setVisible(false);
+            this.options_images.forEach(item => {
+                item.setVisible(false);
+              });
+        });
+    
+        this.bg = this.scene.add.image(0, 0, 'sideBar').setOrigin(0).setDepth(1);
+        this.bg.setScale(530 / this.bg.width, 1000 / this.bg.height);
+        this.bg.setSize(this.bg.displayWidth, this.bg.displayHeight).setInteractive();
+        // this.scene.input.enableDebug(this);
+        this.add(this.bg);
+
+
+        for (let i = 0; i < this.items.length; i++) {
+            let item = this.items[i];
+      
+            let sprite = this.scene
+              .add.sprite(item.x, item.y, item.key)
+              .setScale(item.size)
+              .setInteractive({ useHandCursor: true })
+              .on('pointerover', () => sprite.setPosition(item.x + 5, item.y + 5))
+              .on('pointerout', () => sprite.setPosition(item.x, item.y))
+              .on('pointerdown', () => {
+                if (this.selectedItem) {
+                  this.deselectItem(this.selectedItem);
+                }
+                this.selectItem(item);
+              });
+      
+            this.add(sprite);
+            this.options_images.push(sprite);
+          }
+    }
+
+    selectItem(item) {
+        this.selectedItem = item;
+        // code to highlight the selected shape
+        let newSprite = this.scene.add.sprite(item.newPos[0], item.newPos[1], item.key).setScale(item.newSize);
+        newSprite.setName(item.key);  
+      
+        this.options_images.push(newSprite);  
+        this.add(newSprite);
+    }
+
+    deselectItem(item){
+        let sprite = this.options_images.find(s => s.name === item.key);
+      if (sprite) {
+          sprite.destroy(); 
+          this.options_images = this.options_images.filter(s => s !== sprite);  // 
+      }
+
+      this.selectedItem= null;
+    }
+   
+}
+
+class TextOptionsContainer extends Phaser.GameObjects.Container {
+    constructor(scene, x, y, items) {
+        super(scene, x, y);
+        scene.add.existing(this);
+        this.scene = scene;
+        this.items = items;
+        this.options_images = []; 
+
+        // 1370,50
+        this.closeBtn = this.scene.add.image(1405, 300, 'closeButton')
+        this.closeBtn.setInteractive({useHandCursor: true});
+          this.closeBtn.on('pointerdown', () => {
+            this.closeBtn.setVisible(false);
+            this.bg.setVisible(false);
+            this.options_images.forEach(item => {
+                item.setVisible(false);
+              });
+        });
+
+       
+    
+        this.bg = this.scene.add.image(0, 0, 'textsideBar').setOrigin(0);
+        this.bg.setScale(530 / this.bg.width, 1000 / this.bg.height);
+        this.bg.setSize(this.bg.displayWidth, this.bg.displayHeight).setInteractive();
+        // this.scene.input.enableDebug(this);
+        this.add(this.bg);
+
+
+        for (let i = 0; i < this.items.length; i++) {
+            let item = this.items[i];
+      
+            let sprite = this.scene
+              .add.sprite(item.x, item.y, item.key)
+              .setScale(item.size)
+              .setInteractive({ useHandCursor: true })
+              .on('pointerover', () => sprite.setPosition(item.x + 5, item.y + 5))
+              .on('pointerout', () => sprite.setPosition(item.x, item.y))
+              .on('pointerdown', () => {
+                if (this.selectedItem) {
+                  this.deselectItem(this.selectedItem);
+                }
+                this.selectItem(item);
+              });
+      
+            this.add(sprite);
+            this.options_images.push(sprite);
+          }
+    }
+
+    selectItem(item) {
+        this.selectedItem = item;
+        // code to highlight the selected shape
+        let newSprite = this.scene.add.sprite(item.newPos[0], item.newPos[1], item.key).setScale(item.newSize);
+        newSprite.setName(item.key);  
+      
+        this.options_images.push(newSprite);  
+        this.add(newSprite);
+    }
+
+    deselectItem(item){
+        let sprite = this.options_images.find(s => s.name === item.key);
+      if (sprite) {
+          sprite.destroy(); 
+          this.options_images = this.options_images.filter(s => s !== sprite);  // 
+      }
+
+      this.selectedItem= null;
+    }
+   
 }
