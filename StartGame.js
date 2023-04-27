@@ -6,7 +6,7 @@ class StartGame extends Phaser.Scene {
     create() {
         
 
-        this.options_shapes1 = [
+        this.options_shapes = [
             {
               type: 'shape',
               name:'Red Rectangle',
@@ -79,6 +79,48 @@ class StartGame extends Phaser.Scene {
           
           ];
 
+          this.options_icon = [
+            {
+              type: 'icon',
+              name:'cctv icon',
+              key:'cctv',
+              x: 210, y:150,
+              newPos:[-520, 500],
+              size:0.15,
+              newSize:0.23,
+  
+            },
+            {
+              type: 'icon',
+              name:'clock icon',
+              key:'clock',
+              x: 210, y: 360,
+              newPos:[-520, 500],
+              size:0.15,
+              newSize:0.2,
+  
+            },
+            {
+              type: 'icon',
+              name:'smoking icon',
+              key:'smoking',
+              x: 220, y: 595,
+              newPos:[-520, 500],
+              size:0.1,
+              newSize:0.25,
+            },
+            {
+              type: 'icon',
+              name:'tresspassing icon',
+              key:'trespassing',
+              x: 220, y: 830,
+              newPos:[-520, 500],
+              size:0.1,
+              newSize:0.25,
+            },
+          
+          ];
+
         
 
         this.startMusic3 = new SoundButton(this, 300, 110, "music3", musicConfig);
@@ -131,17 +173,17 @@ class StartGame extends Phaser.Scene {
                 .on('pointerdown', () => {
                     if(key == 'shapebtn'){
                         // this.scene.launch('shapesPopUpScene');
-                        this.shapePopup = new OptionsContainer(this, 1480,50, this.options_shapes1);
+                        this.shapePopup = new OptionsContainer(this, 1480,50, this.options_shapes);
                         console.log('click shapes button');
                     }
                     if(key == 'textbtn'){
                         this.TextPopup = new TextOptionsContainer(this, 1480,50, this.options_text);
                         console.log('click text button');
                     }
-                    // if(key == 'vectorbtn'){
-                    //     this.VectorPopup = new OptionsContainer(this, 1480,50, this.options_shapes1);
-                    //     console.log('click vector button');
-                    // }
+                    if(key == 'vectorbtn'){
+                        this.VectorPopup = new OptionsContainer(this, 1480,50, this.options_icon);
+                        console.log('click vector button');
+                    }
                 })
                 .on('pointerover', () => button.setScale(0.9))
                 .on('pointerout', () => button.setScale(1));
