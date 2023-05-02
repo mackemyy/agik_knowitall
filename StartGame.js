@@ -203,20 +203,37 @@ class StartGame extends Phaser.Scene {
                 .on('pointerdown', () => {
                     if(key == 'shapebtn'){
                         // this.scene.launch('shapesPopUpScene');
-                        this.shapePopup = new OptionsContainer(this, 1480,50, this.options_shapes);
+                        this.textbtn.visible = false;
+                        this.vectorbtn.visible = false;
+                        this.shapePopup = new OptionsContainer(this, 1480,50, this.options_shapes,'sideBar');
                         console.log('click shapes button');
                     }
                     if(key == 'textbtn'){
-                        this.TextPopup = new TextOptionsContainer(this, 1480,50, this.options_text);
+                        this.shapebtn.visible = false;
+                        this.vectorbtn.visible = false;
+                        this.TextPopup = new OptionsContainer(this, 1480,50, this.options_text,'textsideBar');
                         console.log('click text button');
                     }
                     if(key == 'vectorbtn'){
-                        this.VectorPopup = new OptionsContainer(this, 1480,50, this.options_icon);
+                        this.shapebtn.visible = false;
+                        this.textbtn.visible = false;
+                        this.VectorPopup = new OptionsContainer(this, 1480,50, this.options_icon,'sideBar');
                         console.log('click vector button');
                     }
                 })
                 .on('pointerover', () => button.setScale(0.9))
                 .on('pointerout', () => button.setScale(1));
+
+                // assign button objects to scene properties
+              if (key === 'shapebtn') {
+                  this.shapebtn = button;
+              }
+              if (key === 'textbtn') {
+                  this.textbtn = button;
+              }
+              if (key === 'vectorbtn') {
+                  this.vectorbtn = button;
+              }
         });
 
 
@@ -333,16 +350,15 @@ class StartGame extends Phaser.Scene {
 
 
 class OptionsContainer extends Phaser.GameObjects.Container {
-    constructor(scene, x, y, items) {
+    constructor(scene, x, y, items,bgImage) {
         super(scene, x, y);
         scene.add.existing(this);
         this.scene = scene;
         this.items = items;
-        this.options_images = []; 
+        this.options_images = [];
 
         // 1370,50
-        this.closeBtn = this.scene.add.image(1405, 300, 'closeButton')
-        // this.closeBtn.setScale(200 / this.closeBtn.width, 150 / this.closeBtn.height);
+        this.closeBtn = this.scene.add.image(1405, 300, 'closeButton')        
         this.closeBtn.setInteractive({useHandCursor: true});
           this.closeBtn.on('pointerdown', () => {
             this.closeBtn.setVisible(false);
@@ -350,9 +366,12 @@ class OptionsContainer extends Phaser.GameObjects.Container {
             this.options_images.forEach(item => {
                 item.setVisible(false);
               });
+              this.scene.shapebtn.setVisible(true);
+              this.scene.textbtn.setVisible(true);
+              this.scene.vectorbtn.setVisible(true);
         });
     
-        this.bg = this.scene.add.image(0, 0, 'sideBar').setOrigin(0).setDepth(1);
+        this.bg = this.scene.add.image(0, 0, bgImage).setOrigin(0).setDepth(1);
         this.bg.setScale(530 / this.bg.width, 1000 / this.bg.height);
         this.bg.setSize(this.bg.displayWidth, this.bg.displayHeight).setInteractive();
         // this.scene.input.enableDebug(this);
@@ -378,8 +397,10 @@ class OptionsContainer extends Phaser.GameObjects.Container {
             this.add(sprite);
             this.options_images.push(sprite);
           }
+        // this.addItemsForPage(this.page);
     }
 
+      
     selectItem(item) {
         this.selectedItem = item;
         // code to highlight the selected shape
@@ -402,73 +423,3 @@ class OptionsContainer extends Phaser.GameObjects.Container {
    
 }
 
-class TextOptionsContainer extends Phaser.GameObjects.Container {
-    constructor(scene, x, y, items) {
-        super(scene, x, y);
-        scene.add.existing(this);
-        this.scene = scene;
-        this.items = items;
-        this.options_images = []; 
-
-        // 1370,50
-        this.closeBtn = this.scene.add.image(1405, 300, 'closeButton')
-        this.closeBtn.setInteractive({useHandCursor: true});
-          this.closeBtn.on('pointerdown', () => {
-            this.closeBtn.setVisible(false);
-            this.bg.setVisible(false);
-            this.options_images.forEach(item => {
-                item.setVisible(false);
-              });
-        });
-
-       
-    
-        this.bg = this.scene.add.image(0, 0, 'textsideBar').setOrigin(0);
-        this.bg.setScale(530 / this.bg.width, 1000 / this.bg.height);
-        this.bg.setSize(this.bg.displayWidth, this.bg.displayHeight).setInteractive();
-        // this.scene.input.enableDebug(this);
-        this.add(this.bg);
-
-
-        for (let i = 0; i < this.items.length; i++) {
-            let item = this.items[i];
-      
-            let sprite = this.scene
-              .add.sprite(item.x, item.y, item.key)
-              .setScale(item.size)
-              .setInteractive({ useHandCursor: true })
-              .on('pointerover', () => sprite.setPosition(item.x + 5, item.y + 5))
-              .on('pointerout', () => sprite.setPosition(item.x, item.y))
-              .on('pointerdown', () => {
-                if (this.selectedItem) {
-                  this.deselectItem(this.selectedItem);
-                }
-                this.selectItem(item);
-              });
-      
-            this.add(sprite);
-            this.options_images.push(sprite);
-          }
-    }
-
-    selectItem(item) {
-        this.selectedItem = item;
-        // code to highlight the selected shape
-        let newSprite = this.scene.add.sprite(item.newPos[0], item.newPos[1], item.key).setScale(item.newSize);
-        newSprite.setName(item.key);  
-      
-        this.options_images.push(newSprite);  
-        this.add(newSprite);
-    }
-
-    deselectItem(item){
-        let sprite = this.options_images.find(s => s.name === item.key);
-      if (sprite) {
-          sprite.destroy(); 
-          this.options_images = this.options_images.filter(s => s !== sprite);  // 
-      }
-
-      this.selectedItem= null;
-    }
-   
-}
