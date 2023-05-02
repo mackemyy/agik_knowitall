@@ -38,6 +38,35 @@ class StartGame extends Phaser.Scene {
               size:0.1,
               newSize:0.23,
             },
+
+            {
+                type: 'shape',
+                name:'Yellow Square',
+                key:'square1',
+                x: 200, y: 200,
+                newPos:[-520, 500],
+                size:0.1,
+                newSize:0.23,
+              },
+              {
+                type: 'shape',
+                name:'Orange Triangle',
+                key:'triangle1',
+                x: 200, y: 530,
+                newPos:[-520, 500],
+                size:0.1,
+                newSize:0.23,
+              },
+              {
+                type: 'shape',
+                name:'Red Circle',
+                key:'circle1',
+                x: 210, y: 820,
+                newPos:[-520, 500],
+                size:0.1,
+                newSize:0.23,
+              },
+
           
         ];
 
@@ -46,9 +75,9 @@ class StartGame extends Phaser.Scene {
               type: 'text',
               name:'CCTV Warning',
               key:'cctvWarning',
-              x: 210, y:150,
+              x: 200, y:150,
               newPos:[-520, 500],
-              size:0.1,
+              size:0.13,
               newSize:0.23,
   
             },
@@ -56,9 +85,9 @@ class StartGame extends Phaser.Scene {
               type: 'text',
               name:'No Noon Break',
               key:'noNoonBreak',
-              x: 210, y: 360,
+              x: 210, y: 390,
               newPos:[-520, 500],
-              size:0.1,
+              size:0.13,
               newSize:0.2,
   
             },
@@ -66,18 +95,18 @@ class StartGame extends Phaser.Scene {
               type: 'text',
               name:'No Smoking',
               key:'noSmoking',
-              x: 220, y: 595,
+              x: 200, y: 615,
               newPos:[-520, 500],
-              size:0.1,
+              size:0.13,
               newSize:0.2,
             },
             {
               type: 'text',
               name:'No Trespassing',
               key:'noTrespassing',
-              x: 220, y: 830,
+              x: 200, y: 840,
               newPos:[-520, 500],
-              size:0.1,
+              size:0.13,
               newSize:0.2,
             },
           
@@ -153,9 +182,9 @@ class StartGame extends Phaser.Scene {
           ];
 
 
-        this.startMusic3 = new SoundButton(this, 300, 110, "music3", musicConfig);
-        this.add.existing(this.startMusic3);
-        this.startMusic3.setDepth(1);
+        // this.startMusic3 = new SoundButton(this, 300, 110, "music3", musicConfig);
+        // this.add.existing(this.startMusic3);
+        // this.startMusic3.setDepth(1);
        
         this.timer = this.time.delayedCall(120000, this.timerCallback, [], this);
         console.log('Timer duration:', this.timer.delay);
@@ -205,19 +234,19 @@ class StartGame extends Phaser.Scene {
                         // this.scene.launch('shapesPopUpScene');
                         this.textbtn.visible = false;
                         this.vectorbtn.visible = false;
-                        this.shapePopup = new OptionsContainer(this, 1480,50, this.options_shapes,'sideBar', 2);
+                        this.shapePopup = new OptionsContainer(this, 1470,50, this.options_shapes,'sideBar', 3);
                         console.log('click shapes button');
                     }
                     if(key == 'textbtn'){
                         this.shapebtn.visible = false;
                         this.vectorbtn.visible = false;
-                        this.TextPopup = new OptionsContainer(this, 1480,50, this.options_text,'textsideBar', 2);
+                        this.TextPopup = new OptionsContainer(this, 1470,50, this.options_text,'textSideBar', 4);
                         console.log('click text button');
                     }
                     if(key == 'vectorbtn'){
                         this.shapebtn.visible = false;
                         this.textbtn.visible = false;
-                        this.VectorPopup = new OptionsContainer(this, 1480,50, this.options_icon,'sideBar', 2);
+                        this.VectorPopup = new OptionsContainer(this, 1470,50, this.options_icon,'sideBar', 4);
                         console.log('click vector button');
                     }
                 })
@@ -334,19 +363,13 @@ class StartGame extends Phaser.Scene {
       this.currentQuestion = question;
     
       console.log("show question!");
-
-      
+     
     
       // this.matchPlay();
     
     }
-    
-
-
-    
 
 }
-
 
 
 class OptionsContainer extends Phaser.GameObjects.Container {
@@ -365,6 +388,9 @@ class OptionsContainer extends Phaser.GameObjects.Container {
           this.closeBtn.on('pointerdown', () => {
             this.closeBtn.setVisible(false);
             this.bg.setVisible(false);
+            this.buttonBorder.setVisible(false);
+            this.prevButton.setVisible(false);
+            this.nextButton.setVisible(false);
             this.options_images.forEach(item => {
                 item.setVisible(false);
               });
@@ -378,37 +404,19 @@ class OptionsContainer extends Phaser.GameObjects.Container {
         this.bg.setSize(this.bg.displayWidth, this.bg.displayHeight).setInteractive();
         // this.scene.input.enableDebug(this);
         this.add(this.bg);
-
-
-        // for (let i = 0; i < this.items.length; i++) {
-        //     let item = this.items[i];
-      
-        //     let sprite = this.scene
-        //       .add.sprite(item.x, item.y, item.key)
-        //       .setScale(item.size)
-        //       .setInteractive({ useHandCursor: true })
-        //       .on('pointerover', () => sprite.setPosition(item.x + 5, item.y + 5))
-        //       .on('pointerout', () => sprite.setPosition(item.x, item.y))
-        //       .on('pointerdown', () => {
-        //         if (this.selectedItem) {
-        //           this.deselectItem(this.selectedItem);
-        //         }
-        //         this.selectItem(item);
-        //       });
-      
-        //     this.add(sprite);
-        //     this.options_images.push(sprite);
-        //   }
-
-            // Add pagination buttons
-        this.prevButton = this.scene.add.image(290,400, 'upBtn');
+        
+        this.buttonBorder = this.scene.add.image(390,500, 'buttonBorder');
+        this.buttonBorder.setScale(30 / this.buttonBorder.width, 120 / this.buttonBorder.height)
+        this.add(this.buttonBorder);
+        // Add pagination buttons
+        this.prevButton = this.scene.add.image(390,450, 'upBtn');
         this.prevButton.setInteractive({ useHandCursor: true });
         this.prevButton.on('pointerdown', () => {
           this.prevPage();
         });
         this.add(this.prevButton);
 
-        this.nextButton = this.scene.add.image(130, 600, 'downBtn');
+        this.nextButton = this.scene.add.image(390, 550, 'downBtn');
         this.nextButton.setInteractive({ useHandCursor: true });
         this.nextButton.on('pointerdown', () => {
           this.nextPage();
