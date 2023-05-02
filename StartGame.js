@@ -205,19 +205,19 @@ class StartGame extends Phaser.Scene {
                         // this.scene.launch('shapesPopUpScene');
                         this.textbtn.visible = false;
                         this.vectorbtn.visible = false;
-                        this.shapePopup = new OptionsContainer(this, 1480,50, this.options_shapes,'sideBar');
+                        this.shapePopup = new OptionsContainer(this, 1480,50, this.options_shapes,'sideBar', 2);
                         console.log('click shapes button');
                     }
                     if(key == 'textbtn'){
                         this.shapebtn.visible = false;
                         this.vectorbtn.visible = false;
-                        this.TextPopup = new OptionsContainer(this, 1480,50, this.options_text,'textsideBar');
+                        this.TextPopup = new OptionsContainer(this, 1480,50, this.options_text,'textsideBar', 2);
                         console.log('click text button');
                     }
                     if(key == 'vectorbtn'){
                         this.shapebtn.visible = false;
                         this.textbtn.visible = false;
-                        this.VectorPopup = new OptionsContainer(this, 1480,50, this.options_icon,'sideBar');
+                        this.VectorPopup = new OptionsContainer(this, 1480,50, this.options_icon,'sideBar', 2);
                         console.log('click vector button');
                     }
                 })
@@ -350,12 +350,14 @@ class StartGame extends Phaser.Scene {
 
 
 class OptionsContainer extends Phaser.GameObjects.Container {
-    constructor(scene, x, y, items,bgImage) {
+    constructor(scene, x, y, items, bgImage, itemsPerPage) {
         super(scene, x, y);
         scene.add.existing(this);
         this.scene = scene;
         this.items = items;
         this.options_images = [];
+        this.itemsPerPage = itemsPerPage;
+        this.currentPage = 1;
 
         // 1370,50
         this.closeBtn = this.scene.add.image(1405, 300, 'closeButton')        
@@ -378,28 +380,76 @@ class OptionsContainer extends Phaser.GameObjects.Container {
         this.add(this.bg);
 
 
-        for (let i = 0; i < this.items.length; i++) {
-            let item = this.items[i];
+        // for (let i = 0; i < this.items.length; i++) {
+        //     let item = this.items[i];
       
-            let sprite = this.scene
-              .add.sprite(item.x, item.y, item.key)
-              .setScale(item.size)
-              .setInteractive({ useHandCursor: true })
-              .on('pointerover', () => sprite.setPosition(item.x + 5, item.y + 5))
-              .on('pointerout', () => sprite.setPosition(item.x, item.y))
-              .on('pointerdown', () => {
-                if (this.selectedItem) {
-                  this.deselectItem(this.selectedItem);
-                }
-                this.selectItem(item);
-              });
+        //     let sprite = this.scene
+        //       .add.sprite(item.x, item.y, item.key)
+        //       .setScale(item.size)
+        //       .setInteractive({ useHandCursor: true })
+        //       .on('pointerover', () => sprite.setPosition(item.x + 5, item.y + 5))
+        //       .on('pointerout', () => sprite.setPosition(item.x, item.y))
+        //       .on('pointerdown', () => {
+        //         if (this.selectedItem) {
+        //           this.deselectItem(this.selectedItem);
+        //         }
+        //         this.selectItem(item);
+        //       });
       
-            this.add(sprite);
-            this.options_images.push(sprite);
-          }
-        // this.addItemsForPage(this.page);
+        //     this.add(sprite);
+        //     this.options_images.push(sprite);
+        //   }
+
+            // Add pagination buttons
+        this.prevButton = this.scene.add.image(290,400, 'upBtn');
+        this.prevButton.setInteractive({ useHandCursor: true });
+        this.prevButton.on('pointerdown', () => {
+          this.prevPage();
+        });
+        this.add(this.prevButton);
+
+        this.nextButton = this.scene.add.image(130, 600, 'downBtn');
+        this.nextButton.setInteractive({ useHandCursor: true });
+        this.nextButton.on('pointerdown', () => {
+          this.nextPage();
+        });
+        this.add(this.nextButton);
+
+        this.showPage(this.currentPage);
     }
 
+    showPage(pageNumber) {
+        // Hide all items
+      this.options_images.forEach(item => {
+        item.setVisible(false);
+      });
+
+      // Get items to display on current page
+      const startIndex = (pageNumber - 1) * this.itemsPerPage;
+      const endIndex = startIndex + this.itemsPerPage;
+      const itemsToDisplay = this.items.slice(startIndex, endIndex);
+
+      // Display items on current page
+      for (let i = 0; i < itemsToDisplay.length; i++) {
+        let item = itemsToDisplay[i];
+
+        let sprite = this.scene
+          .add.sprite(item.x, item.y, item.key)
+          .setScale(item.size)
+          .setInteractive({ useHandCursor: true })
+          .on('pointerover', () => sprite.setPosition(item.x + 5, item.y + 5))
+          .on('pointerout', () => sprite.setPosition(item.x, item.y))
+          .on('pointerdown', () => {
+            if (this.selectedItem) {
+              this.deselectItem(this.selectedItem);
+            }
+            this.selectItem(item);
+          });
+
+        this.add(sprite);
+        this.options_images.push(sprite);
+      }
+    }
       
     selectItem(item) {
         this.selectedItem = item;
@@ -419,6 +469,24 @@ class OptionsContainer extends Phaser.GameObjects.Container {
       }
 
       this.selectedItem= null;
+    }
+
+    nextPage() {
+      if (this.currentPage < this.getNumPages()) {
+        this.currentPage++;
+        this.showPage(this.currentPage);
+      }
+    }
+  
+    prevPage() {
+      if (this.currentPage > 1) {
+        this.currentPage--;
+        this.showPage(this.currentPage);
+      }
+    }
+  
+    getNumPages() {
+      return Math.ceil(this.items.length / this.itemsPerPage);
     }
    
 }
