@@ -1,9 +1,14 @@
+// import { showQuestion} from "./StartGame.js";
+
 class PlayLogofy extends Phaser.Scene {
     constructor() {
         super("playLogofy");
         this.centerX = config.scale.width / 2;
         this.centerY = config.scale.height / 2;
+        
     }
+
+    
 
     create() {
         this.emptyOffice1Bg = this.add.image(this.centerX, this.centerY, "emptyOffice1");
@@ -78,7 +83,9 @@ class PlayLogofy extends Phaser.Scene {
         this.hrDP = this.add.image(this.centerX - 465, this.centerY + 240, "hrDP");
         this.playbtn = new ImageButton(this, this.centerX + 500, this.centerY + 350, "playbtn", () => {
             this.scene.get("introGame").sound.pauseAll();
-            this.scene.start("startGame");}, 
+            this.scene.start("startGame");
+            // showQuestion();
+        }, 
             () => this.playbtn.setPosition(this.centerX + 490, this.centerY + 340), () => this.playbtn.setPosition(this.centerX + 500, this.centerY + 350),);
         this.hrNarrateTxt = new CustomHrText(this, this.centerX - 240, this.centerY + 120, "To begin, read the client's request at the left side of the screen, which will be your guide in making the logo. You'll be given 90 seconds to finish all the clients' request in each stage. Do your best and good luck!", "29px", 820, '#00453B', "justify");
      }  

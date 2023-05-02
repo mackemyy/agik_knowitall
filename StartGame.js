@@ -1,9 +1,13 @@
+// import { Combinations } from './Combinations.js';
 class StartGame extends Phaser.Scene {
     constructor() {
         super("startGame");
+        // this.combinations = new Combinations();
+        
     }
 
     create() {
+        
         
 
         this.options_shapes = [
@@ -121,7 +125,33 @@ class StartGame extends Phaser.Scene {
           
           ];
 
-        
+          this.questions = [
+            {
+            text: 'Employees want to keep the air clean in this area. I want the signage to be inside a shape where opposite sides are equal.',
+            answer_shape: 'Red Rectangle',
+            answer_vector: 'No Smoking Vector',
+            answer_text: 'No Smoking Text'
+            },
+            {
+            text: 'I want a four-sided polygon sign (but not square) that warns people not to enter this place or area.',
+            answer_shape: 'Orange Rectangle',
+            answer_vector: 'No Trespassing Vector',
+            answer_text: 'No Trespassing Text'
+            },
+            {
+            text: 'I want a signage in a square shape that lets our customers know that we are available to cater to their needs any time within our working hours.',
+            answer_shape: 'Yellow Rectangle',
+            answer_vector: 'Clock Vector',
+            answer_text: 'No Noon Break Text'
+            },
+            {
+            text: 'A box-like logo that tells people that a closed-circuit cameras are in use for their own safety and crime prevention.',
+            answer_shape: 'Yellow Square',
+            answer_vector: 'CCTV Warning Vector',
+            answer_text: 'CCTV Warning Text'
+            },
+          ];
+
 
         this.startMusic3 = new SoundButton(this, 300, 110, "music3", musicConfig);
         this.add.existing(this.startMusic3);
@@ -201,6 +231,7 @@ class StartGame extends Phaser.Scene {
             .setInteractive({ useHandCursor: true })
             .setScale(0.9)
             .setDepth(1)
+            .on('pointerdown', () => {this.showQuestion();})
             .on('pointerover', () => this.checkButton.setScale(1))
             .on('pointerout', () => this.checkButton.setScale(0.9));
 
@@ -210,10 +241,13 @@ class StartGame extends Phaser.Scene {
         });
 
         this.clientTxtContainer = this.add.container(135, 630);
-        this.clientRqstTxt = this.add.text(0, 0, 'Employees want to keep the air clean in this area. I want the signage to be inside a shape where opposite sides are equal.', {
+        //CLIENT REQUEST
+        this.clientRqstTxt = this.add.text(0, 0, '', {
             fontFamily: '"Montserrat"', fill: '#000000', fontSize: '25px', align: "center", stroke: "#000000", strokeThickness: 0.5, wordWrap: { width: 210, useAdvancedWrap: true }
         });
         this.clientTxtContainer.add(this.clientRqstTxt);
+
+        this.showQuestion();
 
         
 
@@ -269,8 +303,34 @@ class StartGame extends Phaser.Scene {
         return formattedTime;
     }
 
+    showQuestion() {
+
+      if (this.currentQuestion) {
+        this.currentQuestion = null;
+        this.clientRqstTxt.setText('');
+      }
     
+      const question = this.questions[Math.floor(Math.random() * this.questions.length)];
+
+      this.clientRqstTxt.setText(question.text);
+    
+      this.currentQuestion = question;
+    
+      console.log("show question!");
+
+      
+    
+      // this.matchPlay();
+    
+    }
+    
+
+
+    
+
 }
+
+
 
 class OptionsContainer extends Phaser.GameObjects.Container {
     constructor(scene, x, y, items) {
