@@ -79,6 +79,8 @@ class LoadAllAssets extends Phaser.Scene {
          this.load.image("clientDP", "assets/objects/clientDP.png");
          this.load.image("sideBar", "assets/objects/sideBar.png");
          this.load.image("textsideBar", "assets/objects/TextsideBar.png");
+         this.load.image("level2Unlocked", "assets/objects/level2_unlocked.png");
+         this.load.image("miniGameUnlocked", "assets/objects/miniGame_unlocked.png");
 
         //assets for music
         this.load.audio("music1", "assets/music/music1.mp3");
