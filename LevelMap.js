@@ -15,10 +15,10 @@ class LevelMap extends Phaser.Scene{
             .setInteractive({useHandCursor: true})
             .setScale(0.5)
             .on('pointerdown', () => console.log('miniGame'));
-        this.level2 = this.add.image(this.centerX + 590, this.centerY + 90, "level2")
+        this.level2 = this.add.image(this.centerX + 590, this.centerY + 90, "level2Unlocked")
             .setInteractive({useHandCursor: true})
             .setScale(0.6)
-            .on('pointerdown', () => console.log('level2'));
+            .on('pointerdown', () => this.scene.start('WBintroGame'));
     }
 
     update() { }
