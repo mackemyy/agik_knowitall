@@ -16,6 +16,8 @@ class LoadAllAssets extends Phaser.Scene {
          this.load.image("menu_bg", "assets/bg/menu_bg.png");
          this.load.image("disclaimer", "assets/bg/disclaimer.png");
          this.load.image("quitWindow", "assets/bg/quitscreen.png");
+         this.load.image("WBwMasterG", "assets/bg/whitebelt_bg.png");
+         this.load.image("WBemptyoffice", "assets/bg/wb_emptyoffice_bg.png");
  
          //assets for all buttons
          this.load.image("sureBtn", "assets/buttons/sureButton.png");
@@ -39,6 +41,7 @@ class LoadAllAssets extends Phaser.Scene {
          this.load.image("closeButton", "assets/buttons/closeButton.png");
          this.load.image('buttonBorder', 'assets/Buttons/buttonborder.png');
          this.load.image('upBtn', 'assets/Buttons/UpBtn.png');
+
          //assets for all logo
          this.load.image("logo1", "assets/logo/logo6.png");
          this.load.image("logo2", "assets/logo/logo5.png");
@@ -67,6 +70,7 @@ class LoadAllAssets extends Phaser.Scene {
          //assets for all objects
          this.load.image("bubbleChatOR", "assets/objects/bubbleChatOrange.png");
          this.load.image("agikObj", "assets/objects/AGIK.png");
+         this.load.image("WBObj", "assets/objects/WhiteBelt.png");
          this.load.image("bubbleChatORLeft", "assets/objects/bubbleChatORLeft.png");
          this.load.image("level1", "assets/objects/level1.png");
          this.load.image("level2", "assets/objects/level2.png");
@@ -119,8 +123,11 @@ class LoadAllAssets extends Phaser.Scene {
                     progressBox.destroy();
                     progressBar.destroy();
                     loadingText.destroy();
-                    // this.scene.start("loadingScene");
-                   this.scene.start("startGame");
+                     this.scene.start("loadingScene");
+                  
+                //    this.scene.start("startGame");
+
+             // this.scene.start("WBintroGame");
                 }
             },
             callbackScope: this,

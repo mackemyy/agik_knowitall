@@ -395,6 +395,7 @@ class OptionsContainer extends Phaser.GameObjects.Container {
                 item.setVisible(false);
               });
               this.scene.shapebtn.setVisible(true);
+             
               this.scene.textbtn.setVisible(true);
               this.scene.vectorbtn.setVisible(true);
         });
