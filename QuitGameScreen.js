@@ -4,6 +4,19 @@ class QuitGameScene extends Phaser.Scene {
   }
 
   create() {
+      const value = this.scene.settings.data.value;
+      
+      // Determine the scene to resume
+      let resumeScene;
+      if (value === 1) {
+        resumeScene = 'startGame';
+      } else if (value === 2) {
+        resumeScene = 'ClueCraftStartGame';
+      } else {
+        // Default to startGame if value is not 1 or 2
+        resumeScene = 'startGame';
+      }
+
       // Create a container for the pop-up window
       const container = this.add.container(this.game.config.width / 2, this.game.config.height / 2);
   
@@ -14,40 +27,32 @@ class QuitGameScene extends Phaser.Scene {
       const yesButton = this.add.image(220, 120, 'yesButton');
       yesButton.setInteractive();
       yesButton.on('pointerup', () => {
-        this.game.scene.getScene('startGame').scene.stop();
-        // this.scenes.getScene('startGame').destroy();
+        this.game.scene.getScene(resumeScene).scene.stop();
         this.scene.start('levelMap');
       });
       container.add(yesButton);
 
-      -240, 120
   
       const noButton = this.add.image(-240, 120, 'noButton');
       noButton.setInteractive();
       noButton.on('pointerdown', () => {
         this.scene.stop();
-        this.scene.resume('startGame');
+        this.game.scene.getScene(resumeScene).scene.resume();
       });
       container.add(noButton);
-
 
       // Add animations to the buttons
       this.addHoverAnimation(yesButton);
       this.addHoverAnimation(noButton);
-  
-      // Helper function to add hover animations to a button
-    
-      // Position the container in the center of the screen
-      // container.setPosition(this.game.config.width / 2, this.game.config.height / 2);
-    }
+  }
 
-    // I have no idea why this code is finally working but thanks god.
-    addHoverAnimation(yesButton) {
-      yesButton.on('pointerover', () => {
-          yesButton.setScale(1.1);
-      });
-      yesButton.on('pointerout', () => {
-      yesButton.setScale(1);
-      });
-    }
+  // Add hover animation to buttons
+  addHoverAnimation(button) {
+    button.on('pointerover', () => {
+      button.setScale(1.1);
+    });
+    button.on('pointerout', () => {
+      button.setScale(1);
+    });
+  }
 }

@@ -17,7 +17,7 @@ class ClueCraftStartGame extends Phaser.Scene {
         this.PuzzleClueCtr = this.add.image(250, 600, "puzzleClueCtr");
         this.PuzzleBoxBackground();
         this.PiecesSideBarBG();
-        this.timer();
+        this.timerX();
         this.gamePointers();
 
  
@@ -31,14 +31,21 @@ class ClueCraftStartGame extends Phaser.Scene {
         // function for puzzle clue
         this.showClue();
 
-        this.timer = this.time.delayedCall(120000, this.timerCallback, [], this);
-        this.timeText = this.add.text(config.scale.width / 2 - 380, config.scale.height / 2 - 495, '2:00', { fontFamily: '"Typesauce"', fill: '#FFFFFF', fontSize: '50px', align: "center", stroke: "#00BBA0", strokeThickness: 10, });
+        
+        this.timer = this.time.delayedCall(300000, this.timerCallback, [], this);
+        this.timeText = this.add.text(config.scale.width / 2 - 380, config.scale.height / 2 - 495, '5:00', { fontFamily: '"Typesauce"', fill: '#FFFFFF', fontSize: '50px', align: "center", stroke: "#00BBA0", strokeThickness: 10, });
+
 
         this.menuButton = new ImageButton(this, 150, 90, "menuBtnv2", 
             () => this.launchQuitGame(),
             () => this.tweenButtonScale(1.1, this.menuButton),
             () => this.tweenButtonScale(1, this.menuButton),
         );
+
+        this.launchQuitGame = () => {
+            this.scene.pause();
+            this.scene.launch("QuitGame", { value: 2 });
+        };
 
         this.tweenButtonScale = (scale, targets) => {
             this.tweens.add({
@@ -61,7 +68,7 @@ class ClueCraftStartGame extends Phaser.Scene {
         const PiecesBGctr = this.add.image(config.scale.width - 250, config.scale.height - 580, "piecesCtr");
     };
 
-    timer(){
+    timerX(){
         const gameTimer = this.add.image(config.scale.width / 2 - 350 , config.scale.height/2 -460, "timerBG");
     }
 
@@ -98,13 +105,12 @@ class ClueCraftStartGame extends Phaser.Scene {
       }
 
 
-    update(){
-
+      update(){
         var elapsedSeconds = this.timer.getElapsedSeconds();
-        var remainingTime = 120 - elapsedSeconds;
-
-        if (remainingTime <= 0) {
-            this.timeText.setText('0:00');
+        var remainingTime = elapsedSeconds;
+    
+        if (remainingTime >= 300) { // If 5 minutes have passed
+            this.timeText.setText('5:00');
             this.timer.remove();
             this.add
                 .text(
@@ -115,19 +121,18 @@ class ClueCraftStartGame extends Phaser.Scene {
                 )
             .setOrigin(0.5);
         }
-
-        if (remainingTime > 0) {
+    
+        if (remainingTime < 300) { // If less than 5 minutes have passed
             var minutes = Math.floor(remainingTime / 60);
             var seconds = Math.floor(remainingTime % 60);
             var timeString = minutes.toString().padStart(1, '0') + ':' + seconds.toString().padStart(2, '0');
             this.timeText.setText(timeString);
-
         }
-
+    
         // Bring the time text to the top to ensure it's visible
         this.children.bringToTop(this.timeText);
-
     }
+    
 
     formatTime(time) {
         // Helper function to add leading zeroes to single-digit numbers

@@ -214,9 +214,9 @@ class StartGame extends Phaser.Scene {
       };
 
       this.launchQuitGame = () => {
-          this.scene.pause();
-          this.scene.launch("QuitGame");
-      };
+        this.scene.pause();
+        this.scene.launch("QuitGame", { value: 1 });
+    };
 
 
       const buttonConfigs = [
