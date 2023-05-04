@@ -28,6 +28,7 @@ class LoadAllAssets extends Phaser.Scene {
          this.load.image("yesButton", "assets/buttons/quitbtn.png");
          this.load.image("noButton", "assets/buttons/backbtn.png");
          this.load.image("menuBtn", "assets/buttons/menubtn.png");
+         this.load.image("menuBtnv2", "assets/buttons/menubtnv2.png");
          this.load.image("shapebtn", "assets/buttons/shapesbtn.png");
          this.load.image("textbtn", "assets/buttons/textbtn.png");
          this.load.image("vectorbtn", "assets/buttons/vectorbtn.png");
@@ -85,6 +86,12 @@ class LoadAllAssets extends Phaser.Scene {
          this.load.image("textSideBar", "assets/objects/TextsideBar.png");
          this.load.image("level2Unlocked", "assets/objects/level2_unlocked.png");
          this.load.image("miniGameUnlocked", "assets/objects/miniGame_unlocked.png");
+         this.load.image("MasterGDP", "assets/objects/MasterGDP.png");
+         this.load.image("puzzleClueCtr", "assets/objects/puzzleclue.png");
+         this.load.image("puzzleCtr", "assets/objects/puzzleContainer.png");
+         this.load.image("piecesCtr", "assets/objects/PuzzlePiecesCtr.png");
+         this.load.image("timerBG", "assets/objects/timer.png");
+         this.load.image("pointerBG", "assets/objects/points.png");
 
         //assets for music
         this.load.audio("music1", "assets/music/music1.mp3");
@@ -123,9 +130,9 @@ class LoadAllAssets extends Phaser.Scene {
                     progressBox.destroy();
                     progressBar.destroy();
                     loadingText.destroy();
-                     this.scene.start("loadingScene");
+                    this.scene.start("loadingScene");
                   
-                //    this.scene.start("startGame");
+                 // this.scene.start("ClueCraftStartGame");
 
              // this.scene.start("WBintroGame");
                 }

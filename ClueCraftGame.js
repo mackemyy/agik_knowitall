@@ -55,8 +55,6 @@ class playClueCraft extends Phaser.Scene {
               this.groupGameObjTxt.add(this.gameObjTxt);
         }
 
-        
-
         this.gameObjTxtTween = this.add.tween({
             targets: this.groupGameObjTxt,
             alpha: 1,
@@ -68,5 +66,23 @@ class playClueCraft extends Phaser.Scene {
 
         this.nextBtn = new ImageButton(this, this.centerX + 800, this.centerY + 420, "nextBtn", () => this.showHRNarrate(), () => this.nextBtn.setScale(0.9), () => this.nextBtn.setScale(1.1), 0.9);
      }
+
+
+     showHRNarrate() {
+        this.gameObjCtr.setVisible(false);
+        this.gameObjTitleTxt.setVisible(false);
+        this.gameTitleCtr.setVisible(false);
+        this.groupGameObjTxt.setVisible(false);
+        this.nextBtn.setVisible(false);
+        this.hrNarrateCtr = this.add.image(this.centerX, this.centerY + 250, "hrNarrateCtr");
+        this.masterGdp = this.add.image(this.centerX - 465, this.centerY + 240, "MasterGDP");
+        this.playbtn = new ImageButton(this, this.centerX + 500, this.centerY + 350, "playbtn", () => {
+            this.scene.get("introGame").sound.pauseAll();
+            this.scene.start("ClueCraftStartGame");
+            // showQuestion();
+        }, 
+            () => this.playbtn.setPosition(this.centerX + 490, this.centerY + 340), () => this.playbtn.setPosition(this.centerX + 500, this.centerY + 350),);
+        this.hrNarrateTxt = new CustomHrText(this, this.centerX - 240, this.centerY + 120, "To begin, read the client's request at the left side of the screen, which will be your guide in making the logo. You'll be given 90 seconds to finish all the clients' request in each stage. Do your best and good luck!", "29px", 820, '#00453B', "justify");
+     }  
      
 }

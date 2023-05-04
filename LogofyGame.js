@@ -1,5 +1,3 @@
-// import { showQuestion} from "./StartGame.js";
-
 class PlayLogofy extends Phaser.Scene {
     constructor() {
         super("playLogofy");

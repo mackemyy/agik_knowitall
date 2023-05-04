@@ -11,7 +11,7 @@ var musicConfig = {
 var config = {
     type: Phaser.AUTO,
     backgroundColor: 0x0C2238,
-    scene: [ LoadAllAssets, LoadingScene, IntroGame, PlayLogofy, playClueCraft, LevelMap, WBintroGame, StartGame, ShapesPopUpScene, TextPopUpScene, QuitGameScene, ],
+    scene: [ LoadAllAssets, LoadingScene, IntroGame, PlayLogofy, playClueCraft, LevelMap, StartGame,  WBintroGame,  ClueCraftStartGame,ShapesPopUpScene, TextPopUpScene, QuitGameScene, ],
     pixelArt: true,
     physics: {
         default: "arcade",
