@@ -132,7 +132,7 @@ class LoadAllAssets extends Phaser.Scene {
                     loadingText.destroy();
                     this.scene.start("loadingScene");
                   
-                 // this.scene.start("ClueCraftStartGame");
+               //  this.scene.start("ClueCraftStartGame");
 
              // this.scene.start("WBintroGame");
                 }

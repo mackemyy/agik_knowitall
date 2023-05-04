@@ -287,6 +287,7 @@ class StartGame extends Phaser.Scene {
       });
 
       this.clientTxtContainer = this.add.container(135, 630);
+      
       //CLIENT REQUEST
       this.clientRqstTxt = this.add.text(0, 0, '', {
           fontFamily: '"Montserrat"', fill: '#000000', fontSize: '25px', align: "center", stroke: "#000000", strokeThickness: 0.5, wordWrap: { width: 210, useAdvancedWrap: true }

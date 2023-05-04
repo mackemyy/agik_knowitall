@@ -4,6 +4,14 @@ class ClueCraftStartGame extends Phaser.Scene {
     }   
     
     create(){
+
+
+        this.puzzle_clue = [
+            {
+                text: '"Our company uses this JavaScript framework for building user interfaces due to its simplicity, user-friendliness, and lightweight features, which offer our developers numerous use cases while maintaining powerful capabilities."',
+                // answer: 'Vue',
+            },
+        ];
         
         this.emptyOffice1Bg = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2, "WBemptyoffice");
         this.PuzzleClueCtr = this.add.image(250, 600, "puzzleClueCtr");
@@ -11,6 +19,17 @@ class ClueCraftStartGame extends Phaser.Scene {
         this.PiecesSideBarBG();
         this.timer();
         this.gamePointers();
+
+ 
+        // set text in puzzle clue container
+        this.mr_g_puzzleclue = this.add.text(0, 0, '', {
+            fontFamily: '"Montserrat"', fill: '#000000', fontSize: '23px', align: "center", stroke: "#000000", strokeThickness: 0.5, wordWrap: { width: 270, useAdvancedWrap: true }
+        });
+        this.puzzletxtCntnr = this.add.container(130, 510);
+        this.puzzletxtCntnr.add(this.mr_g_puzzleclue);
+
+        // function for puzzle clue
+        this.showClue();
 
         this.timer = this.time.delayedCall(120000, this.timerCallback, [], this);
         this.timeText = this.add.text(config.scale.width / 2 - 380, config.scale.height / 2 - 495, '2:00', { fontFamily: '"Typesauce"', fill: '#FFFFFF', fontSize: '50px', align: "center", stroke: "#00BBA0", strokeThickness: 10, });
@@ -59,6 +78,24 @@ class ClueCraftStartGame extends Phaser.Scene {
 
         const gamePointer = this.add.image(config.scale.width / 2 + 320, config.scale.height/2 -460, "pointerBG");
     }
+
+    showClue() {
+
+        if (this.currentQuestion) {
+          this.currentQuestion = null;
+          this.mr_g_puzzleclue.setText('');
+        }
+      
+        const puzzle_clue = this.puzzle_clue[Math.floor(Math.random() * this.puzzle_clue.length)];
+    
+        this.mr_g_puzzleclue.setText(puzzle_clue.text);
+      
+        this.currentQuestion = puzzle_clue;
+      
+        console.log("show clue!");
+
+      
+      }
 
 
     update(){
