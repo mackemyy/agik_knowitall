@@ -295,6 +295,7 @@ class StartGame extends Phaser.Scene {
       this.clientTxtContainer.add(this.clientRqstTxt);
 
       this.showQuestion();
+      this.matchPlay();
 
       
 
@@ -365,9 +366,69 @@ class StartGame extends Phaser.Scene {
   
     console.log("show question!");
    
+    
   
-    // this.matchPlay();
-  
+  }
+
+  matchPlay(){
+    let points = 0;
+    
+    if(this.currentQuestion === this.questions[0] ){
+      if(this.selectedItem === this.questions[0].answer_shape && 
+        this.selectedItem === this.questions[0].answer_text && 
+        this.selectedItem === this.questions[0].answer_vector){
+
+        console.log("Correct");
+    
+        points += 5;
+      }else{
+        
+        console.log("Incorrect");
+      }
+    }else if(this.currentQuestion === this.questions[1]){
+      if(this.selectedItem === this.questions[1].answer_shape && 
+        this.selectedItem === this.questions[1].answer_text && 
+        this.selectedItem === this.questions[1].answer_vector){
+
+        console.log("Correct");
+      
+        points += 5;
+      }else{
+        
+        console.log("Incorrect");
+      }
+    }else if(this.currentQuestion === this.questions[2]){
+      if(this.selectedItem === this.questions[2].answer_shape && 
+        this.selectedItem === this.questions[2].answer_text && 
+        this.selectedItem === this.questions[2].answer_vector){
+
+        console.log("Correct");
+      
+        points += 5;
+      }else{
+        
+        console.log("Incorrect");
+      }
+    }else if(this.currentQuestion === this.questions[3]){
+      if(this.selectedItem === this.questions[3].answer_shape && 
+        this.selectedItem === this.questions[3].answer_text && 
+        this.selectedItem === this.questions[3].answer_vector){
+
+        console.log("Correct");
+      
+        points += 5;
+      }else{
+        
+        console.log("Incorrect");
+      }
+    }else {
+      console.log("NOT question");
+    }
+
+
+    this.score += points;
+    
+
   }
 
 }
@@ -450,6 +511,9 @@ class OptionsContainer extends Phaser.GameObjects.Container {
         .on('pointerover', () => sprite.setPosition(item.x + 5, item.y + 5))
         .on('pointerout', () => sprite.setPosition(item.x, item.y))
         .on('pointerdown', () => {
+
+          this.selectedItem = item.name;
+
           if (this.selectedItem) {
             this.deselectItem(this.selectedItem);
           }
