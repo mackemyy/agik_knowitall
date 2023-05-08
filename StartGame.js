@@ -76,7 +76,7 @@ class StartGame extends Phaser.Scene {
             name:'CCTV Warning',
             key:'cctvWarning',
             x: 200, y:150,
-            newPos:[-520, 500],
+            newPos:[-520, 620],
             size:0.13,
             newSize:0.23,
 
@@ -86,7 +86,7 @@ class StartGame extends Phaser.Scene {
             name:'No Noon Break',
             key:'noNoonBreak',
             x: 210, y: 390,
-            newPos:[-520, 500],
+            newPos:[-680, 500],
             size:0.13,
             newSize:0.2,
 
@@ -96,7 +96,7 @@ class StartGame extends Phaser.Scene {
             name:'No Smoking',
             key:'noSmoking',
             x: 200, y: 615,
-            newPos:[-520, 500],
+            newPos:[-520, 280],
             size:0.13,
             newSize:0.2,
           },
@@ -105,7 +105,7 @@ class StartGame extends Phaser.Scene {
             name:'No Trespassing',
             key:'noTrespassing',
             x: 200, y: 840,
-            newPos:[-520, 500],
+            newPos:[-520, 700],
             size:0.13,
             newSize:0.2,
           },
@@ -118,9 +118,9 @@ class StartGame extends Phaser.Scene {
             name:'cctv icon',
             key:'cctv',
             x: 210, y:150,
-            newPos:[-520, 500],
+            newPos:[-520, 420],
             size:0.15,
-            newSize:0.23,
+            newSize:0.28,
 
           },
           {
@@ -128,7 +128,7 @@ class StartGame extends Phaser.Scene {
             name:'clock icon',
             key:'clock',
             x: 210, y: 360,
-            newPos:[-520, 500],
+            newPos:[-370, 500],
             size:0.15,
             newSize:0.2,
 
@@ -138,9 +138,9 @@ class StartGame extends Phaser.Scene {
             name:'smoking icon',
             key:'smoking',
             x: 220, y: 595,
-            newPos:[-520, 500],
+            newPos:[-520, 600],
             size:0.1,
-            newSize:0.25,
+            newSize:0.20,
           },
           {
             type: 'icon',
@@ -149,7 +149,7 @@ class StartGame extends Phaser.Scene {
             x: 220, y: 830,
             newPos:[-520, 500],
             size:0.1,
-            newSize:0.25,
+            newSize:0.20,
           },
         
         ];
@@ -441,6 +441,7 @@ class OptionsContainer extends Phaser.GameObjects.Container {
       this.scene = scene;
       this.items = items;
       this.options_images = [];
+      this.selected_items = [];
       this.itemsPerPage = itemsPerPage;
       this.currentPage = 1;
 
@@ -467,6 +468,10 @@ class OptionsContainer extends Phaser.GameObjects.Container {
       this.bg.setSize(this.bg.displayWidth, this.bg.displayHeight).setInteractive();
       // this.scene.input.enableDebug(this);
       this.add(this.bg);
+
+      // Create a container for the selected items
+      this.selectedItemsContainer = this.scene.add.container();
+      this.add(this.selectedItemsContainer);
       
       this.buttonBorder = this.scene.add.image(390,500, 'buttonBorder');
       this.buttonBorder.setScale(30 / this.buttonBorder.width, 120 / this.buttonBorder.height)
@@ -474,14 +479,20 @@ class OptionsContainer extends Phaser.GameObjects.Container {
       // Add pagination buttons
       this.prevButton = this.scene.add.image(390,450, 'upBtn');
       this.prevButton.setInteractive({ useHandCursor: true });
-      this.prevButton.on('pointerdown', () => {
+      this.prevButton
+      .on('pointerover',() => this.prevButton.setScale(1))
+      .on('pointerout', () => this.prevButton.setScale(1.1))
+      .on('pointerdown', () => {
         this.prevPage();
       });
       this.add(this.prevButton);
 
       this.nextButton = this.scene.add.image(390, 550, 'downBtn');
       this.nextButton.setInteractive({ useHandCursor: true });
-      this.nextButton.on('pointerdown', () => {
+      this.nextButton
+      .on('pointerover',() => this.nextButton.setScale(1))
+      .on('pointerout', () => this.nextButton.setScale(1.1))
+      .on('pointerdown', () => {
         this.nextPage();
       });
       this.add(this.nextButton);
@@ -512,8 +523,7 @@ class OptionsContainer extends Phaser.GameObjects.Container {
         .on('pointerout', () => sprite.setPosition(item.x, item.y))
         .on('pointerdown', () => {
 
-          this.selectedItem = item.name;
-
+          // this.selectedItem = item.name;
           if (this.selectedItem) {
             this.deselectItem(this.selectedItem);
           }
@@ -531,15 +541,15 @@ class OptionsContainer extends Phaser.GameObjects.Container {
       let newSprite = this.scene.add.sprite(item.newPos[0], item.newPos[1], item.key).setScale(item.newSize);
       newSprite.setName(item.key);  
     
-      this.options_images.push(newSprite);  
-      this.add(newSprite);
+      this.selected_items.push(newSprite);
+      this.selectedItemsContainer.add(newSprite);
   }
 
   deselectItem(item){
-      let sprite = this.options_images.find(s => s.name === item.key);
+      let sprite = this.selected_items.find(s => s.name === item.key);
     if (sprite) {
         sprite.destroy(); 
-        this.options_images = this.options_images.filter(s => s !== sprite);  // 
+        this.selected_items = this.selected_items.filter(s => s !== sprite);  // 
     }
 
     this.selectedItem= null;
