@@ -82,6 +82,8 @@ class LoadAllAssets extends Phaser.Scene {
          this.load.image("hrNarrateCtr", "assets/objects/hrNarrateContainer.png");
          this.load.image("clientRqst", "assets/objects/clientrqts.png");
          this.load.image("clientDP", "assets/objects/clientDP.png");
+         this.load.image("client_react_RIGHT", "assets/objects/avatar_rightAns.png");
+         this.load.image("client_react_WRONG", "assets/objects/avatar_wrongAns.png");
          this.load.image("sideBar", "assets/objects/sideBar.png");
          this.load.image("textSideBar", "assets/objects/TextsideBar.png");
          this.load.image("level2Unlocked", "assets/objects/level2_unlocked.png");
@@ -136,7 +138,7 @@ class LoadAllAssets extends Phaser.Scene {
                   
                //  this.scene.start("ClueCraftStartGame");
 
-             // this.scene.start("WBintroGame");
+            
                 }
             },
             callbackScope: this,
