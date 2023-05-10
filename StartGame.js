@@ -277,7 +277,7 @@ class StartGame extends Phaser.Scene {
           .setInteractive({ useHandCursor: true })
           .setScale(0.9)
           .setDepth(1)
-          .on('pointerdown', () => {this.showQuestion();})
+          .on('pointerdown', () => {this.matchPlay();})
           .on('pointerover', () => this.checkButton.setScale(1))
           .on('pointerout', () => this.checkButton.setScale(0.9));
 
@@ -295,7 +295,7 @@ class StartGame extends Phaser.Scene {
       this.clientTxtContainer.add(this.clientRqstTxt);
 
       this.showQuestion();
-      this.matchPlay();
+      // this.matchPlay();
 
       
 
@@ -365,8 +365,6 @@ class StartGame extends Phaser.Scene {
     this.currentQuestion = question;
   
     console.log("show question!");
-   
-    
   
   }
 
@@ -425,25 +423,25 @@ class StartGame extends Phaser.Scene {
       console.log("NOT question");
     }
 
-
+    this.showQuestion();
     this.score += points;
-    
-
+    console.log(points);
   }
-
 }
 
 
 class OptionsContainer extends Phaser.GameObjects.Container {
   constructor(scene, x, y, items, bgImage, itemsPerPage) {
       super(scene, x, y);
-      scene.add.existing(this);
       this.scene = scene;
       this.items = items;
       this.options_images = [];
       this.selected_items = [];
       this.itemsPerPage = itemsPerPage;
       this.currentPage = 1;
+      this.selectedItem;
+      this.scene.add.existing(this);
+
 
       // 1370,50
       this.closeBtn = this.scene.add.image(1405, 300, 'closeButton')        
@@ -523,7 +521,7 @@ class OptionsContainer extends Phaser.GameObjects.Container {
         .on('pointerout', () => sprite.setPosition(item.x, item.y))
         .on('pointerdown', () => {
 
-          // this.selectedItem = item.name;
+          this.scene.selectedItem = item.name;
           if (this.selectedItem) {
             this.deselectItem(this.selectedItem);
           }
