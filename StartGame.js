@@ -158,26 +158,26 @@ class StartGame extends Phaser.Scene {
           {
           text: 'Employees want to keep the air clean in this area. I want the signage to be inside a shape where opposite sides are equal.',
           answer_shape: 'Red Rectangle',
-          answer_vector: 'No Smoking Vector',
-          answer_text: 'No Smoking Text'
+          answer_vector: 'smoking icon',
+          answer_text: 'No Smoking'
           },
           {
           text: 'I want a four-sided polygon sign (but not square) that warns people not to enter this place or area.',
           answer_shape: 'Orange Rectangle',
-          answer_vector: 'No Trespassing Vector',
-          answer_text: 'No Trespassing Text'
+          answer_vector: 'tresspassing icon',
+          answer_text: 'No Trespassing'
           },
           {
           text: 'I want a signage in a square shape that lets our customers know that we are available to cater to their needs any time within our working hours.',
           answer_shape: 'Yellow Rectangle',
           answer_vector: 'Clock Vector',
-          answer_text: 'No Noon Break Text'
+          answer_text: 'No Noon Break'
           },
           {
           text: 'A box-like logo that tells people that a closed-circuit cameras are in use for their own safety and crime prevention.',
           answer_shape: 'Yellow Square',
-          answer_vector: 'CCTV Warning Vector',
-          answer_text: 'CCTV Warning Text'
+          answer_vector: 'cctv icon',
+          answer_text: 'CCTV Warning'
           },
         ];
 
