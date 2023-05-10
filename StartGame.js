@@ -374,9 +374,9 @@ class StartGame extends Phaser.Scene {
     let points = 0;
     
     if(this.currentQuestion === this.questions[0] ){
-      if(this.selectedItem === this.questions[0].answer_shape && 
-        this.selectedItem === this.questions[0].answer_text && 
-        this.selectedItem === this.questions[0].answer_vector){
+      if(this.shapePopup.selectedItem.name === this.questions[0].answer_shape && 
+        this.TextPopup.selectedItem.name === this.questions[0].answer_text && 
+        this.VectorPopup.selectedItem.name === this.questions[0].answer_vector){
 
         console.log("Correct");
     
@@ -386,9 +386,9 @@ class StartGame extends Phaser.Scene {
         console.log("Incorrect");
       }
     }else if(this.currentQuestion === this.questions[1]){
-      if(this.selectedItem === this.questions[1].answer_shape && 
-        this.selectedItem === this.questions[1].answer_text && 
-        this.selectedItem === this.questions[1].answer_vector){
+      if(this.shapePopup.selectedItem.name === this.questions[1].answer_shape && 
+        this.TextPopup.selectedItem.name === this.questions[1].answer_text && 
+        this.VectorPopup.selectedItem.name === this.questions[1].answer_vector){
 
         console.log("Correct");
       
@@ -398,9 +398,9 @@ class StartGame extends Phaser.Scene {
         console.log("Incorrect");
       }
     }else if(this.currentQuestion === this.questions[2]){
-      if(this.selectedItem === this.questions[2].answer_shape && 
-        this.selectedItem === this.questions[2].answer_text && 
-        this.selectedItem === this.questions[2].answer_vector){
+      if(this.shapePopup.selectedItem.name === this.questions[2].answer_shape && 
+        this.TextPopup.selectedItem.name === this.questions[2].answer_text && 
+        this.VectorPopup.selectedItem.name === this.questions[2].answer_vector){
 
         console.log("Correct");
       
@@ -410,9 +410,9 @@ class StartGame extends Phaser.Scene {
         console.log("Incorrect");
       }
     }else if(this.currentQuestion === this.questions[3]){
-      if(this.selectedItem === this.questions[3].answer_shape && 
-        this.selectedItem === this.questions[3].answer_text && 
-        this.selectedItem === this.questions[3].answer_vector){
+      if(this.shapePopup.selectedItem.name === this.questions[3].answer_shape && 
+        this.TextPopup.selectedItem.name === this.questions[3].answer_text && 
+        this.VectorPopup.selectedItem.name === this.questions[3].answer_vector){
 
         console.log("Correct");
       
