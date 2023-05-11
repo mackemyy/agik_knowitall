@@ -383,46 +383,50 @@ class StartGame extends Phaser.Scene {
     
         points += 5;
       }else{
-        
-        console.log("Incorrect");
+
+        this.showClientRightReact();
+      } 
+      else {
+        this.showClientWrongReact();
       }
-    }else if(this.currentQuestion === this.questions[1]){
-      if(this.shapePopup.selectedItem.name === this.questions[1].answer_shape && 
-        this.TextPopup.selectedItem.name === this.questions[1].answer_text && 
-        this.VectorPopup.selectedItem.name === this.questions[1].answer_vector){
+    }
     else if(this.currentQuestion === this.combinations.questions[1]){
       if(this.shapePopup.selectedItem.name === this.combinations.questions[1].answer_shape && 
         this.TextPopup.selectedItem.name === this.combinations.questions[1].answer_text && 
         this.VectorPopup.selectedItem.name === this.combinations.questions[1].answer_vector){
       }else{
 
-        console.log("Incorrect");
+        this.showClientRightReact();
       }
-    }else if(this.currentQuestion === this.questions[2]){
-      if(this.shapePopup.selectedItem.name === this.questions[2].answer_shape && 
-        this.TextPopup.selectedItem.name === this.questions[2].answer_text && 
-        this.VectorPopup.selectedItem.name === this.questions[2].answer_vector){
+      else{
+        this.showClientWrongReact();
+      }
+    }
     else if(this.currentQuestion === this.combinations.questions[2]){
       if(this.shapePopup.selectedItem.name === this.combinations.questions[2].answer_shape && 
         this.TextPopup.selectedItem.name === this.combinations.questions[2].answer_text && 
         this.VectorPopup.selectedItem.name === this.combinations.questions[2].answer_vector){
       }else{
 
-        console.log("Incorrect");
+        this.showClientRightReact();
       }
-    }else if(this.currentQuestion === this.questions[3]){
-      if(this.shapePopup.selectedItem.name === this.questions[3].answer_shape && 
-        this.TextPopup.selectedItem.name === this.questions[3].answer_text && 
-        this.VectorPopup.selectedItem.name === this.questions[3].answer_vector){
+      else{
+        this.showClientWrongReact();
+      }
+    }
     else if(this.currentQuestion === this.combinations.questions[3]){
       if(this.shapePopup.selectedItem.name === this.combinations.questions[3].answer_shape && 
         this.TextPopup.selectedItem.name === this.combinations.questions[3].answer_text && 
         this.VectorPopup.selectedItem.name === this.combinations.questions[3].answer_vector){
       }else{
-        
-        console.log("Incorrect");
+
+        this.showClientRightReact();
       }
-    }else {
+      else {
+        this.showClientWrongReact();
+      }
+    } 
+    else {
       console.log("NOT question");
     }
   }
