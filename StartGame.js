@@ -440,8 +440,18 @@ class StartGame extends Phaser.Scene {
     });
   }
 
-    this.showQuestion();
-    this.score += points;
+  showClientWrongReact() {
+    this.wrong = this.add.image(config.scale.width/2, config.scale.height/2, "client_react_WRONG");
+    this.time.delayedCall(1000, () => {
+      this.wrong.setVisible(false);
+      this.shapePopup.selectedItemsContainer.setVisible(false);
+      this.VectorPopup.selectedItemsContainer.setVisible(false);
+      this.TextPopup.selectedItemsContainer.setVisible(false);
+      this.shapePopup.selectedItem = null;
+      this.VectorPopup.selectedItem = null;
+      this.TextPopup.selectedItem = null;
+      this.showQuestion();
+    });
     console.log(points);
   }
 }
