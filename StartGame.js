@@ -185,6 +185,8 @@ class StartGame extends Phaser.Scene {
       // this.startMusic3 = new SoundButton(this, 300, 110, "music3", musicConfig);
       // this.add.existing(this.startMusic3);
       // this.startMusic3.setDepth(1);
+
+      this.combinations = new Combinations();
      
       this.timer = this.time.delayedCall(120000, this.timerCallback, [], this);
       console.log('Timer duration:', this.timer.delay);
@@ -234,19 +236,19 @@ class StartGame extends Phaser.Scene {
                       // this.scene.launch('shapesPopUpScene');
                       this.textbtn.visible = false;
                       this.vectorbtn.visible = false;
-                      this.shapePopup = new OptionsContainer(this, 1470,50, this.options_shapes,'sideBar', 3);
+                      this.shapePopup = new OptionsContainer(this, 1470,50, this.combinations.options_shapes,'sideBar', 3);
                       console.log('click shapes button');
                   }
                   if(key == 'textbtn'){
                       this.shapebtn.visible = false;
                       this.vectorbtn.visible = false;
-                      this.TextPopup = new OptionsContainer(this, 1470,50, this.options_text,'textSideBar', 4);
+                      this.TextPopup = new OptionsContainer(this, 1470,50, this.combinations.options_text,'textSideBar', 4);
                       console.log('click text button');
                   }
                   if(key == 'vectorbtn'){
                       this.shapebtn.visible = false;
                       this.textbtn.visible = false;
-                      this.VectorPopup = new OptionsContainer(this, 1470,50, this.options_icon,'sideBar', 4);
+                      this.VectorPopup = new OptionsContainer(this, 1470,50, this.combinations.options_icon,'sideBar', 4);
                       console.log('click vector button');
                   }
               })
@@ -358,7 +360,8 @@ class StartGame extends Phaser.Scene {
       this.clientRqstTxt.setText('');
     }
   
-    const question = this.questions[Math.floor(Math.random() * this.questions.length)];
+    const questionLength = this.combinations.questions.length;
+    const question = this.combinations.questions[Math.floor(Math.random() * questionLength)];
 
     this.clientRqstTxt.setText(question.text);
   
@@ -369,10 +372,10 @@ class StartGame extends Phaser.Scene {
   }
 
   matchPlay(){
-    let points = 0;
-    
-    if(this.currentQuestion === this.questions[0] ){
-      if(this.shapePopup.selectedItem.name === this.questions[0].answer_shape && 
+    if(this.currentQuestion === this.combinations.questions[0] ){
+      if(this.shapePopup.selectedItem.name === this.combinations.questions[0].answer_shape && 
+        this.TextPopup.selectedItem.name === this.combinations.questions[0].answer_text && 
+        this.VectorPopup.selectedItem.name === this.combinations.questions[0].answer_vector) {
         this.TextPopup.selectedItem.name === this.questions[0].answer_text && 
         this.VectorPopup.selectedItem.name === this.questions[0].answer_vector){
 
@@ -387,34 +390,34 @@ class StartGame extends Phaser.Scene {
       if(this.shapePopup.selectedItem.name === this.questions[1].answer_shape && 
         this.TextPopup.selectedItem.name === this.questions[1].answer_text && 
         this.VectorPopup.selectedItem.name === this.questions[1].answer_vector){
-
-        console.log("Correct");
-      
-        points += 5;
+    else if(this.currentQuestion === this.combinations.questions[1]){
+      if(this.shapePopup.selectedItem.name === this.combinations.questions[1].answer_shape && 
+        this.TextPopup.selectedItem.name === this.combinations.questions[1].answer_text && 
+        this.VectorPopup.selectedItem.name === this.combinations.questions[1].answer_vector){
       }else{
-        
+
         console.log("Incorrect");
       }
     }else if(this.currentQuestion === this.questions[2]){
       if(this.shapePopup.selectedItem.name === this.questions[2].answer_shape && 
         this.TextPopup.selectedItem.name === this.questions[2].answer_text && 
         this.VectorPopup.selectedItem.name === this.questions[2].answer_vector){
-
-        console.log("Correct");
-      
-        points += 5;
+    else if(this.currentQuestion === this.combinations.questions[2]){
+      if(this.shapePopup.selectedItem.name === this.combinations.questions[2].answer_shape && 
+        this.TextPopup.selectedItem.name === this.combinations.questions[2].answer_text && 
+        this.VectorPopup.selectedItem.name === this.combinations.questions[2].answer_vector){
       }else{
-        
+
         console.log("Incorrect");
       }
     }else if(this.currentQuestion === this.questions[3]){
       if(this.shapePopup.selectedItem.name === this.questions[3].answer_shape && 
         this.TextPopup.selectedItem.name === this.questions[3].answer_text && 
         this.VectorPopup.selectedItem.name === this.questions[3].answer_vector){
-
-        console.log("Correct");
-      
-        points += 5;
+    else if(this.currentQuestion === this.combinations.questions[3]){
+      if(this.shapePopup.selectedItem.name === this.combinations.questions[3].answer_shape && 
+        this.TextPopup.selectedItem.name === this.combinations.questions[3].answer_text && 
+        this.VectorPopup.selectedItem.name === this.combinations.questions[3].answer_vector){
       }else{
         
         console.log("Incorrect");
