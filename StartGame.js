@@ -422,6 +422,23 @@ class StartGame extends Phaser.Scene {
     }else {
       console.log("NOT question");
     }
+  }
+
+  showClientRightReact() {
+    this.points += 5;
+    this.pointsTxt.text = this.points + " pts";
+    this.correct = this.add.image(config.scale.width/2, config.scale.height/2, "client_react_RIGHT");
+    this.time.delayedCall(1000, () => {
+      this.correct.setVisible(false);
+      this.shapePopup.selectedItemsContainer.setVisible(false);
+      this.VectorPopup.selectedItemsContainer.setVisible(false);
+      this.TextPopup.selectedItemsContainer.setVisible(false);
+      this.shapePopup.selectedItem = null;
+      this.VectorPopup.selectedItem = null;
+      this.TextPopup.selectedItem = null;
+      this.showQuestion();
+    });
+  }
 
     this.showQuestion();
     this.score += points;
@@ -440,6 +457,7 @@ class OptionsContainer extends Phaser.GameObjects.Container {
       this.itemsPerPage = itemsPerPage;
       this.currentPage = 1;
       this.selectedItem;
+      this.selectedItemsContainer;
       this.scene.add.existing(this);
 
 
