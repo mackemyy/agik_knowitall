@@ -96,6 +96,7 @@ class StartGame extends Phaser.Scene {
           .setInteractive({ useHandCursor: true })
           .setScale(0.9)
           .setDepth(1)
+          .on('pointerdown', () => { this.removeSelectedItems() })
           .on('pointerover', () => this.deleteButton.setScale(1))
           .on('pointerout', () => this.deleteButton.setScale(0.9));
 
@@ -123,10 +124,6 @@ class StartGame extends Phaser.Scene {
       this.clientTxtContainer.add(this.clientRqstTxt);
 
       this.showQuestion();
-      // this.matchPlay();
-
-      
-
   }
 
   update() {
@@ -253,14 +250,18 @@ class StartGame extends Phaser.Scene {
     
     this.time.delayedCall(1000, () => {
       reactImage.setVisible(false);
-      this.shapePopup.selectedItemsContainer.setVisible(false);
+      this.removeSelectedItems();
+      this.showQuestion();
+    });
+  }
+
+  removeSelectedItems() {
+    this.shapePopup.selectedItemsContainer.setVisible(false);
       this.VectorPopup.selectedItemsContainer.setVisible(false);
       this.TextPopup.selectedItemsContainer.setVisible(false);
       this.shapePopup.selectedItem = null;
       this.VectorPopup.selectedItem = null;
       this.TextPopup.selectedItem = null;
-      this.showQuestion();
-    });
   }
 }
 
