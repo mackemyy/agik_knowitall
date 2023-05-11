@@ -198,10 +198,10 @@ class StartGame extends Phaser.Scene {
         this.TextPopup.selectedItem.name === this.combinations.questions[0].answer_text && 
         this.VectorPopup.selectedItem.name === this.combinations.questions[0].answer_vector) {
 
-        this.showClientRightReact();
+        this.showClientReact(true);
       } 
       else {
-        this.showClientWrongReact();
+        this.showClientReact(false);
       }
     }
     else if(this.currentQuestion === this.combinations.questions[1]){
@@ -209,10 +209,10 @@ class StartGame extends Phaser.Scene {
         this.TextPopup.selectedItem.name === this.combinations.questions[1].answer_text && 
         this.VectorPopup.selectedItem.name === this.combinations.questions[1].answer_vector){
 
-        this.showClientRightReact();
+        this.showClientReact(true);
       }
       else{
-        this.showClientWrongReact();
+        this.showClientReact(false);
       }
     }
     else if(this.currentQuestion === this.combinations.questions[2]){
@@ -220,10 +220,10 @@ class StartGame extends Phaser.Scene {
         this.TextPopup.selectedItem.name === this.combinations.questions[2].answer_text && 
         this.VectorPopup.selectedItem.name === this.combinations.questions[2].answer_vector){
 
-        this.showClientRightReact();
+        this.showClientReact(true);
       }
       else{
-        this.showClientWrongReact();
+        this.showClientReact(false);
       }
     }
     else if(this.currentQuestion === this.combinations.questions[3]){
@@ -231,10 +231,10 @@ class StartGame extends Phaser.Scene {
         this.TextPopup.selectedItem.name === this.combinations.questions[3].answer_text && 
         this.VectorPopup.selectedItem.name === this.combinations.questions[3].answer_vector){
 
-        this.showClientRightReact();
+        this.showClientReact(true);
       }
       else {
-        this.showClientWrongReact();
+        this.showClientReact(false);
       }
     } 
     else {
@@ -242,26 +242,17 @@ class StartGame extends Phaser.Scene {
     }
   }
 
-  showClientRightReact() {
-    this.points += 5;
+  showClientReact(isCorrect) {
+    const clientReactImage = isCorrect ? "client_react_RIGHT" : "client_react_WRONG";
+    const pointsToAdd = isCorrect ? 5 : 0;
+    
+    this.points += pointsToAdd;
     this.pointsTxt.text = this.points + " pts";
-    this.correct = this.add.image(config.scale.width/2, config.scale.height/2, "client_react_RIGHT");
+    
+    const reactImage = this.add.image(config.scale.width/2, config.scale.height/2, clientReactImage);
+    
     this.time.delayedCall(1000, () => {
-      this.correct.setVisible(false);
-      this.shapePopup.selectedItemsContainer.setVisible(false);
-      this.VectorPopup.selectedItemsContainer.setVisible(false);
-      this.TextPopup.selectedItemsContainer.setVisible(false);
-      this.shapePopup.selectedItem = null;
-      this.VectorPopup.selectedItem = null;
-      this.TextPopup.selectedItem = null;
-      this.showQuestion();
-    });
-  }
-
-  showClientWrongReact() {
-    this.wrong = this.add.image(config.scale.width/2, config.scale.height/2, "client_react_WRONG");
-    this.time.delayedCall(1000, () => {
-      this.wrong.setVisible(false);
+      reactImage.setVisible(false);
       this.shapePopup.selectedItemsContainer.setVisible(false);
       this.VectorPopup.selectedItemsContainer.setVisible(false);
       this.TextPopup.selectedItemsContainer.setVisible(false);
