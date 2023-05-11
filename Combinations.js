@@ -1,184 +1,174 @@
 class Combinations extends Phaser.Scene {
     constructor() {
         super("combination");
-    }
 
-    create() { 
-        this.options_shapes1 = [
-            {
-              type: 'shape',
-              name:'Red Rectangle',
-              key:'rectangle1',
-              position:[200,200],
-              newPos:[950,600],
-              size:0.1,
-              newSize:0.25,
-            },
-            {
-              type: 'shape',
-              name:'Orange Rectangle',
-              key:'rectangle3',
-              position:[200,530],
-              newPos:[950,600],
-              size:0.1,
-              newSize:0.25,
-            },
-            {
-              type: 'shape',
-              name:'Yellow Rectangle',
-              key:'rectangle2',
-              position:[210,820],
-              newPos:[950,600],
-              size:0.1,
-              newSize:0.25,
-            },
-          
-          ];
+      this.options_shapes = [
+        {
+          type: 'shape',
+          name:'Red Rectangle',
+          key:'rectangle1',
+          x: 200, y: 200,
+          newPos:[-520, 500],
+          size:0.1,
+          newSize:0.23,
+        },
+        {
+          type: 'shape',
+          name:'Orange Rectangle',
+          key:'rectangle3',
+          x: 200, y: 530,
+          newPos:[-520, 500],
+          size:0.1,
+          newSize:0.23,
+        },
+        {
+          type: 'shape',
+          name:'Yellow Rectangle',
+          key:'rectangle2',
+          x: 210, y: 820,
+          newPos:[-520, 500],
+          size:0.1,
+          newSize:0.23,
+        },
+
+        {
+            type: 'shape',
+            name:'Yellow Square',
+            key:'square1',
+            x: 200, y: 200,
+            newPos:[-520, 500],
+            size:0.1,
+            newSize:0.23,
+          },
+          {
+            type: 'shape',
+            name:'Orange Triangle',
+            key:'triangle1',
+            x: 200, y: 530,
+            newPos:[-520, 500],
+            size:0.1,
+            newSize:0.23,
+          },
+          {
+            type: 'shape',
+            name:'Red Circle',
+            key:'circle1',
+            x: 210, y: 820,
+            newPos:[-520, 500],
+            size:0.1,
+            newSize:0.23,
+          },
+    ];
+
+    this.options_text = [
+        {
+          type: 'text',
+          name:'CCTV Warning',
+          key:'cctvWarning',
+          x: 200, y:150,
+          newPos:[-520, 620],
+          size:0.13,
+          newSize:0.23,
+
+        },
+        {
+          type: 'text',
+          name:'No Noon Break',
+          key:'noNoonBreak',
+          x: 210, y: 390,
+          newPos:[-680, 500],
+          size:0.13,
+          newSize:0.2,
+
+        },
+        {
+          type: 'text',
+          name:'No Smoking',
+          key:'noSmoking',
+          x: 200, y: 615,
+          newPos:[-520, 280],
+          size:0.13,
+          newSize:0.2,
+        },
+        {
+          type: 'text',
+          name:'No Trespassing',
+          key:'noTrespassing',
+          x: 200, y: 840,
+          newPos:[-520, 700],
+          size:0.13,
+          newSize:0.2,
+        },
       
-          this.options_shapes2 = [
-            {
-              type: 'shape',
-              name:'Yellow Square',
-              key:'square1',
-              position:[200,200],
-              newPos:[950,600],
-              size:0.1,
-              newSize:0.25,
-            },
-            {
-              type: 'shape',
-              name:'Orange Triangle',
-              key:'triangle1',
-              position:[200,530],
-              newPos:[950,600],
-              size:0.1,
-              newSize:0.25,
-            },
-            
-            {
-              type: 'shape',
-              name:'Red',
-              key:'circle1',
-              position:[200,800],
-              newPos:[950,600],
-              size:0.1,
-              newSize:0.25,
-            },
-          ];
+      ];
 
-          this.options_text1 = [
-            {
-              type: 'text',
-              name:'No Smoking Text',
-              key:'noSmoking',
-              position:[200,200],
-              newPos:[950,600],
-              size:0.1,
-              newSize:0.25,
-            },
-            {
-              type: 'text',
-              name:'No Trespassing Text',
-              key:'noTrespassing',
-              position:[200,530],
-              newPos:[950,600],
-              size:0.1,
-              newSize:0.25,
-            },
-            
-            {
-              type: 'text',
-              name:'CCTV Warning Text',
-              key:'cctvWarning',
-              position:[200,800],
-              newPos:[950,600],
-              size:0.1,
-              newSize:0.25,
-            },
-          ];
+      this.options_icon = [
+        {
+          type: 'icon',
+          name:'cctv icon',
+          key:'cctv',
+          x: 210, y:150,
+          newPos:[-520, 420],
+          size:0.15,
+          newSize:0.28,
 
-          this.options_text2 = [
-            {
-              type: 'text',
-              name:'No Noon Break Text',
-              key:'noNoonBreak',
-              position:[200,200],
-              newPos:[950,600],
-              size:0.1,
-              newSize:0.25,
-            },
-          ];
+        },
+        {
+          type: 'icon',
+          name:'clock icon',
+          key:'clock',
+          x: 210, y: 360,
+          newPos:[-370, 500],
+          size:0.15,
+          newSize:0.2,
 
-          this.options_vector1 = [
-            {
-              type: 'vector',
-              name:'No Smoking Vector',
-              key:'smoking',
-              position:[200,200],
-              newPos:[950,600],
-              size:0.1,
-              newSize:0.25,
-            },
-            {
-              type: 'vector',
-              name:'No Trespassing Vector',
-              key:'trespassing',
-              position:[200,530],
-              newPos:[950,600],
-              size:0.1,
-              newSize:0.25,
-            },
-            
-            {
-              type: 'vector',
-              name:'CCTV Warning Vector',
-              key:'cctv',
-              position:[200,800],
-              newPos:[950,600],
-              size:0.1,
-              newSize:0.25,
-            },
-          ];
+        },
+        {
+          type: 'icon',
+          name:'smoking icon',
+          key:'smoking',
+          x: 220, y: 595,
+          newPos:[-520, 600],
+          size:0.1,
+          newSize:0.20,
+        },
+        {
+          type: 'icon',
+          name:'tresspassing icon',
+          key:'trespassing',
+          x: 220, y: 830,
+          newPos:[-520, 500],
+          size:0.1,
+          newSize:0.20,
+        },
+      
+      ];
 
-          this.options_vector2 = [
-            {
-              type: 'vector',
-              name:'Clock Vector',
-              key:'clock',
-              position:[200,200],
-              newPos:[950,600],
-              size:0.1,
-              newSize:0.25,
-            },
-          ];
-
-          this.questions = [
-            {
-            text: 'Employees want to keep the air clean in this area. I want the signage to be inside a shape where opposite sides are equal.',
-            answer_shape: 'Red Rectangle',
-            answer_vector: 'No Smoking Vector',
-            answer_text: 'No Smoking Text'
-            },
-            {
-            text: 'I want a four-sided polygon sign (but not square) that warns people not to enter this place or area.',
-            answer_shape: 'Orange Rectangle',
-            answer_vector: 'No Trespassing Vector',
-            answer_text: 'No Trespassing Text'
-            },
-            {
-            text: 'I want a signage in a square shape that lets our customers know that we are available to cater to their needs any time within our working hours.',
-            answer_shape: 'Yellow Rectangle',
-            answer_vector: 'Clock Vector',
-            answer_text: 'No Noon Break Text'
-            },
-            {
-            text: 'A box-like logo that tells people that a closed-circuit cameras are in use for their own safety and crime prevention.',
-            answer_shape: 'Yellow Square',
-            answer_vector: 'CCTV Warning Vector',
-            answer_text: 'CCTV Warning Text'
-            },
-          ];
+      this.questions = [
+        {
+        text: 'Employees want to keep the air clean in this area. I want the signage to be inside a shape where opposite sides are equal.',
+        answer_shape: 'Red Rectangle',
+        answer_vector: 'smoking icon',
+        answer_text: 'No Smoking'
+        },
+        {
+        text: 'I want a four-sided polygon sign (but not square) that warns people not to enter this place or area.',
+        answer_shape: 'Orange Rectangle',
+        answer_vector: 'tresspassing icon',
+        answer_text: 'No Trespassing'
+        },
+        {
+        text: 'I want a signage in a square shape that lets our customers know that we are available to cater to their needs any time within our working hours.',
+        answer_shape: 'Yellow Rectangle',
+        answer_vector: 'clock icon',
+        answer_text: 'No Noon Break'
+        },
+        {
+        text: 'A box-like logo that tells people that a closed-circuit cameras are in use for their own safety and crime prevention.',
+        answer_shape: 'Yellow Square',
+        answer_vector: 'cctv icon',
+        answer_text: 'CCTV Warning'
+        },
+      ];
     }
-
-
-}
+  }
