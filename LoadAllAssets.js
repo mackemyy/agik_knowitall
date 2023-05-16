@@ -46,7 +46,9 @@ class LoadAllAssets extends Phaser.Scene {
          //assets for all logo
          this.load.image("logo1", "assets/logo/logo6.png");
          this.load.image("logo2", "assets/logo/logo5.png");
+         this.load.image("bram_logo", "assets/logo/bram_logo.png");
          this.load.image("logoCntnr", "assets/objects/logoContainer.png");
+
 
          //assets for all shapes
          this.load.image("rectangle1", "assets/logofy_shapes/Rectangle1.png");
@@ -132,9 +134,9 @@ class LoadAllAssets extends Phaser.Scene {
                     progressBox.destroy();
                     progressBar.destroy();
                     loadingText.destroy();
-                //  this.scene.start("loadingScene");
+                this.scene.start("loadingScene");
 
-                 this.scene.start("startGame");
+                //   this.scene.start("startGame");
                   
                //  this.scene.start("ClueCraftStartGame");
 

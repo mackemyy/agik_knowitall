@@ -113,6 +113,17 @@ class LoadingScene extends Phaser.Scene {
             },
             callbackScope: this,
         });
+        const padding = 20; // Adjust the padding value as needed
+
+        this.bram_logo = this.add.image(padding, this.cameras.main.height - padding, "bram_logo")
+            .setScale(0.3)
+            .setOrigin(0, 1);
+        
+       
+        
+           
+        
+    
     
     }
 
