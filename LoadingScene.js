@@ -101,23 +101,18 @@ class LoadingScene extends Phaser.Scene {
             duration: 1500,
             ease: 'Power2',
             onComplete: function() {
-                this.newGameBtn = new ImageButton(this, config.scale.width/2, config.scale.height/2, "newGameBtn", 
+                this.newGameBtn = new ImageButton(this, config.scale.width/2, config.scale.height/2 + 70, "newGameBtn", 
                     () => this.goToNextScene(), 
-                    () => this.newGameBtn.setPosition(config.scale.width/2 - 10, config.scale.height/2), 
-                    ()=> this.newGameBtn.setPosition(config.scale.width/2, config.scale.height/2), 0.8);
+                    () => this.newGameBtn.setPosition(config.scale.width/2 - 10, config.scale.height/2 + 70), 
+                    ()=> this.newGameBtn.setPosition(config.scale.width/2, config.scale.height/2 + 70), 0.8);
 
-                this.loadGameBtn = new ImageButton(this, config.scale.width/2, config.scale.height/2 + 150, "loadGameBtn", 
+                this.loadGameBtn = new ImageButton(this, config.scale.width/2, config.scale.height/2 + 210, "loadGameBtn", 
                     () => console.log("load game scene here"), 
-                    () => this.loadGameBtn.setPosition(config.scale.width/2 - 10, config.scale.height/2 + 150), 
-                    ()=> this.loadGameBtn.setPosition(config.scale.width/2, config.scale.height/2 + 150), 0.8);
+                    () => this.loadGameBtn.setPosition(config.scale.width/2 - 10, config.scale.height/2 + 210), 
+                    ()=> this.loadGameBtn.setPosition(config.scale.width/2, config.scale.height/2 + 210), 0.8);
             },
             callbackScope: this,
         });
-        const padding = 20; // Adjust the padding value as needed
-
-        this.bram_logo = this.add.image(padding, this.cameras.main.height - padding, "bram_logo")
-            .setScale(0.3)
-            .setOrigin(0, 1);
         
        
         
