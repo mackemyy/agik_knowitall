@@ -1,130 +1,106 @@
 // import { Combinations } from './Combinations.js';
 class StartGame extends Phaser.Scene {
-  constructor() {
-      super("startGame");
-      // this.combinations = new Combinations();
+	constructor() {
+		super("startGame");
+		// this.combinations = new Combinations();
+	}
 
-  }
+	create() {
+		// this.startMusic3 = new SoundButton(this, 300, 110, "music3", musicConfig);
+		// this.add.existing(this.startMusic3);
+		// this.startMusic3.setDepth(1);
 
-  create() {
-      // this.startMusic3 = new SoundButton(this, 300, 110, "music3", musicConfig);
-      // this.add.existing(this.startMusic3);
-      // this.startMusic3.setDepth(1);
+		this.combinations = new Combinations();
+		
+		this.timer = this.time.delayedCall(120000, this.timerCallback, [], this);
+		console.log('Timer duration:', this.timer.delay);
 
-      this.combinations = new Combinations();
-     
-      this.timer = this.time.delayedCall(120000, this.timerCallback, [], this);
-      console.log('Timer duration:', this.timer.delay);
+		// Display the remaining time in minute format on the screen
+		this.timeText = this.add.text(config.scale.width / 2 - 380, config.scale.height / 2 - 470, '2:00', { fontFamily: '"Typesauce"', fill: '#FFFFFF', fontSize: '50px', align: "center", stroke: "#00BBA0", strokeThickness: 10, });
 
-      // Display the remaining time in minute format on the screen
-      this.timeText = this.add.text(config.scale.width / 2 - 380, config.scale.height / 2 - 470, '2:00', { fontFamily: '"Typesauce"', fill: '#FFFFFF', fontSize: '50px', align: "center", stroke: "#00BBA0", strokeThickness: 10, });
+		this.emptyOffice1Bg = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2, "emptyOffice1")
+		this.logoBoxBackground();
+		this.clientRequest = this.add.image(230, 750, "clientRqst");
+		this.clientAvatar = this.add.image(230, 350, "clientDP");
 
-      this.emptyOffice1Bg = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2, "emptyOffice1")
-      this.logoBoxBackground();
-      this.clientRequest = this.add.image(230, 750, "clientRqst");
-      this.clientAvatar = this.add.image(230, 350, "clientDP");
+		this.menuButton = new ImageButton(this, 150, 110, "menuBtn", 
+			() => this.launchQuitGame(),
+			() => this.tweenButtonScale(1.1, this.menuButton),
+			() => this.tweenButtonScale(1, this.menuButton),
+		);
 
-      this.menuButton = new ImageButton(this, 150, 110, "menuBtn", 
-          () => this.launchQuitGame(),
-          () => this.tweenButtonScale(1.1, this.menuButton),
-          () => this.tweenButtonScale(1, this.menuButton),
-      );
+		this.tweenButtonScale = (scale, targets) => {
+			this.tweens.add({
+				targets: targets,
+				duration: 5,
+				scaleX: scale,
+				scaleY: scale,
+				ease: 'Linear'
+			});
+		};
 
-      this.tweenButtonScale = (scale, targets) => {
-          this.tweens.add({
-              targets: targets,
-              duration: 5,
-              scaleX: scale,
-              scaleY: scale,
-              ease: 'Linear'
-          });
-      };
+		this.launchQuitGame = () => {
+			this.scene.pause();
+			this.scene.launch("QuitGame", { value: 1 });
+		};
 
-      this.launchQuitGame = () => {
-        this.scene.pause();
-        this.scene.launch("QuitGame", { value: 1 });
-    };
+		const DATA_OPTIONS = [
+			{
+				name: 'shape', x: 1470, y: 50, bg_key: 'sideBar',
+				items: this.combinations.options_shapes,
+				itemsPerPage: 3,
+				button: {key: "shapebtn", x: this.cameras.main.width / 1 - 170, y: 230}
+			},
+			{
+				name: 'text', x: 1470, y: 50, bg_key: 'textSideBar',
+				items: this.combinations.options_text,
+				itemsPerPage: 4,
+				button: {key: "textbtn", x: this.cameras.main.width / 1 - 170, y: 500}
+			},
+			{
+				name: 'vector', x: 1470, y: 50, bg_key: 'sideBar',
+				items: this.combinations.options_icon,
+				itemsPerPage: 4,
+				button: {key: "vectorbtn", x: this.cameras.main.width / 1 - 170, y: 800}
+			},
+		]
 
+		DATA_OPTIONS.forEach(option => {
+			 new OptionsContainer(this, option.x, option.y, option.items, option);	
+		});
 
-      const buttonConfigs = [
-          { key: "shapebtn", x: this.cameras.main.width / 1 - 170, y: 230 },
-          { key: "textbtn", x: this.cameras.main.width / 1 - 170, y: 500 },
-          { key: "vectorbtn", x: this.cameras.main.width / 1 - 170, y: 800 }
-      ];
+		this.deleteButton = this.add.image(this.cameras.main.width / 2 - 400, config.scale.height / 1 - 100, "deletebtn")
+			.setInteractive({ useHandCursor: true })
+			.setScale(0.9)
+			.setDepth(1)
+			.on('pointerdown', () => { this.removeSelectedItems() })
+			.on('pointerover', () => this.deleteButton.setScale(1))
+			.on('pointerout', () => this.deleteButton.setScale(0.9));
 
-      buttonConfigs.forEach(({ key, x, y }) => {
-          const button = this.add.image(x, y, key)
-              .setInteractive({ useHandCursor: true })
-              .setScale(1)
-              .on('pointerdown', () => {
-                  if(key == 'shapebtn'){
-                      this.textbtn.visible = false;
-                      this.vectorbtn.visible = false;
-                      this.shapePopup = new OptionsContainer(this, 1470,50, this.combinations.options_shapes,'sideBar', 3);
-                      console.log('click shapes button');
-                  }
-                  if(key == 'textbtn'){
-                      this.shapebtn.visible = false;
-                      this.vectorbtn.visible = false;
-                      this.TextPopup = new OptionsContainer(this, 1470,50, this.combinations.options_text,'textSideBar', 4);
-                      console.log('click text button');
-                  }
-                  if(key == 'vectorbtn'){
-                      this.shapebtn.visible = false;
-                      this.textbtn.visible = false;
-                      this.VectorPopup = new OptionsContainer(this, 1470,50, this.combinations.options_icon,'sideBar', 4);
-                      console.log('click vector button');
-                  }
-              })
-              .on('pointerover', () => button.setScale(0.9))
-              .on('pointerout', () => button.setScale(1));
+		this.checkButton = this.add.image(this.cameras.main.width / 2 + 410, config.scale.height / 1 - 100, "checkbtn")
+			.setInteractive({ useHandCursor: true })
+			.setScale(0.9)
+			.setDepth(1)
+			.on('pointerdown', () => {this.matchPlay();})
+			.on('pointerover', () => this.checkButton.setScale(1))
+			.on('pointerout', () => this.checkButton.setScale(0.9));
 
-              // assign button objects to scene properties
-            if (key === 'shapebtn') {
-                this.shapebtn = button;
-            }
-            if (key === 'textbtn') {
-                this.textbtn = button;
-            }
-            if (key === 'vectorbtn') {
-                this.vectorbtn = button;
-            }
-      });
+		this.pointsTxt = this.add.text(this.cameras.main.width / 2 + 240, config.scale.height / 2 - 460, "0 pts", {
+			fontFamily: '"Typesauce"', fill: '#FFFFFF', fontSize: '45px', align: "center", stroke: "#EF7300", strokeThickness: 10, wordWrap: { width: 900, useAdvancedWrap: true }
+		});
 
+		this.points = 0;
 
-      this.deleteButton = this.add.image(this.cameras.main.width / 2 - 400, config.scale.height / 1 - 100, "deletebtn")
-          .setInteractive({ useHandCursor: true })
-          .setScale(0.9)
-          .setDepth(1)
-          .on('pointerdown', () => { this.removeSelectedItems() })
-          .on('pointerover', () => this.deleteButton.setScale(1))
-          .on('pointerout', () => this.deleteButton.setScale(0.9));
+		this.clientTxtContainer = this.add.container(135, 630);
+		
+		//CLIENT REQUEST
+		this.clientRqstTxt = this.add.text(0, 0, '', {
+			fontFamily: '"Montserrat"', fill: '#000000', fontSize: '25px', align: "center", stroke: "#000000", strokeThickness: 0.5, wordWrap: { width: 210, useAdvancedWrap: true }
+		});
+		this.clientTxtContainer.add(this.clientRqstTxt);
 
-      this.checkButton = this.add.image(this.cameras.main.width / 2 + 410, config.scale.height / 1 - 100, "checkbtn")
-          .setInteractive({ useHandCursor: true })
-          .setScale(0.9)
-          .setDepth(1)
-          .on('pointerdown', () => {this.matchPlay();})
-          .on('pointerover', () => this.checkButton.setScale(1))
-          .on('pointerout', () => this.checkButton.setScale(0.9));
-
-
-      this.pointsTxt = this.add.text(this.cameras.main.width / 2 + 240, config.scale.height / 2 - 460, "0 pts", {
-          fontFamily: '"Typesauce"', fill: '#FFFFFF', fontSize: '45px', align: "center", stroke: "#EF7300", strokeThickness: 10, wordWrap: { width: 900, useAdvancedWrap: true }
-      });
-
-     this.points = 0;
-
-      this.clientTxtContainer = this.add.container(135, 630);
-      
-      //CLIENT REQUEST
-      this.clientRqstTxt = this.add.text(0, 0, '', {
-          fontFamily: '"Montserrat"', fill: '#000000', fontSize: '25px', align: "center", stroke: "#000000", strokeThickness: 0.5, wordWrap: { width: 210, useAdvancedWrap: true }
-      });
-      this.clientTxtContainer.add(this.clientRqstTxt);
-
-      this.showQuestion();
-  }
+		this.showQuestion();
+	}
 
   update() {
       var elapsedSeconds = this.timer.getElapsedSeconds();
@@ -267,72 +243,71 @@ class StartGame extends Phaser.Scene {
 
 
 class OptionsContainer extends Phaser.GameObjects.Container {
-  constructor(scene, x, y, items, bgImage, itemsPerPage) {
-      super(scene, x, y);
-      this.scene = scene;
-      this.items = items;
-      this.options_images = [];
-      this.selected_items = [];
-      this.itemsPerPage = itemsPerPage;
-      this.currentPage = 1;
-      this.selectedItem;
-      this.selectedItemsContainer;
-      this.scene.add.existing(this);
+	constructor(scene, x, y, items, data) {
+		super(scene, x, y).setVisible(false).setDepth(100);
+		this.scene.add.existing(this);
 
+		this.items = items;
+		this.options_images = [];
+		this.selected_items = [];
+		this.itemsPerPage = data.itemsPerPage;
+		this.currentPage = 1;
+		this.selectedItem;
+		this.selectedItemsContainer;
 
-      // 1370,50
-      this.closeBtn = this.scene.add.image(1405, 300, 'closeButton')        
-      this.closeBtn.setInteractive({useHandCursor: true});
-        this.closeBtn.on('pointerdown', () => {
-          this.closeBtn.setVisible(false);
-          this.bg.setVisible(false);
-          this.buttonBorder.setVisible(false);
-          this.prevButton.setVisible(false);
-          this.nextButton.setVisible(false);
-          this.options_images.forEach(item => {
-              item.setVisible(false);
-            });
-            this.scene.shapebtn.setVisible(true);
-           
-            this.scene.textbtn.setVisible(true);
-            this.scene.vectorbtn.setVisible(true);
-      });
-  
-      this.bg = this.scene.add.image(0, 0, bgImage).setOrigin(0).setDepth(1);
-      this.bg.setScale(530 / this.bg.width, 1000 / this.bg.height);
-      this.bg.setSize(this.bg.displayWidth, this.bg.displayHeight).setInteractive();
-      this.add(this.bg);
+		this.button = scene.add.image(data.button.x, data.button.y, data.button.key)
+			.setInteractive({ useHandCursor: true })
+			.on('pointerover', () => this.button.setScale(0.9))
+			.on('pointerout', () => this.button.setScale(1))
+			.on('pointerdown', () => {
+				this.setVisible(true);
+				this.closeBtn.setVisible(true);
+			});
 
-      // Create a container for the selected items
-      this.selectedItemsContainer = this.scene.add.container();
-      this.add(this.selectedItemsContainer);
-      
-      this.buttonBorder = this.scene.add.image(390,500, 'buttonBorder');
-      this.buttonBorder.setScale(30 / this.buttonBorder.width, 120 / this.buttonBorder.height)
-      this.add(this.buttonBorder);
-      // Add pagination buttons
-      this.prevButton = this.scene.add.image(390,450, 'upBtn');
-      this.prevButton.setInteractive({ useHandCursor: true });
-      this.prevButton
-      .on('pointerover',() => this.prevButton.setScale(1))
-      .on('pointerout', () => this.prevButton.setScale(1.1))
-      .on('pointerdown', () => {
-        this.prevPage();
-      });
-      this.add(this.prevButton);
+		// 1370,50
+		this.closeBtn = this.scene.add.image(-75, 300, 'closeButton')
+			.setInteractive({useHandCursor: true})
+			.setVisible(false)
+			.on('pointerdown', () => {
+				this.setVisible(false);
+				// this.options_images.forEach(item => {
+				// 	item.setVisible(false);
+				// });
+			});
+		this.add(this.closeBtn);
+	
+		this.bg = this.scene.add.image(0, 0, data.bg_key).setOrigin(0).setDepth(1);
+		this.bg.setScale(530 / this.bg.width, 1000 / this.bg.height).setInteractive();
+		this.add(this.bg);
 
-      this.nextButton = this.scene.add.image(390, 550, 'downBtn');
-      this.nextButton.setInteractive({ useHandCursor: true });
-      this.nextButton
-      .on('pointerover',() => this.nextButton.setScale(1))
-      .on('pointerout', () => this.nextButton.setScale(1.1))
-      .on('pointerdown', () => {
-        this.nextPage();
-      });
-      this.add(this.nextButton);
+		// Create a container for the selected items
+		this.selectedItemsContainer = this.scene.add.container(data.x, data.y);
+		// this.add(this.selectedItemsContainer);
+		
+		this.buttonBorder = this.scene.add.image(390,500, 'buttonBorder');
+		this.buttonBorder.setScale(30 / this.buttonBorder.width, 120 / this.buttonBorder.height)
+		this.add(this.buttonBorder);
 
-      this.showPage(this.currentPage);
-  }
+		// Add pagination buttons
+		this.prevButton = this.scene.add.image(390,450, 'upBtn');
+		this.prevButton.setInteractive({ useHandCursor: true })
+			.on('pointerover',() => this.prevButton.setScale(1))
+			.on('pointerout', () => this.prevButton.setScale(1.1))
+			.on('pointerdown', () => {
+				this.prevPage();
+			});
+		this.add(this.prevButton);
+
+		this.nextButton = this.scene.add.image(390, 550, 'downBtn');
+		this.nextButton.setInteractive({ useHandCursor: true })
+			.on('pointerover',() => this.nextButton.setScale(1))
+			.on('pointerout', () => this.nextButton.setScale(1.1))
+			.on('pointerdown', () => {
+				this.nextPage();
+			});
+		this.add(this.nextButton);
+		this.showPage(this.currentPage);
+	}
 
   showPage(pageNumber) {
       // Hide all items
