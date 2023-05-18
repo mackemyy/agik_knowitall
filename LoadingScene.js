@@ -92,35 +92,63 @@ class LoadingScene extends Phaser.Scene {
     }
 
     showMenuScreen() {
-        this.startMusic1 = new SoundButton(this, this.centerX + 800, this.centerY - 450, "music1", musicConfig);
+        this.startMusic1 = new SoundButton(this, this.centerX + 850, this.centerY - 450, "music1", musicConfig);
         this.add.existing(this.startMusic1);
-
+    
+        this.infoBtn = new ImageButton(this, this.startMusic1.x - 130, this.startMusic1.y, "infoBtn",
+            () => {
+                console.log("info button clicked");
+                this.showInfoPopup();
+            },
+            () => this.infoBtn.setScale(1.1),
+            () => this.infoBtn.setScale(1),
+            1);
+        this.add.existing(this.infoBtn);
+    
         this.menuBgTween = this.add.tween({
             targets: this.menu_bg,
             alpha: 1,
             duration: 1500,
             ease: 'Power2',
             onComplete: function() {
-                this.newGameBtn = new ImageButton(this, config.scale.width/2, config.scale.height/2 + 70, "newGameBtn", 
-                    () => this.goToNextScene(), 
-                    () => this.newGameBtn.setPosition(config.scale.width/2 - 10, config.scale.height/2 + 70), 
-                    ()=> this.newGameBtn.setPosition(config.scale.width/2, config.scale.height/2 + 70), 0.8);
-
-                this.loadGameBtn = new ImageButton(this, config.scale.width/2, config.scale.height/2 + 210, "loadGameBtn", 
-                    () => console.log("load game scene here"), 
-                    () => this.loadGameBtn.setPosition(config.scale.width/2 - 10, config.scale.height/2 + 210), 
-                    ()=> this.loadGameBtn.setPosition(config.scale.width/2, config.scale.height/2 + 210), 0.8);
+                this.newGameBtn = new ImageButton(this, config.scale.width/2, config.scale.height/2 + 70, "newGameBtn",
+                    () => {
+                        if (!this.infoPopupActive) {
+                            this.goToNextScene();
+                        }
+                    },
+                    () => this.newGameBtn.setPosition(config.scale.width/2 - 10, config.scale.height/2 + 70),
+                    () => this.newGameBtn.setPosition(config.scale.width/2, config.scale.height/2 + 70), 0.8);
+    
+                this.loadGameBtn = new ImageButton(this, config.scale.width/2, config.scale.height/2 + 210, "loadGameBtn",
+                    () => {
+                        if (!this.infoPopupActive) {
+                            console.log("load game scene here");
+                        }
+                    },
+                    () => this.loadGameBtn.setPosition(config.scale.width/2 - 10, config.scale.height/2 + 210),
+                    () => this.loadGameBtn.setPosition(config.scale.width/2, config.scale.height/2 + 210), 0.8);
             },
             callbackScope: this,
         });
-        
-       
-        
-           
-        
-    
-    
     }
+    
+    showInfoPopup() {
+        this.infoPopupActive = true; // Flag to track if info popup is active
+    
+        const popupContainer = this.add.container(this.centerX, this.centerY);
+        popupContainer.setDepth(1);
+        const popupBg = this.add.image(0, 0, 'creditPopUp');
+        popupContainer.add(popupBg);
+        const closeButton = this.add.image(popupBg.width / 2.3, -popupBg.height / 2.2, 'closeBtn');
+        closeButton.setInteractive();
+        closeButton.on('pointerdown', () => {
+            popupContainer.destroy();
+            this.infoPopupActive = false; // Reset the flag when info popup is closed
+        });
+        popupContainer.add(closeButton);
+    }
+    
 
     goToNextScene() {
         this.startMusic1.stopMusic();
