@@ -1,9 +1,12 @@
 // import { Combinations } from './Combinations.js';
 class StartGame extends Phaser.Scene {
-	constructor() {
-		super("startGame");
-		// this.combinations = new Combinations();
-	}
+
+    constructor () 
+    {
+        super({
+            key: 'startGame'
+        });
+    }
 
 	create() {
 		// this.startMusic3 = new SoundButton(this, 300, 110, "music3", musicConfig);
@@ -18,10 +21,11 @@ class StartGame extends Phaser.Scene {
 		// Display the remaining time in minute format on the screen
 		this.timeText = this.add.text(config.scale.width / 2 - 380, config.scale.height / 2 - 470, '2:00', { fontFamily: '"Typesauce"', fill: '#FFFFFF', fontSize: '50px', align: "center", stroke: "#00BBA0", strokeThickness: 10, });
 
-		this.emptyOffice1Bg = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2, "emptyOffice1")
-		this.logoBoxBackground();
-		this.clientRequest = this.add.image(230, 750, "clientRqst");
-		this.clientAvatar = this.add.image(230, 350, "clientDP");
+		// Static Assets
+		const bg = this.add.image(this.scale.width/2, this.scale.height/2, "emptyOffice1")
+		const logoBox = this.add.image(this.scale.width/2, this.scale.height/2, "logoCntnr");
+		const clientRequest = this.add.image(230, 750, "clientRqst");
+		const clientAvatar = this.add.image(230, 350, "clientDP");
 
 		this.menuButton = new ImageButton(this, 150, 110, "menuBtn", 
 			() => this.launchQuitGame(),
@@ -44,30 +48,21 @@ class StartGame extends Phaser.Scene {
 			this.scene.launch("QuitGame", { value: 1 });
 		};
 
-		const DATA_OPTIONS = [
-			{
+		this.options_shapes = new OptionsContainer(this, 1470, 50, this.combinations.options_shapes, {
 				name: 'shape', x: 1470, y: 50, bg_key: 'sideBar',
-				items: this.combinations.options_shapes,
-				itemsPerPage: 3,
+				items: this.combinations.options_shapes, itemsPerPage: 3,
 				button: {key: "shapebtn", x: this.cameras.main.width / 1 - 170, y: 230}
-			},
-			{
+			});
+		this.options_texts = new OptionsContainer(this, 1470, 50, this.combinations.options_text, {
 				name: 'text', x: 1470, y: 50, bg_key: 'textSideBar',
-				items: this.combinations.options_text,
-				itemsPerPage: 4,
+				items: this.combinations.options_text, itemsPerPage: 4,
 				button: {key: "textbtn", x: this.cameras.main.width / 1 - 170, y: 500}
-			},
-			{
+			});
+		this.options_vectors = new OptionsContainer(this, 1470, 50, this.combinations.options_icon, {
 				name: 'vector', x: 1470, y: 50, bg_key: 'sideBar',
-				items: this.combinations.options_icon,
-				itemsPerPage: 4,
+				items: this.combinations.options_icon, itemsPerPage: 4,
 				button: {key: "vectorbtn", x: this.cameras.main.width / 1 - 170, y: 800}
-			},
-		]
-
-		DATA_OPTIONS.forEach(option => {
-			 new OptionsContainer(this, option.x, option.y, option.items, option);	
-		});
+			});
 
 		this.deleteButton = this.add.image(this.cameras.main.width / 2 - 400, config.scale.height / 1 - 100, "deletebtn")
 			.setInteractive({ useHandCursor: true })
@@ -81,7 +76,7 @@ class StartGame extends Phaser.Scene {
 			.setInteractive({ useHandCursor: true })
 			.setScale(0.9)
 			.setDepth(1)
-			.on('pointerdown', () => {this.matchPlay();})
+			.on('pointerdown', () => { this.gameplay.questionCheckAnswer(); })
 			.on('pointerover', () => this.checkButton.setScale(1))
 			.on('pointerout', () => this.checkButton.setScale(0.9));
 
@@ -89,17 +84,14 @@ class StartGame extends Phaser.Scene {
 			fontFamily: '"Typesauce"', fill: '#FFFFFF', fontSize: '45px', align: "center", stroke: "#EF7300", strokeThickness: 10, wordWrap: { width: 900, useAdvancedWrap: true }
 		});
 
-		this.points = 0;
-
-		this.clientTxtContainer = this.add.container(135, 630);
-		
 		//CLIENT REQUEST
-		this.clientRqstTxt = this.add.text(0, 0, '', {
-			fontFamily: '"Montserrat"', fill: '#000000', fontSize: '25px', align: "center", stroke: "#000000", strokeThickness: 0.5, wordWrap: { width: 210, useAdvancedWrap: true }
+		this.clientRqstTxt = this.add.text(135, 630, '', {
+			fontFamily: '"Montserrat"', fill: '#000000', fontSize: '25px', align: "center",
+			stroke: "#000000", strokeThickness: 0.5, wordWrap: { width: 210, useAdvancedWrap: true }
 		});
-		this.clientTxtContainer.add(this.clientRqstTxt);
 
-		this.showQuestion();
+		this.gameplay = new Gameplay(this)
+		this.gameplay.questionLoad();
 	}
 
   update() {
@@ -131,125 +123,108 @@ class StartGame extends Phaser.Scene {
 
   }
 
-  logoBoxBackground(){
-      const logoBox = this.add.image(config.scale.width / 2, config.scale.height / 2, "logoCntnr");
-    };
+	timerCallback() {
+		// Handle the timer completion event
+	}
 
-  timerCallback() {
-      // Handle the timer completion event
-  }
+	formatTime(time) {
+		// Helper function to add leading zeroes to single-digit numbers
+		console.log('Input time:', time);
+		var formattedTime = (time < 10) ? '0' + time : time;
+		console.log('Formatted time:', formattedTime);
+		return formattedTime;
+	}
 
-  formatTime(time) {
-      // Helper function to add leading zeroes to single-digit numbers
-      console.log('Input time:', time);
-      var formattedTime = (time < 10) ? '0' + time : time;
-      console.log('Formatted time:', formattedTime);
-      return formattedTime;
-  }
+	showClientReact(isCorrect) {
+		const clientReactImage = isCorrect ? "client_react_RIGHT" : "client_react_WRONG";
+		const pointsToAdd = isCorrect ? 5 : 0;
+		
+		this.gameplay.points += pointsToAdd;
+		this.pointsTxt.text = this.gameplay.points + " pts";
+		
+		const reactImage = this.add.image(config.scale.width/2, config.scale.height/2, clientReactImage);
+		
+		this.time.delayedCall(1000, () => {
+			reactImage.setVisible(false);
+			this.removeSelectedItems();
+			this.gameplay.questionLoad();
+		});
+	}
 
-  showQuestion() {
-
-    if (this.currentQuestion) {
-      this.currentQuestion = null;
-      this.clientRqstTxt.setText('');
-    }
-  
-    const questionLength = this.combinations.questions.length;
-    const question = this.combinations.questions[Math.floor(Math.random() * questionLength)];
-
-    this.clientRqstTxt.setText(question.text);
-  
-    this.currentQuestion = question;
-  
-    console.log("show question!");
-  
-  }
-
-  matchPlay(){
-    if(this.currentQuestion === this.combinations.questions[0] ){
-      if(this.shapePopup.selectedItem.name === this.combinations.questions[0].answer_shape && 
-        this.TextPopup.selectedItem.name === this.combinations.questions[0].answer_text && 
-        this.VectorPopup.selectedItem.name === this.combinations.questions[0].answer_vector) {
-
-        this.showClientReact(true);
-      } 
-      else {
-        this.showClientReact(false);
-      }
-    }
-    else if(this.currentQuestion === this.combinations.questions[1]){
-      if(this.shapePopup.selectedItem.name === this.combinations.questions[1].answer_shape && 
-        this.TextPopup.selectedItem.name === this.combinations.questions[1].answer_text && 
-        this.VectorPopup.selectedItem.name === this.combinations.questions[1].answer_vector){
-
-        this.showClientReact(true);
-      }
-      else{
-        this.showClientReact(false);
-      }
-    }
-    else if(this.currentQuestion === this.combinations.questions[2]){
-      if(this.shapePopup.selectedItem.name === this.combinations.questions[2].answer_shape && 
-        this.TextPopup.selectedItem.name === this.combinations.questions[2].answer_text && 
-        this.VectorPopup.selectedItem.name === this.combinations.questions[2].answer_vector){
-
-        this.showClientReact(true);
-      }
-      else{
-        this.showClientReact(false);
-      }
-    }
-    else if(this.currentQuestion === this.combinations.questions[3]){
-      if(this.shapePopup.selectedItem.name === this.combinations.questions[3].answer_shape && 
-        this.TextPopup.selectedItem.name === this.combinations.questions[3].answer_text && 
-        this.VectorPopup.selectedItem.name === this.combinations.questions[3].answer_vector){
-
-        this.showClientReact(true);
-      }
-      else {
-        this.showClientReact(false);
-      }
-    } 
-    else {
-      console.log("NOT question");
-    }
-  }
-
-  showClientReact(isCorrect) {
-    const clientReactImage = isCorrect ? "client_react_RIGHT" : "client_react_WRONG";
-    const pointsToAdd = isCorrect ? 5 : 0;
-    
-    this.points += pointsToAdd;
-    this.pointsTxt.text = this.points + " pts";
-    
-    const reactImage = this.add.image(config.scale.width/2, config.scale.height/2, clientReactImage);
-    
-    this.time.delayedCall(1000, () => {
-      reactImage.setVisible(false);
-      this.removeSelectedItems();
-      this.showQuestion();
-    });
-  }
-
-  removeSelectedItems() {
-    this.shapePopup.selectedItemsContainer.setVisible(false);
-      this.VectorPopup.selectedItemsContainer.setVisible(false);
-      this.TextPopup.selectedItemsContainer.setVisible(false);
-      this.shapePopup.selectedItem = null;
-      this.VectorPopup.selectedItem = null;
-      this.TextPopup.selectedItem = null;
-  }
+	removeSelectedItems() {
+		this.options_shapes.selectedItemsContainer.removeAll(true);
+		this.options_texts.selectedItemsContainer.removeAll(true);
+		this.options_vectors.selectedItemsContainer.removeAll(true);
+		this.options_shapes.selectedItem = null;
+		this.options_texts.selectedItem = null;
+		this.options_vectors.selectedItem = null;
+	}
 }
 
 
+
+class Gameplay
+{
+	constructor(scene)
+	{
+		this.scene = scene;
+		this.points = 0;
+		this.questions_index = 0;
+		this.questions = scene.combinations.questions;
+		this.questions = this.questionRandomize(this.questions);
+		this.currentQuestion = null;
+	}
+
+	questionRandomize(questions)
+	{
+		for (let i = questions.length - 1; i > 0; i--) {
+			const j = Math.floor(Math.random() * (i + 1));
+			const temp = questions[i];
+			questions[i] = questions[j];
+			questions[j] = temp;
+			return questions;
+		}
+	}
+	
+	questionLoad()
+	{
+		let q = this.questions[this.questions_index++];
+		this.currentQuestion = null;
+		this.currentQuestion = q;
+		this.scene.clientRqstTxt.setText('');
+		this.scene.clientRqstTxt.setText(q.text);
+	}
+
+	questionCheckAnswer()
+	{
+		let answer_shape = this.scene.options_shapes.selectedItem;
+		let answer_text = this.scene.options_texts.selectedItem;
+		let answer_vector = this.scene.options_vectors.selectedItem;
+
+		if (answer_shape && answer_text && answer_vector) {
+			if (answer_shape.name === this.currentQuestion.answer_shape && 
+				answer_text.name === this.currentQuestion.answer_text && 
+				answer_vector.name === this.currentQuestion.answer_vector) {
+
+				// If answers is correct
+				this.scene.showClientReact(true);
+			} 
+			else {
+				// If answers is incorrect
+				this.scene.showClientReact(false);
+			}
+		}
+	}
+}
+
 class OptionsContainer extends Phaser.GameObjects.Container {
-	constructor(scene, x, y, items, data) {
+	constructor(scene, x, y, items, data)
+	{
 		super(scene, x, y).setVisible(false).setDepth(100);
 		this.scene.add.existing(this);
 
 		this.items = items;
 		this.options_images = [];
-		this.selected_items = [];
 		this.itemsPerPage = data.itemsPerPage;
 		this.currentPage = 1;
 		this.selectedItem;
@@ -267,15 +242,11 @@ class OptionsContainer extends Phaser.GameObjects.Container {
 		// 1370,50
 		this.closeBtn = this.scene.add.image(-75, 300, 'closeButton')
 			.setInteractive({useHandCursor: true})
-			.setVisible(false)
 			.on('pointerdown', () => {
 				this.setVisible(false);
-				// this.options_images.forEach(item => {
-				// 	item.setVisible(false);
-				// });
 			});
 		this.add(this.closeBtn);
-	
+
 		this.bg = this.scene.add.image(0, 0, data.bg_key).setOrigin(0).setDepth(1);
 		this.bg.setScale(530 / this.bg.width, 1000 / this.bg.height).setInteractive();
 		this.add(this.bg);
@@ -306,80 +277,66 @@ class OptionsContainer extends Phaser.GameObjects.Container {
 				this.nextPage();
 			});
 		this.add(this.nextButton);
+
+		// Display items on current page
+		items.forEach(item => {
+			let sprite = this.scene.add.sprite(item.x, item.y, item.key)
+				.setScale(item.size)
+				.setInteractive({ useHandCursor: true })
+				.on('pointerover', () => sprite.setPosition(item.x + 5, item.y + 5))
+				.on('pointerout', () => sprite.setPosition(item.x, item.y))
+				.on('pointerdown', () => {
+					this.scene.selectedItem = item.name;
+					this.selectItem(item);
+				});
+
+			this.add(sprite);
+			this.options_images.push(sprite);
+		});
+
 		this.showPage(this.currentPage);
 	}
 
-  showPage(pageNumber) {
-      // Hide all items
-    this.options_images.forEach(item => {
-      item.setVisible(false);
-    });
-
-    // Get items to display on current page
-    const startIndex = (pageNumber - 1) * this.itemsPerPage;
-    const endIndex = startIndex + this.itemsPerPage;
-    const itemsToDisplay = this.items.slice(startIndex, endIndex);
-
-    // Display items on current page
-    for (let i = 0; i < itemsToDisplay.length; i++) {
-      let item = itemsToDisplay[i];
-
-      let sprite = this.scene
-        .add.sprite(item.x, item.y, item.key)
-        .setScale(item.size)
-        .setInteractive({ useHandCursor: true })
-        .on('pointerover', () => sprite.setPosition(item.x + 5, item.y + 5))
-        .on('pointerout', () => sprite.setPosition(item.x, item.y))
-        .on('pointerdown', () => {
-
-          this.scene.selectedItem = item.name;
-          if (this.selectedItem) {
-            this.deselectItem(this.selectedItem);
-          }
-          this.selectItem(item);
-        });
-
-      this.add(sprite);
-      this.options_images.push(sprite);
-    }
-  }
+	showPage(pageNumber) {
+		// Get items to display on current page
+		const startIndex = (pageNumber - 1) * this.itemsPerPage;
+		const endIndex = startIndex + this.itemsPerPage;
+		const itemsToDisplay = this.items.slice(startIndex, endIndex);
+		
+		this.options_images.forEach((item, i) => {
+			if ((i+1 > startIndex) && (i+1 <= endIndex))
+		  		item.setVisible(true);
+			else
+				item.setVisible(false);
+		});
+	}
     
-  selectItem(item) {
-      this.selectedItem = item;
-      // code to highlight the selected shape
-      let newSprite = this.scene.add.sprite(item.newPos[0], item.newPos[1], item.key).setScale(item.newSize);
-      newSprite.setName(item.key);  
-    
-      this.selected_items.push(newSprite);
-      this.selectedItemsContainer.add(newSprite);
-  }
+	selectItem(item) {
+		// Empty selected items
+		this.selectedItemsContainer.removeAll(true);
+		this.selectedItem = item;
 
-  deselectItem(item){
-      let sprite = this.selected_items.find(s => s.name === item.key);
-    if (sprite) {
-        sprite.destroy(); 
-        this.selected_items = this.selected_items.filter(s => s !== sprite);  // 
-    }
+		// code to highlight the selected shape
+		let newSprite = this.scene.add.sprite(item.newPos[0], item.newPos[1], item.key)
+			.setScale(item.newSize).setName(item.key);  
+		this.selectedItemsContainer.add(newSprite);
+	}
 
-    this.selectedItem= null;
-  }
+	nextPage() {
+		if (this.currentPage < this.getNumPages()) {
+			this.currentPage++;
+			this.showPage(this.currentPage);
+		}
+	}
 
-  nextPage() {
-    if (this.currentPage < this.getNumPages()) {
-      this.currentPage++;
-      this.showPage(this.currentPage);
-    }
-  }
+	prevPage() {
+		if (this.currentPage > 1) {
+			this.currentPage--;
+			this.showPage(this.currentPage);
+		}
+	}
 
-  prevPage() {
-    if (this.currentPage > 1) {
-      this.currentPage--;
-      this.showPage(this.currentPage);
-    }
-  }
-
-  getNumPages() {
-    return Math.ceil(this.items.length / this.itemsPerPage);
-  }
- 
+	getNumPages() {
+		return Math.ceil(this.items.length / this.itemsPerPage);
+	}
 }
