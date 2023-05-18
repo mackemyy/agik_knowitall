@@ -106,7 +106,7 @@ class StartGame extends Phaser.Scene {
                   this.cameras.main.centerX, 
                   this.cameras.main.centerY, 
                   'Time\'s up!', 
-                  { fontFamily: '"Typesauce"', fill: '#FFFFFF', fontSize: '72px', align: "center",}
+                  { fontFamily: '"Typesauce"', fill: '#FFFFFF', fontSize: '72px', align: "center", stroke: "#EF7300", strokeThickness: 12,}
               )
           .setOrigin(0.5);
       }
