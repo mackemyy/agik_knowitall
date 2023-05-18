@@ -25,7 +25,7 @@ class StartGame extends Phaser.Scene {
 		const bg = this.add.image(this.scale.width/2, this.scale.height/2, "emptyOffice1")
 		const logoBox = this.add.image(this.scale.width/2, this.scale.height/2, "logoCntnr");
 		const clientRequest = this.add.image(230, 750, "clientRqst");
-		const clientAvatar = this.add.image(230, 350, "clientDP");
+		const clientAvatar = this.add.image(230, 320, "clientDP");
 
 		this.menuButton = new ImageButton(this, 150, 110, "menuBtn", 
 			() => this.launchQuitGame(),
