@@ -142,7 +142,7 @@ class StartGame extends Phaser.Scene {
 		this.gameplay.points += pointsToAdd;
 		this.pointsTxt.text = this.gameplay.points + " pts";
 		
-		const reactImage = this.add.image(config.scale.width/2, config.scale.height/2, clientReactImage);
+		const reactImage = this.add.image(230, 350, clientReactImage);
 		
 		this.time.delayedCall(1000, () => {
 			reactImage.setVisible(false);
