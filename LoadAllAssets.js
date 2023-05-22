@@ -55,6 +55,7 @@ class LoadAllAssets extends Phaser.Scene {
 
 
          //assets for all shapes
+         //GOVERNMENT CATEGORY
          this.load.image("rectangle1", "assets/logofy_shapes/Rectangle1.png");
          this.load.image("rectangle2", "assets/logofy_shapes/Rectangle2.png");
          this.load.image("rectangle3", "assets/logofy_shapes/Rectangle3.png");
@@ -62,17 +63,37 @@ class LoadAllAssets extends Phaser.Scene {
          this.load.image("triangle1", "assets/logofy_shapes/Triangle1.png");
          this.load.image("circle1", "assets/logofy_shapes/Circle1.png");
 
+        //EDUCATION CATEGORY
+         this.load.image("triangle3", "assets/logofy_shapes/Triangle3.png");
+         this.load.image("square6", "assets/logofy_shapes/Square6.png");
+         this.load.image("circle6", "assets/logofy_shapes/Circle6.png");
+         this.load.image("rectangle7", "assets/logofy_shapes/Rectangle7.png");
+
          //assets for all text
+         //GOVERNMENT CATEGORY
          this.load.image("cctvWarning", "assets/logofy_text/cctvWarning.png");
          this.load.image("noNoonBreak", "assets/logofy_text/NoNoonBreak.png");
          this.load.image("noSmoking", "assets/logofy_text/NoSmoking.png");
          this.load.image("noTrespassing", "assets/logofy_text/NoTrespassing.png");
 
+         //EDUCATION CATEGORY
+         this.load.image("childrenZone", "assets/logofy_text/Children'sZone.png");
+         this.load.image("noRunning", "assets/logofy_text/NoRunning.png");
+         this.load.image("silence", "assets/logofy_text/KeepQuiet.png");
+         this.load.image("stopBullying", "assets/logofy_text/StopBullying.png");
+
          //assets for all vector
+         //GOVERNMENT CATEGORY
          this.load.image("cctv", "assets/logofy_vectors/cctv.png");
          this.load.image("clock", "assets/logofy_vectors/clock.png");
          this.load.image("smoking", "assets/logofy_vectors/smoking.png");
          this.load.image("trespassing", "assets/logofy_vectors/trespassing.png");
+
+         //EDUCATION CATEGORY
+         this.load.image("children", "assets/logofy_vectors/children.png");
+         this.load.image("running", "assets/logofy_vectors/running.png");
+         this.load.image("quiet", "assets/logofy_vectors/silence.png");
+         this.load.image("hand", "assets/logofy_vectors/hand.png");
          
          //assets for all objects
          this.load.image("bubbleChatOR", "assets/objects/bubbleChatOrange.png");
