@@ -90,7 +90,7 @@ class StartGame extends Phaser.Scene {
 			stroke: "#000000", strokeThickness: 0.5, wordWrap: { width: 210, useAdvancedWrap: true }
 		});
 
-		this.gameplay = new Gameplay(this)
+		this.gameplay = new Gameplay(this, this.timer)
 		this.gameplay.questionLoad();
 	}
 
@@ -165,9 +165,10 @@ class StartGame extends Phaser.Scene {
 
 class Gameplay
 {
-	constructor(scene)
+	constructor(scene, timer)
 	{
 		this.scene = scene;
+		this.timer = timer;
 		this.points = 0;
 		this.questions_index = 0;
 		this.questions = scene.combinations.questions;
@@ -188,6 +189,12 @@ class Gameplay
 	
 	questionLoad()
 	{
+		if (this.questions_index >= this.questions.length) {
+			this.timer.paused = true;
+			console.log("All questions are shown");
+			return;
+		  }
+
 		let q = this.questions[this.questions_index++];
 		this.currentQuestion = null;
 		this.currentQuestion = q;
