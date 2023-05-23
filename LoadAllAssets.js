@@ -24,6 +24,7 @@ class LoadAllAssets extends Phaser.Scene {
          //assets for all buttons
          this.load.image("sureBtn", "assets/buttons/sureButton.png");
          this.load.image("nextBtn", "assets/buttons/nextButton.png");
+         this.load.image("nextBtnv2", "assets/buttons/nextbtn.png");
          this.load.image("newGameBtn", "assets/buttons/newGameButton.png");
          this.load.image("loadGameBtn", "assets/buttons/loadGameButton.png");
          this.load.image("playbtn", "assets/buttons/playbtn.png");
@@ -86,6 +87,7 @@ class LoadAllAssets extends Phaser.Scene {
          this.load.image("gameObjCtr", "assets/objects/gameObjContainer.png");
          this.load.image("hrDP", "assets/objects/hrDP.png");
          this.load.image("hrNarrateCtr", "assets/objects/hrNarrateContainer.png");
+         this.load.image("categoryCtr", "assets/objects/categoryctr.png");
          this.load.image("clientRqst", "assets/objects/clientrqts.png");
          this.load.image("clientDP", "assets/objects/clientDP.png");
          this.load.image("client_react_RIGHT", "assets/objects/avatar_rightAns.png");
@@ -140,9 +142,9 @@ class LoadAllAssets extends Phaser.Scene {
                     progressBox.destroy();
                     progressBar.destroy();
                     loadingText.destroy();
-                this.scene.start("loadingScene");
+               // this.scene.start("loadingScene");
                 //  this.scene.start("levelMap"); 
-                //   this.scene.start("startGame");
+                  this.scene.start("startGame");
                   
                 //  this.scene.start("ClueCraftStartGame");
 

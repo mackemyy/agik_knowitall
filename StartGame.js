@@ -187,20 +187,70 @@ class Gameplay
 		}
 	}
 	
-	questionLoad()
-	{
+	questionLoad() {
 		if (this.questions_index >= this.questions.length) {
-			this.timer.paused = true;
-			console.log("All questions are shown");
-			return;
-		  }
-
+		  this.timer.paused = true;
+		  console.log("All questions are shown");
+	  
+		  // Call the function to show the popup image
+		  this.showPopupImage();
+	  
+		  return;
+		}
+	  
 		let q = this.questions[this.questions_index++];
 		this.currentQuestion = null;
 		this.currentQuestion = q;
 		this.scene.clientRqstTxt.setText('');
+	  
 		this.scene.clientRqstTxt.setText(q.text);
-	}
+	  }
+	  
+	  showPopupImage() {
+
+		if (this.OptionsContainer) {
+			this.OptionsContainer.destroy();
+			this.OptionsContainer = null;
+		}
+
+		// Create a popup container sprite
+		let popupContainer = this.scene.add.container(1000, 800);
+	  
+		// Create a popup image sprite
+		let popupImage = this.scene.add.sprite(0, 0, 'categoryCtr');
+		popupContainer.add(popupImage);
+	  
+		// Add text to the popup container
+		let text = this.scene.add.text(-280, -130, 'Great job! Education category complete. Let\'s move on to the Business Category.', { fontFamily: '"Montserrat"', fill: '#000000', fontSize: '36px' });
+		text.setAlign('justify');
+		text.setWordWrapWidth(830); // Adjust the width as needed
+		popupContainer.add(text);
+	  
+		// Create a close button as an image
+		let closeButton = this.scene.add.image(450, 80, 'nextBtnv2');
+		closeButton.setInteractive();
+		closeButton.setScale(0.3); // Adjust the scale as needed
+		popupContainer.add(closeButton);
+	  
+		// Set the interactive and depth properties of the popup container
+		popupContainer.setInteractive(); // Make the container interactive if you want to handle events
+		popupContainer.setDepth(5);
+	  
+		
+	  
+		// Add a click event listener to close the popup container
+		closeButton.on('pointerdown', () => {
+		  popupContainer.destroy(); // Remove the popup container from the scene
+	  
+		 
+		});
+	  }
+	  
+	  
+	  
+	  
+	  
+	  
 
 	questionCheckAnswer()
 	{
