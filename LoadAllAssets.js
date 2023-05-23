@@ -92,7 +92,7 @@ class LoadAllAssets extends Phaser.Scene {
          this.load.image("noTrespassing", "assets/logofy_text/NoTrespassing.png");
 
          //EDUCATION CATEGORY
-         this.load.image("childrenZone", "assets/logofy_text/Children'sZone.png");
+         this.load.image("childrenZone", "assets/logofy_text/ChildrenZone.png");
          this.load.image("noRunning", "assets/logofy_text/NoRunning.png");
          this.load.image("silence", "assets/logofy_text/KeepQuiet.png");
          this.load.image("stopBullying", "assets/logofy_text/StopBullying.png");
@@ -190,9 +190,9 @@ class LoadAllAssets extends Phaser.Scene {
                     progressBox.destroy();
                     progressBar.destroy();
                     loadingText.destroy();
-                // this.scene.start("loadingScene");
+                this.scene.start("loadingScene");
                 //  this.scene.start("levelMap"); 
-                  this.scene.start("startGame");
+                //   this.scene.start("startGame");
                   
                 //  this.scene.start("ClueCraftStartGame");
 

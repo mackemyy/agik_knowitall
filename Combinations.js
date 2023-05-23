@@ -59,6 +59,7 @@ class Combinations extends Phaser.Scene {
           size:0.1,
           newSize:0.23,
         },
+
   ];
 
   this.options_text = [
@@ -141,7 +142,7 @@ class Combinations extends Phaser.Scene {
         newPos:[-520, 500],
         size:0.1,
         newSize:0.20,
-      },
+      },  
     
     ];
 
@@ -181,9 +182,9 @@ class Combinations extends Phaser.Scene {
         name:'Red Triangle',
         key:'triangle3',
         x: 200, y: 200,
-        newPos:[-520, 500],
+        newPos:[-520, 520],
         size: 0.07,
-        newSize:0.23,
+        newSize:0.20,
       },
       {
         type: 'shape',
@@ -220,18 +221,18 @@ class Combinations extends Phaser.Scene {
       name:'Children Zone',
       key:'childrenZone',
       x: 200, y:150,
-      newPos:[-520, 620],
-      size:0.15,
-      newSize:0.23,
+      newPos:[-520, 630],
+      size:0.1,
+      newSize:0.20,
 
     },
     {
       type: 'text',
       name:'No Running',
       key:'noRunning',
-      x: 210, y: 390,
+      x: 200, y: 390,
       newPos:[-680, 500],
-      size:0.13,
+      size:0.1,
       newSize:0.2,
 
     },
@@ -239,9 +240,9 @@ class Combinations extends Phaser.Scene {
       type: 'text',
       name:'Keep Quiet',
       key:'silence',
-      x: 200, y: 615,
+      x: 200, y: 620,
       newPos:[-520, 280],
-      size:0.13,
+      size:0.1,
       newSize:0.2,
     },
     {
@@ -250,7 +251,7 @@ class Combinations extends Phaser.Scene {
       key:'stopBullying',
       x: 200, y: 840,
       newPos:[-520, 700],
-      size:0.13,
+      size:0.1,
       newSize:0.2,
     },
 
@@ -263,9 +264,9 @@ class Combinations extends Phaser.Scene {
         name:'children icon',
         key:'children',
         x: 210, y:150,
-        newPos:[-520, 420],
-        size:0.1,
-        newSize:0.28,
+        newPos:[-520, 430],
+        size:0.13,
+        newSize:0.25,
 
       },
       {
@@ -274,7 +275,7 @@ class Combinations extends Phaser.Scene {
         key:'running',
         x: 210, y: 360,
         newPos:[-370, 500],
-        size:0.1,
+        size:0.09,
         newSize:0.2,
 
       },
@@ -282,7 +283,7 @@ class Combinations extends Phaser.Scene {
         type: 'icon',
         name:'quiet icon',
         key:'quiet',
-        x: 220, y: 595,
+        x: 240, y: 595,
         newPos:[-520, 600],
         size:0.1,
         newSize:0.20,
@@ -293,7 +294,7 @@ class Combinations extends Phaser.Scene {
         key:'hand',
         x: 220, y: 830,
         newPos:[-520, 400],
-        size:0.1,
+        size:0.15,
         newSize:0.20,
       },
     
