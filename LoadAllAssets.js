@@ -68,7 +68,22 @@ class LoadAllAssets extends Phaser.Scene {
          this.load.image("square6", "assets/logofy_shapes/Square6.png");
          this.load.image("circle6", "assets/logofy_shapes/Circle6.png");
          this.load.image("rectangle7", "assets/logofy_shapes/Rectangle7.png");
-
+         
+         //BUSINESS CATEGORY
+         this.load.image("circle2", "assets/logofy_shapes/Circle2.png");
+         this.load.image("circle3", "assets/logofy_shapes/Circle3.png");
+         this.load.image("circle4", "assets/logofy_shapes/Circle4.png");
+         this.load.image("circle5", "assets/logofy_shapes/Circle5.png");
+         this.load.image("square2", "assets/logofy_shapes/Square2.png");
+         this.load.image("square3", "assets/logofy_shapes/Square3.png");
+         this.load.image("square4", "assets/logofy_shapes/Square4.png");
+         this.load.image("square5", "assets/logofy_shapes/Square5.png");
+         this.load.image("rectangle4", "assets/logofy_shapes/Rectangle4.png");
+         this.load.image("rectangle5", "assets/logofy_shapes/Rectangle5.png");
+         this.load.image("rectangle6", "assets/logofy_shapes/Rectangle6.png");
+         this.load.image("triangle2", "assets/logofy_shapes/Triangle2.png");
+         this.load.image("triangle4", "assets/logofy_shapes/Triangle4.png");
+         
          //assets for all text
          //GOVERNMENT CATEGORY
          this.load.image("cctvWarning", "assets/logofy_text/cctvWarning.png");
@@ -81,6 +96,13 @@ class LoadAllAssets extends Phaser.Scene {
          this.load.image("noRunning", "assets/logofy_text/NoRunning.png");
          this.load.image("silence", "assets/logofy_text/KeepQuiet.png");
          this.load.image("stopBullying", "assets/logofy_text/StopBullying.png");
+
+        //BUSINESS CATEGORY
+        this.load.image("burgerPlace", "assets/logofy_text/BurgerPlace.png");
+        this.load.image("pizzaPlace", "assets/logofy_text/PizzaPlace.png");
+        this.load.image("waterStation", "assets/logofy_text/WaterStation.png");
+        this.load.image("boutiqueShop", "assets/logofy_text/BoutiqueShop.png");
+        this.load.image("pharmacy", "assets/logofy_text/Pharmacy.png"); 
 
          //assets for all vector
          //GOVERNMENT CATEGORY
@@ -95,6 +117,13 @@ class LoadAllAssets extends Phaser.Scene {
          this.load.image("quiet", "assets/logofy_vectors/silence.png");
          this.load.image("hand", "assets/logofy_vectors/hand.png");
          
+         //BUSINESS CATEGORY
+         this.load.image("burger", "assets/logofy_vectors/Burger.png");
+         this.load.image("pizza", "assets/logofy_vectors/pizza.png");
+         this.load.image("water", "assets/logofy_vectors/waterBottle.png");
+         this.load.image("dress", "assets/logofy_vectors/dress.png");
+         this.load.image("pill", "assets/logofy_vectors/pill.png");
+
          //assets for all objects
          this.load.image("bubbleChatOR", "assets/objects/bubbleChatOrange.png");
          this.load.image("agikObj", "assets/objects/AGIK.png");
@@ -161,9 +190,9 @@ class LoadAllAssets extends Phaser.Scene {
                     progressBox.destroy();
                     progressBar.destroy();
                     loadingText.destroy();
-                this.scene.start("loadingScene");
+                // this.scene.start("loadingScene");
                 //  this.scene.start("levelMap"); 
-                //   this.scene.start("startGame");
+                  this.scene.start("startGame");
                   
                 //  this.scene.start("ClueCraftStartGame");
 

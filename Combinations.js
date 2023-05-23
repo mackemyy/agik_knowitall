@@ -326,11 +326,12 @@ class Combinations extends Phaser.Scene {
       },
     ];
 
-    this.options_shapes2 = [
+    this.options_shapes3 = [
+      //Page1
       {
         type: 'shape',
-        name:'',
-        key:'',
+        name:'Yellow&Brown Circle',
+        key:'circle2',
         x: 200, y: 200,
         newPos:[-520, 500],
         size:0.1,
@@ -338,8 +339,8 @@ class Combinations extends Phaser.Scene {
       },
       {
         type: 'shape',
-        name:'',
-        key:'',
+        name:'Red&Black Circle',
+        key:'circle3',
         x: 200, y: 530,
         newPos:[-520, 500],
         size:0.1,
@@ -347,49 +348,115 @@ class Combinations extends Phaser.Scene {
       },
       {
         type: 'shape',
-        name:'',
-        key:'',
+        name:'L&D Blue Circle',
+        key:'circle4',
         x: 210, y: 820,
         newPos:[-520, 500],
         size:0.1,
         newSize:0.23,
       },
-
+    //Page2
       {
-          type: 'shape',
-          name:'',
-          key:'',
-          x: 200, y: 200,
-          newPos:[-520, 500],
-          size:0.1,
-          newSize:0.23,
-        },
-        {
-          type: 'shape',
-          name:'',
-          key:'',
-          x: 200, y: 530,
-          newPos:[-520, 500],
-          size:0.1,
-          newSize:0.23,
-        },
-        {
-          type: 'shape',
-          name:'',
-          key:'',
-          x: 210, y: 820,
-          newPos:[-520, 500],
-          size:0.1,
-          newSize:0.23,
-        },
+        type: 'shape',
+        name:'White Circle',
+        key:'circle5',
+        x: 200, y: 200,
+        newPos:[-520, 500],
+        size:0.1,
+        newSize:0.23,
+      },
+      {
+        type: 'shape',
+        name:'Pink Square',
+        key:'square2',
+        x: 200, y: 530,
+        newPos:[-520, 500],
+        size:0.1,
+        newSize:0.23,
+      },
+      {
+        type: 'shape',
+        name:'Red&Black Square',
+        key:'square3',
+        x: 210, y: 820,
+        newPos:[-520, 500],
+        size:0.1,
+        newSize:0.23,
+      },
+    //Page3
+      {
+        type: 'shape',
+        name:'L&D Blue Square',
+        key:'square4',
+        x: 200, y: 200,
+        newPos:[-520, 500],
+        size:0.1,
+        newSize:0.23,
+      },
+      {
+        type: 'shape',
+        name:'White Square',
+        key:'square5',
+        x: 200, y: 530,
+        newPos:[-520, 500],
+        size:0.1,
+        newSize:0.23,
+      },
+      {
+        type: 'shape',
+        name:'Red&Black Rectangle',
+        key:'rectangle4',
+        x: 210, y: 820,
+        newPos:[-520, 500],
+        size:0.1,
+        newSize:0.23,
+      },
+    //Page4
+      {
+        type: 'shape',
+        name:'L&D Blue Rectangle',
+        key:'rectangle5',
+        x: 200, y: 200,
+        newPos:[-520, 500],
+        size:0.1,
+        newSize:0.23,
+      },
+      {
+        type: 'shape',
+        name:'White Rectangle',
+        key:'rectangle6',
+        x: 200, y: 530,
+        newPos:[-520, 500],
+        size:0.1,
+        newSize:0.23,
+      },
+      {
+        type: 'shape',
+        name:'White Triangle',
+        key:'triangle2',
+        x: 210, y: 820,
+        newPos:[-520, 500],
+        size:0.1,
+        newSize:0.23,
+      },
+      //Page5
+      {
+        type: 'shape',
+        name:'L&D Blue Triangle',
+        key:'triangle4',
+        x: 210, y: 820,
+        newPos:[-520, 500],
+        size:0.1,
+        newSize:0.23,
+      },
       ];
 
       //BUSINESS CATEGORY
       this.options_text3 = [
         {
           type: 'text',
-          name:'',
-          key:'',
+          name:'Burger Place',
+          key:'burgerPlace',
           x: 200, y:150,
           newPos:[-520, 620],
           size:0.13,
@@ -398,8 +465,8 @@ class Combinations extends Phaser.Scene {
         },
         {
           type: 'text',
-          name:'',
-          key:'',
+          name:'Pizza Place',
+          key:'pizzaPlace',
           x: 210, y: 390,
           newPos:[-680, 500],
           size:0.13,
@@ -408,8 +475,8 @@ class Combinations extends Phaser.Scene {
         },
         {
           type: 'text',
-          name:'',
-          key:'',
+          name:'Water Station',
+          key:'waterStation',
           x: 200, y: 615,
           newPos:[-520, 280],
           size:0.13,
@@ -417,9 +484,19 @@ class Combinations extends Phaser.Scene {
         },
         {
           type: 'text',
-          name:'',
-          key:'',
+          name:'Boutique Shop',
+          key:'boutiqueShop',
           x: 200, y: 840,
+          newPos:[-520, 700],
+          size:0.13,
+          newSize:0.2,
+        },
+        //Page2
+        {
+          type: 'text',
+          name:'Pharmacy',
+          key:'pharmacy',
+          x: 200, y: 150,
           newPos:[-520, 700],
           size:0.13,
           newSize:0.2,
@@ -430,8 +507,8 @@ class Combinations extends Phaser.Scene {
       this.options_icon3 = [
         {
           type: 'icon',
-          name:'',
-          key:'',
+          name:'Burger icon',
+          key:'burger',
           x: 210, y:150,
           newPos:[-520, 420],
           size:0.15,
@@ -440,8 +517,8 @@ class Combinations extends Phaser.Scene {
         },
         {
           type: 'icon',
-          name:'',
-          key:'',
+          name:'Pizza icon',
+          key:'pizza',
           x: 210, y: 360,
           newPos:[-370, 500],
           size:0.15,
@@ -450,8 +527,8 @@ class Combinations extends Phaser.Scene {
         },
         {
           type: 'icon',
-          name:' ',
-          key:'',
+          name:'Water Bottle icon',
+          key:'water',
           x: 220, y: 595,
           newPos:[-520, 600],
           size:0.1,
@@ -459,14 +536,24 @@ class Combinations extends Phaser.Scene {
         },
         {
           type: 'icon',
-          name:'',
-          key:'',
+          name:'Dress icon',
+          key:'dress',
           x: 220, y: 830,
           newPos:[-520, 500],
           size:0.1,
           newSize:0.20,
         },
-      
+      //Page2
+        {
+          type: 'icon',
+          name:'Pill icon',
+          key:'pill',
+          x: 210, y:150,
+          newPos:[-520, 420],
+          size:0.15,
+          newSize:0.28,
+
+        },
       ];
 
       this.questions3 = [
