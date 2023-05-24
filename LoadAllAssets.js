@@ -93,7 +93,7 @@ class LoadAllAssets extends Phaser.Scene {
          this.load.image("noTrespassing", "assets/logofy_text/NoTrespassing.png");
 
          //EDUCATION CATEGORY
-         this.load.image("childrenZone", "assets/logofy_text/Children'sZone.png");
+         this.load.image("childrenZone", "assets/logofy_text/Children's-Zone.png");
          this.load.image("noRunning", "assets/logofy_text/NoRunning.png");
          this.load.image("silence", "assets/logofy_text/KeepQuiet.png");
          this.load.image("stopBullying", "assets/logofy_text/StopBullying.png");
@@ -162,7 +162,7 @@ class LoadAllAssets extends Phaser.Scene {
         this.load.audio("music4", "assets/music/music4.mp3");
         var progress = 0;
         var targetProcess = 1; 
-        var progressDelay = 40; 
+        var progressDelay = 80; 
         var progressBar = this.add.graphics();
         var progressBox = this.add.graphics();
         
@@ -192,9 +192,9 @@ class LoadAllAssets extends Phaser.Scene {
                     progressBox.destroy();
                     progressBar.destroy();
                     loadingText.destroy();
-                this.scene.start("loadingScene");
+               // this.scene.start("loadingScene");
                 //  this.scene.start("levelMap"); 
-                 // this.scene.start("startGame");
+                 this.scene.start("startGame");
                   
                 //  this.scene.start("ClueCraftStartGame");
 

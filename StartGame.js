@@ -13,6 +13,7 @@ class StartGame extends Phaser.Scene {
 		// this.add.existing(this.startMusic3);
 		// this.startMusic3.setDepth(1);
 
+		
 		this.combinations = new Combinations();
 		
 		this.timer = this.time.delayedCall(120000, this.timerCallback, [], this);
@@ -53,6 +54,7 @@ class StartGame extends Phaser.Scene {
 				items: this.combinations.options_shapes, itemsPerPage: 3,
 				button: {key: "shapebtn", x: this.cameras.main.width / 1 - 170, y: 230}
 			});
+				
 		this.options_texts = new OptionsContainer(this, 1470, 50, this.combinations.options_text, {
 				name: 'text', x: 1470, y: 50, bg_key: 'textSideBar',
 				items: this.combinations.options_text, itemsPerPage: 4,
@@ -109,6 +111,7 @@ class StartGame extends Phaser.Scene {
                   { fontFamily: '"Typesauce"', fill: '#FFFFFF', fontSize: '72px', align: "center", stroke: "#EF7300", strokeThickness: 12,}
               )
           .setOrigin(0.5);
+		
       }
 
       if (remainingTime > 0) {
@@ -170,10 +173,15 @@ class Gameplay
 		this.scene = scene;
 		this.timer = timer;
 		this.points = 0;
-		this.questions_index = 0;
-		this.questions = scene.combinations.questions;
-		this.questions = this.questionRandomize(this.questions);
+		this.init_questions(scene.combinations.questions);
+	}
+
+	init_questions(questions)
+	{
 		this.currentQuestion = null;
+		this.questions_index = 3;
+		this.questions = questions;
+		this.questions = this.questionRandomize(this.questions);
 	}
 
 	questionRandomize(questions)
@@ -188,69 +196,91 @@ class Gameplay
 	}
 	
 	questionLoad() {
+		// this.showPopupImage();
+		
 		if (this.questions_index >= this.questions.length) {
-		  this.timer.paused = true;
-		  console.log("All questions are shown");
-	  
-		  // Call the function to show the popup image
-		  this.showPopupImage();
-	  
-		  return;
-		}
-	  
-		let q = this.questions[this.questions_index++];
-		this.currentQuestion = null;
-		this.currentQuestion = q;
-		this.scene.clientRqstTxt.setText('');
-	  
-		this.scene.clientRqstTxt.setText(q.text);
-	  }
-	  
-	  showPopupImage() {
+			this.timer.paused = true;
+			this.scene.options_shapes.setVisible(false);
+			this.scene.options_texts.setVisible(false);
+			this.scene.options_vectors.setVisible(false);
+			console.log("All questions are shown");
+		
+			// Call the function to show the popup image
+			this.showPopupImage();
+		} else {
+			let q = this.questions[this.questions_index++];
+			this.currentQuestion = null;
+			this.currentQuestion = q;
+			this.scene.clientRqstTxt.setText('');
 
-		if (this.OptionsContainer) {
-			this.OptionsContainer.destroy();
-			this.OptionsContainer = null;
+			this.scene.clientRqstTxt.setText(q.text);
 		}
+	}
+	  
+	showPopupImage() {
 
 		// Create a popup container sprite
-		let popupContainer = this.scene.add.container(1000, 800);
-	  
+		let popupContainer = this.scene.add.container(this.scene.scale.width/2, this.scene.scale.height/2)
+			.setSize(this.scene.scale.width, this.scene.scale.height).setInteractive();
+		this.scene.input.enableDebug(popupContainer)
+		
 		// Create a popup image sprite
-		let popupImage = this.scene.add.sprite(0, 0, 'categoryCtr');
+		let popupImage = this.scene.add.sprite(0, 300, 'categoryCtr').setInteractive();
 		popupContainer.add(popupImage);
-	  
+		
 		// Add text to the popup container
 		let text = this.scene.add.text(-280, -130, 'Great job! Education category complete. Let\'s move on to the Business Category.', { fontFamily: '"Montserrat"', fill: '#000000', fontSize: '36px' });
 		text.setAlign('justify');
 		text.setWordWrapWidth(830); // Adjust the width as needed
 		popupContainer.add(text);
-	  
+		
 		// Create a close button as an image
 		let closeButton = this.scene.add.image(450, 80, 'nextBtnv2');
 		closeButton.setInteractive();
 		closeButton.setScale(0.3); // Adjust the scale as needed
 		popupContainer.add(closeButton);
-	  
+		
 		// Set the interactive and depth properties of the popup container
 		popupContainer.setInteractive(); // Make the container interactive if you want to handle events
 		popupContainer.setDepth(5);
-	  
 		
-	  
+		
+		
 		// Add a click event listener to close the popup container
 		closeButton.on('pointerdown', () => {
-		  popupContainer.destroy(); // Remove the popup container from the scene
-	  
-		 
+			popupContainer.destroy(); // Remove the popup container from the scene
+
+			this.scene.options_shapes.button.destroy();
+			this.scene.options_shapes.destroy();
+			this.scene.options_shapes = new OptionsContainer(this.scene, 1470, 50, this.scene.combinations.options_shapes2, {
+				name: 'shape', x: 1470, y: 50, bg_key: 'sideBar',
+				items: this.scene.combinations.options_shapes2, itemsPerPage: 3,
+				button: {key: "shapebtn", x: this.scene.cameras.main.width / 1 - 170, y: 230}
+			});
+
+			this.scene.options_texts.button.destroy();
+			this.scene.options_texts.destroy();
+			this.scene.options_texts = new OptionsContainer(this.scene, 1470, 50, this.scene.combinations.options_text2, {
+				name: 'text', x: 1470, y: 50, bg_key: 'textSideBar',
+				items: this.scene.combinations.options_text2, itemsPerPage: 4,
+				button: {key: "textbtn", x: this.scene.cameras.main.width / 1 - 170, y: 500}
+			});
+
+			this.scene.options_vectors.button.destroy();
+			this.scene.options_vectors.destroy();
+			this.scene.options_vectors = new OptionsContainer(this.scene, 1470, 50, this.scene.combinations.
+			options_icon2, {
+				name: 'vector', x: 1470, y: 50, bg_key: 'sideBar',
+				items: this.scene.combinations.options_icon2, itemsPerPage: 4,
+				button: {key: "vectorbtn", x: this.scene.cameras.main.width / 1 - 170, y: 800}
+			});
+			
+			this.scene.gameplay.init_questions(this.scene.combinations.questions2);
+			this.scene.gameplay.questionLoad();
 		});
-	  }
+	}
 	  
-	  
-	  
-	  
-	  
-	  
+	
 
 	questionCheckAnswer()
 	{
