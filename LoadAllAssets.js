@@ -68,7 +68,7 @@ class LoadAllAssets extends Phaser.Scene {
          this.load.image("triangle3", "assets/logofy_shapes/Triangle3.png");
          this.load.image("square6", "assets/logofy_shapes/Square6.png");
          this.load.image("circle6", "assets/logofy_shapes/Circle6.png");
-         this.load.image("rectangle7", "assets/logofy_shapes/Rectangle7.png");
+         this.load.image("rectangle7", "assets/logofy_shapes/Rectangle8.png");
          
          //BUSINESS CATEGORY
          this.load.image("circle2", "assets/logofy_shapes/Circle2.png");
@@ -93,17 +93,17 @@ class LoadAllAssets extends Phaser.Scene {
          this.load.image("noTrespassing", "assets/logofy_text/NoTrespassing.png");
 
          //EDUCATION CATEGORY
-         this.load.image("childrenZone", "assets/logofy_text/Children's-Zone.png");
+         this.load.image("childrenZone", "assets/logofy_text/ChildrenZone.png");
          this.load.image("noRunning", "assets/logofy_text/NoRunning.png");
          this.load.image("silence", "assets/logofy_text/KeepQuiet.png");
          this.load.image("stopBullying", "assets/logofy_text/StopBullying.png");
 
-        //BUSINESS CATEGORY
-        this.load.image("burgerPlace", "assets/logofy_text/BurgerPlace.png");
-        this.load.image("pizzaPlace", "assets/logofy_text/PizzaPlace.png");
-        this.load.image("waterStation", "assets/logofy_text/WaterStation.png");
-        this.load.image("boutiqueShop", "assets/logofy_text/BoutiqueShop.png");
-        this.load.image("pharmacy", "assets/logofy_text/Pharmacy.png"); 
+         //BUSINESS CATEGORY
+         this.load.image("burgerPlace", "assets/logofy_text/BurgerPlace.png");
+         this.load.image("pizzaPlace", "assets/logofy_text/PizzaPlace.png");
+         this.load.image("waterStation", "assets/logofy_text/WaterStation.png");
+         this.load.image("boutiqueShop", "assets/logofy_text/BoutiqueShop.png");
+         this.load.image("pharmacy", "assets/logofy_text/Pharmacy.png"); 
 
          //assets for all vector
          //GOVERNMENT CATEGORY
