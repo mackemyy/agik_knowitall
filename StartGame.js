@@ -181,7 +181,7 @@ class Gameplay
 	init_questions(questions)
 	{
 		this.currentQuestion = null;
-		this.questions_index = 3;
+		this.questions_index = 0;
 		this.questions = questions;
 		this.questions = this.questionRandomize(this.questions);
 	}
@@ -198,7 +198,6 @@ class Gameplay
 	}
 	
 	questionLoad() {
-		// this.showPopupImage();
 		
 		if (this.questions_index >= this.questions.length) {
 			this.timer.paused = true;
@@ -208,7 +207,7 @@ class Gameplay
 			console.log("All questions are shown");
 		
 			// Call the function to show the popup image
-			this.showPopupImage();
+			this.showPopupImage('Great job! Now, let\'s move on to the Education Category.');
 		} else {
 			let q = this.questions[this.questions_index++];
 			this.currentQuestion = null;
@@ -219,7 +218,7 @@ class Gameplay
 		}
 	}
 	  
-	showPopupImage() {
+	showPopupImage(msg) {
 
 		// Create a popup container sprite
 		let popupContainer = this.scene.add.container(this.scene.scale.width/2, this.scene.scale.height/2)
@@ -231,7 +230,7 @@ class Gameplay
 		popupContainer.add(popupImage);
 		
 		// Add text to the popup container
-		let text = this.scene.add.text(-120, -50, 'Great job! Now, let\'s move on to the Business Category.', { fontFamily: '"Montserrat"', fill: '#000000', fontSize: '30px' });
+		let text = this.scene.add.text(-120, -50, msg, { fontFamily: '"Montserrat"', fill: '#000000', fontSize: '30px' });
 		text.setAlign('justify');
 		text.setWordWrapWidth(450); // Adjust the width as needed
 		popupContainer.add(text);
