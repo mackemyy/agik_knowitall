@@ -325,7 +325,7 @@ class Gameplay
 					break;
 			}
 			
-			this.scene.gameplay.questionLoad();
+			this.scene.gameplay.questionLoad(); 
 		});
 	}
 	  
@@ -350,6 +350,15 @@ class Gameplay
 				this.scene.showClientReact(false);
 			}
 		}
+
+		this.clickedObjects = 0;
+		if (answer_shape) this.clickedObjects++;
+		if (answer_text) this.clickedObjects++;
+		if (answer_vector) this.clickedObjects++;
+
+		if (this.clickedObjects < 3) {
+			console.log("You clicked incompletely");
+			return;}
 	}
 }
 
