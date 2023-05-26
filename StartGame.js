@@ -155,8 +155,11 @@ class StartGame extends Phaser.Scene {
 		this.options_texts.selectedItem = null;
 		this.options_vectors.selectedItem = null;
 	}
-}
 
+	gotToClueCraft() {
+		this.scene.start("WBintroGame");
+	}
+}
 
 
 class Gameplay {
@@ -166,11 +169,12 @@ class Gameplay {
 		this.questionSetCounter = 0; 
 		this.points = 0;
 		this.init_questions(scene.combinations.questions);
+		this.startGame = new StartGame();
 	}
 
 	init_questions(questions) {
 		this.currentQuestion = null;
-		this.questions_index = 0;
+		this.questions_index = 3;
 		this.questions = questions;
 		this.questions = this.questionRandomize(this.questions);
 	}
@@ -198,7 +202,22 @@ class Gameplay {
 				this.showPopupImage('Great job! Now, let\'s move on to the Education Category.');
 			} else if(this.questionSetCounter == 1) {
 				this.showPopupImage('Great job! Now, let\'s move on to the Business Category.');
-			} 
+			} else if(this.questionSetCounter == 2) {
+				this.scoreBoard = this.scene.add.image(this.scene.scale.width/2, this.scene.scale.height/2,  'scoreboard');
+				this.finalScore = this.scene.add.text(this.scene.scale.width/2 - 115, this.scene.scale.height/2 - 140, this.points + 'pts', {
+					fontFamily: '"Typesauce"', fill: '#FFFFFF', fontSize: '80px', align: "center", stroke: "#EF7300", strokeThickness: 10, wordWrap: { width: 900, useAdvancedWrap: true }
+				});
+				this.nextBtnV2 = this.scene.add.image(this.scene.scale.width/2, this.scene.scale.height/2 + 350, 'nextBtnv2').setScale(0.8).setInteractive({useHandCursor: true})
+				.on('pointerdown', () => { 
+					this.scoreBoard.destroy();
+					this.finalScore.destroy();
+					this.nextBtnV2.destroy();
+					this.popUpNextLvl = this.scene.add.image(this.scene.scale.width/2, this.scene.scale.height/2, 'popupNxtLvl').setInteractive({useHandCursor: true})
+					.on('pointerdown', () => { 
+						console.log("clicked");
+						this.startGame.gotToClueCraft()});
+				 })
+			}
 		} else {
 			let q = this.questions[this.questions_index++];
 			this.currentQuestion = null;
@@ -207,6 +226,10 @@ class Gameplay {
 			this.scene.clientRqstTxt.setText(q.text);
 		}
 	}
+
+	// goToClueCraft() {
+	// 	this.scene.start('WBintroGame');
+	// }
 	  
 	showPopupImage(msg) {
 		// Create a popup container sprite
