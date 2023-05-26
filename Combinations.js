@@ -213,6 +213,7 @@ class Combinations extends Phaser.Scene {
         size: 0.07,
         newSize:0.15,
       },
+      
   ];
 
   this.options_text2 = [
@@ -303,26 +304,26 @@ class Combinations extends Phaser.Scene {
     this.questions2 = [
       {
       text: 'I want a three-angle shaped logo for our school that indicates safety zone for kids.',
-      answer_shape: 'Triangle',
-      answer_vector: 'Children',
+      answer_shape: 'Red Triangle',
+      answer_vector: 'children icon',
       answer_text: 'Children Zone'
       },
       {
       text: 'Our students tends to forget it is not allowed to be noisy in the library. I want a square-shaped logo that reminds them of that.',
-      answer_shape: 'Square',
-      answer_vector: 'Quiet Sign',
+      answer_shape: 'Yellow Square',
+      answer_vector: 'quiet icon',
       answer_text: 'Keep Quiet'
       },
       {
       text: 'I want a four-sided signage that tell students that they are only allowed to walk in this hallway.',
-      answer_shape: ['Square', 'Rectangle'],
-      answer_vector: 'Man Running',
+      answer_shape: 'Blue Rectangle',
+      answer_vector: 'running icon',
       answer_text: 'No Running'
       },
       {
       text: 'Sphere-like logo that raises awareness to stop intimidating weaker kids.',
-      answer_shape: 'Circle',
-      answer_vector: 'Hand',
+      answer_shape: 'Red Circle',
+      answer_vector: 'hand icon',
       answer_text: 'Stop Bullying'
       },
     ];
@@ -561,30 +562,30 @@ class Combinations extends Phaser.Scene {
       this.questions3 = [
         {
         text: 'I will start cooking patties for my customers soon. I want a logo inside a shape with no corners.',
-        answer_shape: 'Circle',
+        answer_shape: 'Yellow&Brown Circle',
         answer_vector: 'Burger',
         answer_text: 'Burger Place'
         },
         {
         text: 'Nowadays, alot of people wants a food with lots of toppings - tomato, mushroom, cheese, etc. I want any-shaped logo except triangle',
-        answer_shape: ['Square','Rectangle', 'Circle'],
+        answer_shape: ['Red&Black Square','Red&Black Rectangle', 'Red&Black Circle'],
         answer_vector: 'Pizza',
         answer_text: 'Pizza Place'
         },
         {
         text: 'My store will be selling purified water to our customer soon. Can you make me a logo for my business?',
-        answer_shape: ['Square', 'Rectangle', 'Circle'],
+        answer_shape: ['L&D Blue Square', 'L&D Blue Rectangle', 'L&D Blue Circle'],
         answer_vector: 'Water Bottle',
         answer_text: 'Water Station'
         },
         {
         text: 'I want a logo for our store which sells fashionable clothes and accessories. Any shape will do but I would really be happy with a four equal-sided shape.',
-        answer_shape: 'Square',
+        answer_shape: 'Pink Square',
         answer_vector: 'Dress',
         answer_text: 'Boutique Shop'
         },
         {text: 'Our soon-to-open company will provide the widest range of branded and generic medecines',
-        answer_shape: ['Square', 'Rectangle', 'Circle'],
+        answer_shape: ['White Square', 'White Rectangle', 'White Circle'],
         answer_vector: 'Medicine Pill',
         answer_text: 'Pharmacy',
         }
