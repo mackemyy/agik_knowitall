@@ -26,7 +26,7 @@ class StartGame extends Phaser.Scene {
 		const bg = this.add.image(this.scale.width/2, this.scale.height/2, "emptyOffice1")
 		const logoBox = this.add.image(this.scale.width/2, this.scale.height/2, "logoCntnr");
 		const clientRequest = this.add.image(230, 750, "clientRqst");
-		const clientAvatar = this.add.image(230, 320, "clientDP");
+		const clientAvatar = this.add.image(230, 330, "clientDP");
 
 		this.menuButton = new ImageButton(this, 150, 110, "menuBtn", 
 			() => this.launchQuitGame(),
@@ -145,9 +145,9 @@ class StartGame extends Phaser.Scene {
 		this.gameplay.points += pointsToAdd;
 		this.pointsTxt.text = this.gameplay.points + " pts";
 		
-		const reactImage = this.add.image(230, 350, clientReactImage);
+		const reactImage = this.add.image(230, 340, clientReactImage);
 		
-		this.time.delayedCall(1000, () => {
+		this.time.delayedCall(1800, () => {
 			reactImage.setVisible(false);
 			this.removeSelectedItems();
 			this.gameplay.questionLoad();
@@ -222,23 +222,25 @@ class Gameplay
 		// Create a popup container sprite
 		let popupContainer = this.scene.add.container(this.scene.scale.width/2, this.scene.scale.height/2)
 			.setSize(this.scene.scale.width, this.scene.scale.height).setInteractive();
-		this.scene.input.enableDebug(popupContainer)
+		//this.scene.input.enableDebug(popupContainer)
 		
 		// Create a popup image sprite
-		let popupImage = this.scene.add.sprite(0, 300, 'categoryCtr').setInteractive();
+		let popupImage = this.scene.add.sprite(0, 0, 'category-divider').setInteractive();
 		popupContainer.add(popupImage);
 		
 		// Add text to the popup container
-		let text = this.scene.add.text(-280, -130, 'Great job! Education category complete. Let\'s move on to the Business Category.', { fontFamily: '"Montserrat"', fill: '#000000', fontSize: '36px' });
+		let text = this.scene.add.text(-120, -50, 'Great job! Now, let\'s move on to the Business Category.', { fontFamily: '"Montserrat"', fill: '#000000', fontSize: '30px' });
 		text.setAlign('justify');
-		text.setWordWrapWidth(830); // Adjust the width as needed
+		text.setWordWrapWidth(450); // Adjust the width as needed
 		popupContainer.add(text);
 		
 		// Create a close button as an image
-		let closeButton = this.scene.add.image(450, 80, 'nextBtnv2');
-		closeButton.setInteractive();
-		closeButton.setScale(0.3); // Adjust the scale as needed
-		popupContainer.add(closeButton);
+		let nextButton = this.scene.add.image(300, 110, 'nextBtnv2');
+		nextButton.setInteractive({ useHandCursor: true })
+		nextButton.setScale(0.6)
+		
+		popupContainer.add(nextButton);
+
 		
 		// Set the interactive and depth properties of the popup container
 		popupContainer.setInteractive(); // Make the container interactive if you want to handle events
@@ -247,7 +249,7 @@ class Gameplay
 		
 		
 		// Add a click event listener to close the popup container
-		closeButton.on('pointerdown', () => {
+		nextButton.on('pointerdown', () => {
 			popupContainer.destroy(); // Remove the popup container from the scene
 
 			this.scene.options_shapes.button.destroy();

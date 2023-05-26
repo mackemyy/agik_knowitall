@@ -18,6 +18,7 @@ class LoadAllAssets extends Phaser.Scene {
          this.load.image("quitWindow", "assets/bg/quitscreen.png");
          this.load.image("WBwMasterG", "assets/bg/whitebelt_bg.png");
          this.load.image("WBemptyoffice", "assets/bg/wb_emptyoffice_bg.png");
+         this.load.image("category-divider", "assets/bg/category_div.png");
       
          
  
