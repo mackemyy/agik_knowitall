@@ -16,7 +16,7 @@ class StartGame extends Phaser.Scene {
 		
 		this.combinations = new Combinations();
 		
-		this.timer = this.time.delayedCall(120000, this.timerCallback, [], this);
+		this.timer = this.time.delayedCall(300000, this.timerCallback, [], this);
 		console.log('Timer duration:', this.timer.delay);
 
 		// Display the remaining time in minute format on the screen
@@ -98,7 +98,7 @@ class StartGame extends Phaser.Scene {
 
   update() {
       var elapsedSeconds = this.timer.getElapsedSeconds();
-      var remainingTime = 120 - elapsedSeconds;
+      var remainingTime = 300 - elapsedSeconds;
 
       if (remainingTime <= 0) {
           this.timeText.setText('0:00');
@@ -168,10 +168,12 @@ class StartGame extends Phaser.Scene {
 
 class Gameplay
 {
+
 	constructor(scene, timer)
 	{
 		this.scene = scene;
 		this.timer = timer;
+		this.questionSetCounter = 0; 
 		this.points = 0;
 		this.init_questions(scene.combinations.questions);
 	}
@@ -252,6 +254,8 @@ class Gameplay
 		nextButton.on('pointerdown', () => {
 			popupContainer.destroy(); // Remove the popup container from the scene
 
+			this.timer.paused = false; //Resume time
+
 			this.scene.options_shapes.button.destroy();
 			this.scene.options_shapes.destroy();
 			this.scene.options_shapes = new OptionsContainer(this.scene, 1470, 50, this.scene.combinations.options_shapes2, {
@@ -276,8 +280,52 @@ class Gameplay
 				items: this.scene.combinations.options_icon2, itemsPerPage: 4,
 				button: {key: "vectorbtn", x: this.scene.cameras.main.width / 1 - 170, y: 800}
 			});
+
+			this.questionSetCounter++;
+			console.log(this.questionSetCounter);
 			
-			this.scene.gameplay.init_questions(this.scene.combinations.questions2);
+			switch(this.questionSetCounter){
+				case 1:
+					console.log(this.questionSetCounter);
+					this.scene.gameplay.init_questions(this.scene.combinations.questions2);
+					break;
+				case 2:
+					console.log(this.questionSetCounter);
+					popupContainer.destroy(); // Remove the popup container from the scene
+
+					this.timer.paused = false; //Resume time
+
+					this.scene.options_shapes.button.destroy();
+					this.scene.options_shapes.destroy();
+					this.scene.options_shapes = new OptionsContainer(this.scene, 1470, 50, this.scene.combinations.options_shapes3, {
+						name: 'shape', x: 1470, y: 50, bg_key: 'sideBar',
+						items: this.scene.combinations.options_shapes2, itemsPerPage: 3,
+						button: {key: "shapebtn", x: this.scene.cameras.main.width / 1 - 170, y: 230}
+					});
+
+					this.scene.options_texts.button.destroy();
+					this.scene.options_texts.destroy();
+					this.scene.options_texts = new OptionsContainer(this.scene, 1470, 50, this.scene.combinations.options_text3, {
+						name: 'text', x: 1470, y: 50, bg_key: 'textSideBar',
+						items: this.scene.combinations.options_text2, itemsPerPage: 4,
+						button: {key: "textbtn", x: this.scene.cameras.main.width / 1 - 170, y: 500}
+					});
+
+					this.scene.options_vectors.button.destroy();
+					this.scene.options_vectors.destroy();
+					this.scene.options_vectors = new OptionsContainer(this.scene, 1470, 50, this.scene.combinations.
+					options_icon3, {
+						name: 'vector', x: 1470, y: 50, bg_key: 'sideBar',
+						items: this.scene.combinations.options_icon3, itemsPerPage: 4,
+						button: {key: "vectorbtn", x: this.scene.cameras.main.width / 1 - 170, y: 800}
+					});
+					this.scene.gameplay.init_questions(this.scene.combinations.questions3);
+					break;
+				default:
+					console.log("ERROR");
+					break;
+			}
+			
 			this.scene.gameplay.questionLoad();
 		});
 	}
