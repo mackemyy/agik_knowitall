@@ -358,7 +358,20 @@ class Gameplay
 
 		if (this.clickedObjects < 3) {
 			console.log("You clicked incompletely");
-			return;}
+		
+			// Display the 'warning_prompt' image
+			let image = this.scene.add.image(
+				this.scene.scale.width/2, this.scene.scale.height/2,
+				'warning_prompt');
+		
+			// Remove the image after 1 second
+			setTimeout(function() {
+				image.destroy();
+			}, 1000);
+		
+			return;
+		}
+		
 	}
 }
 

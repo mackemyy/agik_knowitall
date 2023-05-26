@@ -154,7 +154,8 @@ class LoadAllAssets extends Phaser.Scene {
          this.load.image("timerBG", "assets/objects/timer.png");
          this.load.image("pointerBG", "assets/objects/points.png");
          this.load.image("creditPopUp", "assets/objects/creditsPopUp.png");
-
+         this.load.image("warning_prompt", "assets/objects/warning.png");
+         this.load.image("scoreboard", "assets/objects/scoreboard.png");
 
         //assets for music
         this.load.audio("music1", "assets/music/music1.mp3");
