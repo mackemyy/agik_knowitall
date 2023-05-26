@@ -1,8 +1,5 @@
-// import { Combinations } from './Combinations.js';
 class StartGame extends Phaser.Scene {
-
-    constructor () 
-    {
+    constructor () {
         super({
             key: 'startGame'
         });
@@ -12,8 +9,6 @@ class StartGame extends Phaser.Scene {
 		// this.startMusic3 = new SoundButton(this, 300, 110, "music3", musicConfig);
 		// this.add.existing(this.startMusic3);
 		// this.startMusic3.setDepth(1);
-
-		
 		this.combinations = new Combinations();
 		
 		this.timer = this.time.delayedCall(300000, this.timerCallback, [], this);
@@ -111,7 +106,6 @@ class StartGame extends Phaser.Scene {
                   { fontFamily: '"Typesauce"', fill: '#FFFFFF', fontSize: '72px', align: "center", stroke: "#EF7300", strokeThickness: 12,}
               )
           .setOrigin(0.5);
-		
       }
 
       if (remainingTime > 0) {
@@ -120,7 +114,6 @@ class StartGame extends Phaser.Scene {
           var timeString = minutes.toString().padStart(1, '0') + ':' + seconds.toString().padStart(2, '0');
           this.timeText.setText(timeString);
       }
-
       // Bring the time text to the top to ensure it's visible
       this.children.bringToTop(this.timeText);
 
@@ -166,11 +159,8 @@ class StartGame extends Phaser.Scene {
 
 
 
-class Gameplay
-{
-
-	constructor(scene, timer)
-	{
+class Gameplay {
+	constructor(scene, timer) {
 		this.scene = scene;
 		this.timer = timer;
 		this.questionSetCounter = 0; 
@@ -178,16 +168,14 @@ class Gameplay
 		this.init_questions(scene.combinations.questions);
 	}
 
-	init_questions(questions)
-	{
+	init_questions(questions) {
 		this.currentQuestion = null;
 		this.questions_index = 0;
 		this.questions = questions;
 		this.questions = this.questionRandomize(this.questions);
 	}
 
-	questionRandomize(questions)
-	{
+	questionRandomize(questions) {
 		for (let i = questions.length - 1; i > 0; i--) {
 			const j = Math.floor(Math.random() * (i + 1));
 			const temp = questions[i];
@@ -198,28 +186,29 @@ class Gameplay
 	}
 	
 	questionLoad() {
-		
 		if (this.questions_index >= this.questions.length) {
 			this.timer.paused = true;
 			this.scene.options_shapes.setVisible(false);
 			this.scene.options_texts.setVisible(false);
 			this.scene.options_vectors.setVisible(false);
 			console.log("All questions are shown");
-		
+
 			// Call the function to show the popup image
-			this.showPopupImage('Great job! Now, let\'s move on to the Education Category.');
+			if(this.questionSetCounter == 0) {
+				this.showPopupImage('Great job! Now, let\'s move on to the Education Category.');
+			} else if(this.questionSetCounter == 1) {
+				this.showPopupImage('Great job! Now, let\'s move on to the Business Category.');
+			} 
 		} else {
 			let q = this.questions[this.questions_index++];
 			this.currentQuestion = null;
 			this.currentQuestion = q;
 			this.scene.clientRqstTxt.setText('');
-
 			this.scene.clientRqstTxt.setText(q.text);
 		}
 	}
 	  
 	showPopupImage(msg) {
-
 		// Create a popup container sprite
 		let popupContainer = this.scene.add.container(this.scene.scale.width/2, this.scene.scale.height/2)
 			.setSize(this.scene.scale.width, this.scene.scale.height).setInteractive();
@@ -241,19 +230,17 @@ class Gameplay
 		nextButton.setScale(0.6)
 		
 		popupContainer.add(nextButton);
-
 		
 		// Set the interactive and depth properties of the popup container
 		popupContainer.setInteractive(); // Make the container interactive if you want to handle events
 		popupContainer.setDepth(5);
-		
-		
 		
 		// Add a click event listener to close the popup container
 		nextButton.on('pointerdown', () => {
 			popupContainer.destroy(); // Remove the popup container from the scene
 
 			this.timer.paused = false; //Resume time
+
 
 			this.scene.options_shapes.button.destroy();
 			this.scene.options_shapes.destroy();
@@ -281,15 +268,12 @@ class Gameplay
 			});
 
 			this.questionSetCounter++;
-			console.log(this.questionSetCounter);
 			
 			switch(this.questionSetCounter){
 				case 1:
-					console.log(this.questionSetCounter);
 					this.scene.gameplay.init_questions(this.scene.combinations.questions2);
 					break;
 				case 2:
-					console.log(this.questionSetCounter);
 					popupContainer.destroy(); // Remove the popup container from the scene
 
 					this.timer.paused = false; //Resume time
@@ -319,6 +303,7 @@ class Gameplay
 						button: {key: "vectorbtn", x: this.scene.cameras.main.width / 1 - 170, y: 800}
 					});
 					this.scene.gameplay.init_questions(this.scene.combinations.questions3);
+					this.scene.gameplay.questionLoad();
 					break;
 				default:
 					console.log("ERROR");
@@ -329,24 +314,19 @@ class Gameplay
 		});
 	}
 	  
-	
-
-	questionCheckAnswer()
-	{
+	questionCheckAnswer() {
 		let answer_shape = this.scene.options_shapes.selectedItem;
 		let answer_text = this.scene.options_texts.selectedItem;
 		let answer_vector = this.scene.options_vectors.selectedItem;
 
 		if (answer_shape && answer_text && answer_vector) {
-			if (answer_shape.name === this.currentQuestion.answer_shape && 
-				answer_text.name === this.currentQuestion.answer_text && 
-				answer_vector.name === this.currentQuestion.answer_vector) {
-
-				// If answers is correct
+			if (answer_vector.name === this.currentQuestion.answer_vector && 
+				answer_text.name === this.currentQuestion.answer_text && (
+					this.currentQuestion.answer_shape.includes(answer_shape.name) || answer_shape.name === this.currentQuestion.answer_shape))
+				 {
 				this.scene.showClientReact(true);
 			} 
 			else {
-				// If answers is incorrect
 				this.scene.showClientReact(false);
 			}
 		}
@@ -376,8 +356,7 @@ class Gameplay
 }
 
 class OptionsContainer extends Phaser.GameObjects.Container {
-	constructor(scene, x, y, items, data)
-	{
+	constructor(scene, x, y, items, data){
 		super(scene, x, y).setVisible(false).setDepth(100);
 		this.scene.add.existing(this);
 

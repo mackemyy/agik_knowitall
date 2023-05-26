@@ -563,33 +563,33 @@ class Combinations extends Phaser.Scene {
         {
         text: 'I will start cooking patties for my customers soon. I want a logo inside a shape with no corners.',
         answer_shape: 'Yellow&Brown Circle',
-        answer_vector: 'Burger',
+        answer_vector: 'Burger icon',
         answer_text: 'Burger Place'
         },
         {
         text: 'Nowadays, alot of people wants a food with lots of toppings - tomato, mushroom, cheese, etc. I want any-shaped logo except triangle',
         answer_shape: ['Red&Black Square','Red&Black Rectangle', 'Red&Black Circle'],
-        answer_vector: 'Pizza',
+        answer_vector: 'Pizza icon',
         answer_text: 'Pizza Place'
         },
         {
         text: 'My store will be selling purified water to our customer soon. Can you make me a logo for my business?',
-        answer_shape: ['L&D Blue Square', 'L&D Blue Rectangle', 'L&D Blue Circle'],
-        answer_vector: 'Water Bottle',
+        answer_shape: ['L&D Blue Square', 'L&D Blue Rectangle', 'L&D Blue Circle', 'L&D Blue Triangle'],
+        answer_vector: 'Water Bottle icon',
         answer_text: 'Water Station'
         },
         {
         text: 'I want a logo for our store which sells fashionable clothes and accessories. Any shape will do but I would really be happy with a four equal-sided shape.',
         answer_shape: 'Pink Square',
-        answer_vector: 'Dress',
+        answer_vector: 'Dress icon',
         answer_text: 'Boutique Shop'
         },
-        {text: 'Our soon-to-open company will provide the widest range of branded and generic medecines',
+        {
+        text: 'Our soon-to-open company will provide the widest range of branded and generic medicines',
         answer_shape: ['White Square', 'White Rectangle', 'White Circle'],
-        answer_vector: 'Medicine Pill',
+        answer_vector: 'Pill icon',
         answer_text: 'Pharmacy',
         }
-
       ];
 
   }
