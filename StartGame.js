@@ -140,7 +140,7 @@ class StartGame extends Phaser.Scene {
 		
 		const reactImage = this.add.image(230, 335, clientReactImage);
 		
-		this.time.delayedCall(1800, () => {
+		this.time.delayedCall(1500, () => {
 			reactImage.setVisible(false);
 			this.removeSelectedItems();
 			this.gameplay.questionLoad();
@@ -174,7 +174,7 @@ class Gameplay {
 
 	init_questions(questions) {
 		this.currentQuestion = null;
-		this.questions_index = 3;
+		this.questions_index = 0;
 		this.questions = questions;
 		this.questions = this.questionRandomize(this.questions);
 	}
@@ -203,20 +203,25 @@ class Gameplay {
 			} else if(this.questionSetCounter == 1) {
 				this.showPopupImage('Great job! Now, let\'s move on to the Business Category.');
 			} else if(this.questionSetCounter == 2) {
-				this.scoreBoard = this.scene.add.image(this.scene.scale.width/2, this.scene.scale.height/2,  'scoreboard');
-				this.finalScore = this.scene.add.text(this.scene.scale.width/2 - 115, this.scene.scale.height/2 - 140, this.points + 'pts', {
-					fontFamily: '"Typesauce"', fill: '#FFFFFF', fontSize: '80px', align: "center", stroke: "#EF7300", strokeThickness: 10, wordWrap: { width: 900, useAdvancedWrap: true }
-				});
-				this.nextBtnV2 = this.scene.add.image(this.scene.scale.width/2, this.scene.scale.height/2 + 350, 'nextBtnv2').setScale(0.8).setInteractive({useHandCursor: true})
+				this.timer.destroy();
+				this.scene.timeText.setVisible(false);
+
+				let scoreboard_container = this.scene.add.container(this.scene.scale.width/2, this.scene.scale.height/2)
+				.setSize(this.scene.scale.width, this.scene.scale.height).setInteractive();
+
+
+				let scoreboard_image = this.scene.add.sprite(0, 0, 'scoreboard').setInteractive();
+				let text = this.scene.add.text(-110, +20, this.points + 'pts', {fontFamily: '"Typesauce"', fill: '#FFFFFF', fontSize: '80px', align: "center", stroke: "#EF7300", strokeThickness: 10, wordWrap: { width: 900, useAdvancedWrap: true } });
+				let nextBtn = this.scene.add.image(+800, +400,'nextBtnv2').setScale(0.8).setInteractive({useHandCursor: true})
 				.on('pointerdown', () => { 
-					this.scoreBoard.destroy();
-					this.finalScore.destroy();
-					this.nextBtnV2.destroy();
-					this.popUpNextLvl = this.scene.add.image(this.scene.scale.width/2, this.scene.scale.height/2, 'popupNxtLvl').setInteractive({useHandCursor: true})
-					.on('pointerdown', () => { 
-						console.log("clicked");
-						this.startGame.gotToClueCraft()});
-				 })
+					scoreboard_container.destroy();
+					this.showfinalLogofyMsg()});
+				
+				scoreboard_container.add(scoreboard_image);
+				scoreboard_container.add(nextBtn);
+				scoreboard_container.add(text);
+				scoreboard_container.setInteractive(); // Make the container interactive if you want to handle events
+				scoreboard_container.setDepth(5);
 			}
 		} else {
 			let q = this.questions[this.questions_index++];
@@ -227,10 +232,42 @@ class Gameplay {
 		}
 	}
 
-	// goToClueCraft() {
-	// 	this.scene.start('WBintroGame');
-	// }
-	  
+	
+	showfinalLogofyMsg(){
+		let msg_container = this.scene.add.container(this.scene.scale.width/2, this.scene.scale.height/2)
+		.setSize(this.scene.scale.width, this.scene.scale.height).setInteractive();
+		let finalmsg_img = this.scene.add.sprite(0, 0, 'lastmessage').setInteractive();
+		let nextBtn = this.scene.add.image(+800, +400,'nextBtnv2').setScale(0.8).setInteractive({useHandCursor: true})
+				.on('pointerdown', () => { 
+					msg_container.destroy();
+					this.showLvlUpMsg();
+				 })
+		msg_container.add(finalmsg_img);
+		msg_container.add(nextBtn);
+		msg_container.setInteractive(); // Make the container interactive if you want to handle events
+		msg_container.setDepth(5);
+	}
+
+	showLvlUpMsg() {
+		let lvlUp_container = this.scene.add.container(this.scene.scale.width / 2, this.scene.scale.height / 2)
+			.setSize(this.scene.scale.width, this.scene.scale.height).setInteractive();
+		let lvlUp_img = this.scene.add.sprite(0, 0, 'popupNxtLvl').setInteractive();
+		let nextBtn = this.scene.add.image(+800, +400, 'nextBtnv2').setScale(0.8).setInteractive({ useHandCursor: true })
+			.on('pointerdown', () => {
+				lvlUp_container.destroy();
+				this.scene.scene.stop("startGame"); // Stop the "startGame" scene
+				console.log("final_clicked");
+				this.scene.scene.start("WBintroGame");  // Launch the "playClueCraft" scene
+			});
+		lvlUp_container.add(lvlUp_img);
+		lvlUp_container.add(nextBtn);
+		lvlUp_container.setInteractive(); // Make the container interactive if you want to handle events
+		lvlUp_container.setDepth(5);
+	}
+	
+
+
+
 	showPopupImage(msg) {
 		// Create a popup container sprite
 		let popupContainer = this.scene.add.container(this.scene.scale.width/2, this.scene.scale.height/2)

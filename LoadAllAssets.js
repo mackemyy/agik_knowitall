@@ -157,6 +157,7 @@ class LoadAllAssets extends Phaser.Scene {
          this.load.image("warning_prompt", "assets/objects/warning.png");
          this.load.image("scoreboard", "assets/objects/scoreboard.png");
          this.load.image("popupNxtLvl", "assets/objects/pop_up_nxtlvl.png");
+         this.load.image("lastmessage", "assets/objects/last_message.png");
 
         //assets for music
         this.load.audio("music1", "assets/music/music1.mp3");
@@ -195,13 +196,7 @@ class LoadAllAssets extends Phaser.Scene {
                     progressBox.destroy();
                     progressBar.destroy();
                     loadingText.destroy();
-               // this.scene.start("loadingScene");
-                //  this.scene.start("levelMap"); 
-                 this.scene.start("startGame");
-                  
-                //  this.scene.start("ClueCraftStartGame");
-
-            
+                this.scene.start("loadingScene");
                 }
             },
             callbackScope: this,
