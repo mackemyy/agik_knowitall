@@ -59,6 +59,7 @@ class Combinations extends Phaser.Scene {
           size:0.1,
           newSize:0.23,
         },
+      
   ];
 
   this.options_text = [
@@ -138,11 +139,11 @@ class Combinations extends Phaser.Scene {
         name:'tresspassing icon',
         key:'trespassing',
         x: 220, y: 830,
-        newPos:[-520, 500],
+        newPos:[-520, 400],
         size:0.1,
         newSize:0.20,
       },
-    
+        
     ];
 
     this.questions = [
@@ -178,141 +179,124 @@ class Combinations extends Phaser.Scene {
     this.options_shapes2 = [
       {
         type: 'shape',
-        name:'',
-        key:'',
+        name:'Red Triangle',
+        key:'triangle3',
         x: 200, y: 200,
-        newPos:[-520, 500],
-        size:0.1,
-        newSize:0.23,
+        newPos:[-520, 520],
+        size: 0.07,
+        newSize:0.20,
       },
       {
         type: 'shape',
-        name:'',
-        key:'',
+        name:'Yellow Square',
+        key:'square6',
         x: 200, y: 530,
         newPos:[-520, 500],
-        size:0.1,
-        newSize:0.23,
+        size: 0.07,
+        newSize:0.20,
       },
       {
         type: 'shape',
-        name:'',
-        key:'',
+        name:'Red Circle',
+        key:'circle6',
         x: 210, y: 820,
         newPos:[-520, 500],
-        size:0.1,
-        newSize:0.23,
+        size: 0.07,
+        newSize:0.20,
       },
-
       {
-          type: 'shape',
-          name:'',
-          key:'',
-          x: 200, y: 200,
-          newPos:[-520, 500],
-          size:0.1,
-          newSize:0.23,
-        },
-        {
-          type: 'shape',
-          name:'',
-          key:'',
-          x: 200, y: 530,
-          newPos:[-520, 500],
-          size:0.1,
-          newSize:0.23,
-        },
-        {
-          type: 'shape',
-          name:'',
-          key:'',
-          x: 210, y: 820,
-          newPos:[-520, 500],
-          size:0.1,
-          newSize:0.23,
-        },
+        type: 'shape',
+        name:'Blue Rectangle',
+        key:'rectangle7',
+        x: 200, y: 200,
+        newPos:[-520, 500],
+        size: 0.07,
+        newSize:0.15,
+      },
+      
   ];
 
   this.options_text2 = [
-      {
-        type: 'text',
-        name:'',
-        key:'',
-        x: 200, y:150,
-        newPos:[-520, 620],
-        size:0.13,
-        newSize:0.23,
+    {
+      type: 'text',
+      name:'Children Zone',
+      key:'childrenZone',
+      x: 200, y:150,
+      newPos:[-520, 630],
+      size:0.1,
+      newSize:0.20,
 
-      },
-      {
-        type: 'text',
-        name:'',
-        key:'',
-        x: 210, y: 390,
-        newPos:[-680, 500],
-        size:0.13,
-        newSize:0.2,
+    },
+    {
+      type: 'text',
+      name:'No Running',
+      key:'noRunning',
+      x: 200, y: 390,
+      newPos:[-520, 700],
+      size:0.1,
+      newSize:0.20,
 
-      },
-      {
-        type: 'text',
-        name:'',
-        key:'',
-        x: 200, y: 615,
-        newPos:[-520, 280],
-        size:0.13,
-        newSize:0.2,
-      },
-      {
-        type: 'text',
-        name:'',
-        key:'',
-        x: 200, y: 840,
-        newPos:[-520, 700],
-        size:0.13,
-        newSize:0.2,
-      },
+    },
+    {
+      type: 'text',
+      name:'Keep Quiet',
+      key:'silence',
+      x: 200, y: 650,
+      newPos:[-520, 710],
+      size:0.1,
+      newSize:0.20
+    },
+    {
+      type: 'text',
+      name:'Stop Bullying',
+      key:'stopBullying',
+      x: 200, y: 840,
+      newPos:[-520, 600],
+      size:0.1,
+      newSize:0.20,
+    },
+
     
     ];
 
     this.options_icon2 = [
       {
         type: 'icon',
-        name:'',
-        key:'',
+        name:'children icon',
+        key:'children',
         x: 210, y:150,
-        newPos:[-520, 420],
-        size:0.15,
-        newSize:0.28,
+        newPos:[-520, 470],
+        size:0.08,
+        newSize:0.20,
 
       },
       {
         type: 'icon',
-        name:'',
-        key:'',
+        name:'running icon',
+        key:'running',
         x: 210, y: 360,
-        newPos:[-370, 500],
-        size:0.15,
-        newSize:0.2,
+        newPos:[-520, 400],
+        size:0.09,
+        newSize:0.15,
 
       },
       {
         type: 'icon',
-        name:' ',
-        key:'',
-        x: 220, y: 595,
-        newPos:[-520, 600],
+        name:'quiet icon',
+        key:'quiet',
+        x: 240, y: 595,
+        newPos:[-420, 450],
         size:0.1,
         newSize:0.20,
       },
       {
         type: 'icon',
-        name:'',
-        key:'',
+        name:'hand icon',
+        key:'hand',
         x: 220, y: 830,
-        newPos:[-520, 500],
-        size:0.1,
-        newSize:0.20,
+        newPos:[-520, 400],
+        size:0.15,
+        newSize:0.22,
       },
     
     ];
@@ -320,35 +304,64 @@ class Combinations extends Phaser.Scene {
     this.questions2 = [
       {
       text: 'I want a three-angle shaped logo for our school that indicates safety zone for kids.',
-      answer_shape: 'Triangle',
-      answer_vector: 'Children',
+      answer_shape: 'Red Triangle',
+      answer_vector: 'children icon',
       answer_text: 'Children Zone'
       },
       {
       text: 'Our students tends to forget it is not allowed to be noisy in the library. I want a square-shaped logo that reminds them of that.',
-      answer_shape: 'Square',
-      answer_vector: 'Quiet Sign',
+      answer_shape: 'Yellow Square',
+      answer_vector: 'quiet icon',
       answer_text: 'Keep Quiet'
       },
       {
       text: 'I want a four-sided signage that tell students that they are only allowed to walk in this hallway.',
-      answer_shape: ['Square', 'Rectangle'],
-      answer_vector: 'Man Running',
+      answer_shape: 'Blue Rectangle',
+      answer_vector: 'running icon',
       answer_text: 'No Running'
       },
       {
       text: 'Sphere-like logo that raises awareness to stop intimidating weaker kids.',
-      answer_shape: 'Circle',
-      answer_vector: 'Hand',
+      answer_shape: 'Red Circle',
+      answer_vector: 'hand icon',
       answer_text: 'Stop Bullying'
       },
     ];
 
-    this.options_shapes2 = [
+    this.options_shapes3 = [
+      //Page1
       {
         type: 'shape',
-        name:'',
-        key:'',
+        name:'Yellow&Brown Circle',
+        key:'circle2',
+        x: 200, y: 200,
+        newPos:[-520, 500],
+        size:0.13,
+        newSize:0.30,
+      },
+      {
+        type: 'shape',
+        name:'Red&Black Circle',
+        key:'circle3',
+        x: 200, y: 490,
+        newPos:[-520, 500],
+        size:0.13,
+        newSize:0.30,
+      },
+      {
+        type: 'shape',
+        name:'L&D Blue Circle',
+        key:'circle4',
+        x: 210, y: 780,
+        newPos:[-520, 500],
+        size:0.12,
+        newSize:0.30,
+      },
+    //Page2
+      {
+        type: 'shape',
+        name:'White Circle',
+        key:'circle5',
         x: 200, y: 200,
         newPos:[-520, 500],
         size:0.1,
@@ -356,8 +369,36 @@ class Combinations extends Phaser.Scene {
       },
       {
         type: 'shape',
-        name:'',
-        key:'',
+        name:'Pink Square',
+        key:'square2',
+        x: 200, y: 500,
+        newPos:[-520, 500],
+        size:0.1,
+        newSize:0.23,
+      },
+      {
+        type: 'shape',
+        name:'Red&Black Square',
+        key:'square3',
+        x: 200, y: 800,
+        newPos:[-520, 500],
+        size:0.1,
+        newSize:0.23,
+      },
+    //Page3
+      {
+        type: 'shape',
+        name:'L&D Blue Square',
+        key:'square4',
+        x: 200, y: 200,
+        newPos:[-520, 500],
+        size:0.1,
+        newSize:0.25,
+      },
+      {
+        type: 'shape',
+        name:'White Square',
+        key:'square5',
         x: 200, y: 530,
         newPos:[-520, 500],
         size:0.1,
@@ -365,80 +406,101 @@ class Combinations extends Phaser.Scene {
       },
       {
         type: 'shape',
-        name:'',
-        key:'',
-        x: 210, y: 820,
-        newPos:[-520, 500],
-        size:0.1,
-        newSize:0.23,
+        name:'Red&Black Rectangle',
+        key:'rectangle4',
+        x: 230, y: 820,
+        newPos:[-500, 480],
+        size:0.09,
+        newSize:0.20,
       },
-
+    //Page4
       {
-          type: 'shape',
-          name:'',
-          key:'',
-          x: 200, y: 200,
-          newPos:[-520, 500],
-          size:0.1,
-          newSize:0.23,
-        },
-        {
-          type: 'shape',
-          name:'',
-          key:'',
-          x: 200, y: 530,
-          newPos:[-520, 500],
-          size:0.1,
-          newSize:0.23,
-        },
-        {
-          type: 'shape',
-          name:'',
-          key:'',
-          x: 210, y: 820,
-          newPos:[-520, 500],
-          size:0.1,
-          newSize:0.23,
-        },
+        type: 'shape',
+        name:'L&D Blue Rectangle',
+        key:'rectangle5',
+        x: 230, y: 200,
+        newPos:[-520, 480],
+        size:0.08,
+        newSize:0.18,
+      },
+      {
+        type: 'shape',
+        name:'White Triangle',
+        key:'triangle2',
+        x: 200, y: 520,
+        newPos:[-500, 520],
+        size:0.08,
+        newSize:0.20,
+      },
+      {
+        type: 'shape',
+        name:'White Rectangle',
+        key:'rectangle6',
+        x: 230, y: 780,
+        newPos:[-520, 500],
+        size:0.08,
+        newSize:0.18,
+      },
+      
+      //Page5
+      {
+        type: 'shape',
+        name:'L&D Blue Triangle',
+        key:'triangle4',
+        x: 220, y: 220,
+        newPos:[-520, 500],
+        size:0.08,
+        newSize:0.18,
+      },
       ];
 
       //BUSINESS CATEGORY
       this.options_text3 = [
-        {
+         {
           type: 'text',
-          name:'',
-          key:'',
-          x: 200, y:150,
+          name:'Burger Place',
+          key:'burgerPlace',
+          x: 200, y:160,
           newPos:[-520, 620],
-          size:0.13,
-          newSize:0.23,
+          size:0.11,
+          newSize:0.18,
 
         },
         {
           type: 'text',
-          name:'',
-          key:'',
-          x: 210, y: 390,
-          newPos:[-680, 500],
+          name:'Pizza Place',
+          key:'pizzaPlace',
+          x: 200, y: 400,
+          newPos:[-520, 600],
           size:0.13,
           newSize:0.2,
 
         },
         {
           type: 'text',
-          name:'',
-          key:'',
-          x: 200, y: 615,
-          newPos:[-520, 280],
-          size:0.13,
+          name:'Water Station',
+          key:'waterStation',
+          x: 200, y: 640,
+          newPos:[-520, 600],
+          size:0.11,
           newSize:0.2,
         },
         {
           type: 'text',
-          name:'',
-          key:'',
-          x: 200, y: 840,
-          newPos:[-520, 700],
+          name:'Boutique Shop',
+          key:'boutiqueShop',
+          x: 200, y: 860,
+          newPos:[-520, 380],
+          size:0.11,
+          newSize:0.15,
+        },
+        //Page2
+        {
+          type: 'text',
+          name:'Pharmacy',
+          key:'pharmacy',
+          x: 200, y: 160,
+          newPos:[-520, 630],
           size:0.13,
           newSize:0.2,
         },
@@ -448,76 +510,86 @@ class Combinations extends Phaser.Scene {
       this.options_icon3 = [
         {
           type: 'icon',
-          name:'',
-          key:'',
+          name:'Burger icon',
+          key:'burger',
+          x: 210, y:150,
+          newPos:[-520, 430],
+          size:0.10,
+          newSize:0.15,
+
+        },
+        {
+          type: 'icon',
+          name:'Pizza icon',
+          key:'pizza',
+          x: 210, y: 360,
+          newPos:[-520, 430],
+          size:0.10,
+          newSize:0.16,
+
+        },
+        {
+          type: 'icon',
+          name:'Water Bottle icon',
+          key:'water',
+          x: 220, y: 595,
+          newPos:[-520, 420],
+          size:0.1,
+          newSize:0.14,
+        },
+        {
+          type: 'icon',
+          name:'Dress icon',
+          key:'dress',
+          x: 220, y: 830,
+          newPos:[-520, 540],
+          size:0.1,
+          newSize:0.15,
+        },
+      //Page2
+        {
+          type: 'icon',
+          name:'Pill icon',
+          key:'pill',
           x: 210, y:150,
           newPos:[-520, 420],
-          size:0.15,
-          newSize:0.28,
-
-        },
-        {
-          type: 'icon',
-          name:'',
-          key:'',
-          x: 210, y: 360,
-          newPos:[-370, 500],
-          size:0.15,
-          newSize:0.2,
-
-        },
-        {
-          type: 'icon',
-          name:' ',
-          key:'',
-          x: 220, y: 595,
-          newPos:[-520, 600],
           size:0.1,
-          newSize:0.20,
+          newSize:0.10,
         },
-        {
-          type: 'icon',
-          name:'',
-          key:'',
-          x: 220, y: 830,
-          newPos:[-520, 500],
-          size:0.1,
-          newSize:0.20,
-        },
-      
+
       ];
 
       this.questions3 = [
         {
         text: 'I will start cooking patties for my customers soon. I want a logo inside a shape with no corners.',
-        answer_shape: 'Circle',
-        answer_vector: 'Burger',
+        answer_shape: 'Yellow&Brown Circle',
+        answer_vector: 'Burger icon',
         answer_text: 'Burger Place'
         },
         {
         text: 'Nowadays, alot of people wants a food with lots of toppings - tomato, mushroom, cheese, etc. I want any-shaped logo except triangle',
-        answer_shape: ['Square','Rectangle', 'Circle'],
-        answer_vector: 'Pizza',
+        answer_shape: ['Red&Black Square','Red&Black Rectangle', 'Red&Black Circle'],
+        answer_vector: 'Pizza icon',
         answer_text: 'Pizza Place'
         },
         {
         text: 'My store will be selling purified water to our customer soon. Can you make me a logo for my business?',
-        answer_shape: ['Square', 'Rectangle', 'Circle'],
-        answer_vector: 'Water Bottle',
+        answer_shape: ['L&D Blue Square', 'L&D Blue Rectangle', 'L&D Blue Circle', 'L&D Blue Triangle'],
+        answer_vector: 'Water Bottle icon',
         answer_text: 'Water Station'
         },
         {
         text: 'I want a logo for our store which sells fashionable clothes and accessories. Any shape will do but I would really be happy with a four equal-sided shape.',
-        answer_shape: 'Square',
-        answer_vector: 'Dress',
+        answer_shape: 'Pink Square',
+        answer_vector: 'Dress icon',
         answer_text: 'Boutique Shop'
         },
-        {text: 'Our soon-to-open company will provide the widest range of branded and generic medecines',
-        answer_shape: ['Square', 'Rectangle', 'Circle'],
-        answer_vector: 'Medicine Pill',
+        {
+        text: 'Our soon-to-open company will provide the widest range of branded and generic medicines',
+        answer_shape: ['White Square', 'White Rectangle', 'White Circle'],
+        answer_vector: 'Pill icon',
         answer_text: 'Pharmacy',
         }
-
       ];
 
   }
